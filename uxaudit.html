@@ -1,0 +1,2466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selfie Leslie - UX Health Check Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #fff;
+            font-size: 14px;
+        }
+        
+        /* Header */
+        header {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 40px 0;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-left h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .header-left p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+        
+        .header-right {
+            text-align: right;
+        }
+        
+        .header-right img {
+            height: 40px;
+            opacity: 0.9;
+        }
+        
+        /* Navigation Tabs */
+        .nav-tabs {
+            background: #f5f5f7;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-tabs-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            gap: 0;
+        }
+        
+        .tab {
+            padding: 16px 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .tab:hover {
+            color: #1a1a2e;
+            background: rgba(0,0,0,0.02);
+        }
+        
+        .tab.active {
+            color: #1a1a2e;
+            border-bottom-color: #1a1a2e;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .section-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+        
+        .section-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Score Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+        
+        .badge-critical { background: #fee2e2; color: #dc2626; }
+        .badge-warning { background: #fef3c7; color: #d97706; }
+        .badge-caution { background: #fef9c3; color: #ca8a04; }
+        .badge-good { background: #dcfce7; color: #16a34a; }
+        .badge-neutral { background: #f3f4f6; color: #6b7280; }
+        .badge-decent { background: #d1fae5; color: #059669; }
+        
+        /* Overview Cards */
+        .overview-section {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .overview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+        
+        .overview-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .overview-score {
+            text-align: right;
+        }
+        
+        .overview-score .score-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #059669;
+        }
+        
+        .overview-score .score-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .overview-description {
+            color: #444;
+            line-height: 1.7;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .stat-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .stat-card .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+        
+        .stat-card .stat-value.critical { color: #dc2626; }
+        .stat-card .stat-value.success { color: #16a34a; }
+        
+        .stat-card .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        
+        /* Performance Bars */
+        .performance-section {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .performance-section h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        
+        .perf-scale {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0 8px 220px;
+            font-size: 0.7rem;
+            color: #999;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .perf-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .perf-label {
+            width: 200px;
+            flex-shrink: 0;
+            padding-right: 20px;
+        }
+        
+        .perf-label .name {
+            font-weight: 500;
+            color: #1a1a2e;
+            font-size: 0.9rem;
+        }
+        
+        .perf-label .meta {
+            font-size: 0.75rem;
+            color: #999;
+        }
+        
+        .perf-bar-container {
+            flex: 1;
+            height: 24px;
+            background: linear-gradient(to right, 
+                #ef4444 0%, #ef4444 20%,
+                #f97316 20%, #f97316 40%,
+                #eab308 40%, #eab308 60%,
+                #9ca3af 60%, #9ca3af 80%,
+                #22c55e 80%, #22c55e 100%
+            );
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .perf-bar-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: #d4a939;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+        }
+        
+        .perf-bar-fill.good {
+            background: #22c55e;
+        }
+        
+        .perf-score {
+            width: 50px;
+            text-align: right;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #1a1a2e;
+            margin-left: 12px;
+        }
+        
+        /* Summary Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .summary-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 24px;
+        }
+        
+        .summary-card h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .summary-card h4 .icon {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        
+        .summary-card h4 .icon.red { background: #dc2626; }
+        .summary-card h4 .icon.yellow { background: #d97706; }
+        .summary-card h4 .icon.green { background: #16a34a; }
+        
+        .summary-card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .summary-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.875rem;
+            color: #444;
+        }
+        
+        .summary-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-card li strong {
+            color: #1a1a2e;
+        }
+        
+        /* Benchmark Box */
+        .benchmark-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 24px 32px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        
+        .benchmark-box .benchmark-stat {
+            text-align: center;
+        }
+        
+        .benchmark-box .benchmark-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #059669;
+        }
+        
+        .benchmark-box .benchmark-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .benchmark-box .benchmark-text {
+            flex: 1;
+        }
+        
+        .benchmark-box .benchmark-text h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+        
+        .benchmark-box .benchmark-text p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Filters Bar */
+        .filters-bar {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-group label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .filter-group select {
+            padding: 8px 12px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            background: #fff;
+            min-width: 160px;
+        }
+        
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        
+        .data-table thead {
+            background: #1a1a2e;
+            color: #fff;
+        }
+        
+        .data-table th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .data-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e8e8e8;
+            vertical-align: top;
+        }
+        
+        .data-table tbody tr:hover {
+            background: #fafafa;
+        }
+        
+        .data-table .code {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .data-table .title-cell {
+            max-width: 400px;
+        }
+        
+        .data-table .title-main {
+            font-weight: 500;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+        
+        .data-table .title-note {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        .impact-harmful { color: #dc2626; font-weight: 600; }
+        .impact-disruptive { color: #d97706; font-weight: 600; }
+        .impact-interruption { color: #2563eb; font-weight: 600; }
+        .impact-acceptable { color: #6b7280; font-weight: 600; }
+        
+        .kpi-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #e0f2fe;
+            color: #0369a1;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .table-wrapper {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .table-scroll {
+            max-height: 700px;
+            overflow-y: auto;
+        }
+        
+        /* Section Cards */
+        .section-block {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+        
+        .section-block-header {
+            background: #f8f9fa;
+            padding: 20px 24px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-block-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        
+        .section-block-stats {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .section-block-stat {
+            text-align: center;
+        }
+        
+        .section-block-stat .value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        
+        .section-block-stat .value.red { color: #dc2626; }
+        
+        .section-block-stat .label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+        
+        .section-block-content {
+            padding: 24px;
+        }
+        
+        /* Violation Items */
+        .violation-item {
+            padding: 16px;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-left: 3px solid #dc2626;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 12px;
+        }
+        
+        .violation-item.low {
+            border-left-color: #d97706;
+        }
+        
+        .violation-item.neutral {
+            border-left-color: #9ca3af;
+        }
+        
+        .violation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .violation-title {
+            font-weight: 500;
+            color: #1a1a2e;
+            font-size: 0.9rem;
+        }
+        
+        .violation-note {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+        
+        /* How to Fix */
+        .how-to-fix-toggle {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            padding: 8px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: #0369a1;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s ease;
+        }
+        
+        .how-to-fix-toggle:hover {
+            background: #e0f2fe;
+        }
+        
+        .how-to-fix-toggle svg {
+            transition: transform 0.15s ease;
+        }
+        
+        .how-to-fix-toggle.open svg {
+            transform: rotate(180deg);
+        }
+        
+        .how-to-fix-content {
+            display: none;
+            margin-top: 12px;
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+        
+        .how-to-fix-content.open {
+            display: block;
+        }
+        
+        /* Quick Win Cards */
+        .quick-win-card {
+            background: #fff;
+            border: 1px solid #d1fae5;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .quick-win-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .quick-win-header h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        
+        .quick-win-effort {
+            padding: 4px 10px;
+            background: #f0fdf4;
+            color: #16a34a;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .quick-win-body p {
+            margin-bottom: 10px;
+            color: #444;
+            font-size: 0.875rem;
+        }
+        
+        .quick-win-body p strong {
+            color: #1a1a2e;
+        }
+        
+        .quick-win-impact {
+            color: #059669;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            padding: 20px 24px;
+            margin-top: 32px;
+        }
+        
+        .info-box h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 12px;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .info-box li {
+            padding: 6px 0;
+            color: #78350f;
+            font-size: 0.875rem;
+        }
+        
+        .info-box li strong {
+            color: #92400e;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+            
+            .header-right {
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 24px 16px;
+            }
+            
+            .nav-tabs-inner {
+                padding: 0 16px;
+                overflow-x: auto;
+            }
+            
+            .perf-label {
+                width: 140px;
+            }
+            
+            .perf-scale {
+                padding-left: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-left">
+                <h1>Selfie Leslie — UX Health Check</h1>
+                <p>Pre-Launch Audit • December 2025</p>
+            </div>
+            <div class="header-right">
+                <img src="https://mindarc.com/cdn/shop/files/MindArc_Favicon_White.png" alt="MindArc">
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-tabs">
+        <div class="nav-tabs-inner">
+            <button class="tab active" onclick="showTab('summary')">Summary</button>
+            <button class="tab" onclick="showTab('violations')">All Violations</button>
+            <button class="tab" onclick="showTab('sections')">By Section</button>
+            <button class="tab" onclick="showTab('quick-wins')">Quick Wins</button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Summary Tab -->
+        <div id="summary" class="tab-content active">
+            <div class="overview-section">
+                <div class="overview-header">
+                    <div>
+                        <h3>Overall UX Performance</h3>
+                        <span class="badge badge-decent">Decent</span>
+                    </div>
+                    <div class="overview-score">
+                        <div class="score-value">~41</div>
+                        <div class="score-label">out of 100</div>
+                    </div>
+                </div>
+                <p class="overview-description">
+                    The new Selfie Leslie site delivers a solid shopping experience across the core customer journey. Product listing and product detail pages—the most critical touchpoints for fashion eCommerce—perform well with clear product presentation and functional browsing. The audit identified 74 items across 424 guidelines, with 30 requiring attention before launch. Most issues relate to navigation refinements and filtering enhancements rather than fundamental UX problems.
+                </p>
+            </div>
+
+            <div class="benchmark-box">
+                <div class="benchmark-stat">
+                    <div class="benchmark-value">Top 40%</div>
+                    <div class="benchmark-label">Baymard Benchmark</div>
+                </div>
+                <div class="benchmark-text">
+                    <h4>Above Industry Median</h4>
+                    <p>Selfie Leslie outperforms approximately 60% of sites benchmarked using the Baymard Institute methodology. The score of ~41 places the site firmly in the "Decent" category.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">424</div>
+                    <div class="stat-label">Guidelines Evaluated</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">74</div>
+                    <div class="stat-label">Items Identified</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value critical">30</div>
+                    <div class="stat-label">High Priority</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value success">9</div>
+                    <div class="stat-label">Quick Wins</div>
+                </div>
+            </div>
+
+            <div class="performance-section">
+                <h3>Performance by Section</h3>
+                <div class="perf-scale">
+                    <span>Poor</span>
+                    <span>Mediocre</span>
+                    <span>Decent</span>
+                    <span>Good</span>
+                    <span>Perfect</span>
+                </div>
+                
+                <div class="perf-row">
+                    <div class="perf-label">
+                        <div class="name">Homepage & Category</div>
+                        <div class="meta">32 Guidelines</div>
+                    </div>
+                    <div class="perf-bar-container">
+                        <div class="perf-bar-fill" style="width: 56.9%;"></div>
+                    </div>
+                    <div class="perf-score">56.9</div>
+                </div>
+                
+                <div class="perf-row">
+                    <div class="perf-label">
+                        <div class="name">On-Site Search</div>
+                        <div class="meta">28 Guidelines</div>
+                    </div>
+                    <div class="perf-bar-container">
+                        <div class="perf-bar-fill" style="width: 54.4%;"></div>
+                    </div>
+                    <div class="perf-score">54.4</div>
+                </div>
+                
+                <div class="perf-row">
+                    <div class="perf-label">
+                        <div class="name">Product Lists & Filtering</div>
+                        <div class="meta">70 Guidelines</div>
+                    </div>
+                    <div class="perf-bar-container">
+                        <div class="perf-bar-fill" style="width: 46.7%;"></div>
+                    </div>
+                    <div class="perf-score">46.7</div>
+                </div>
+                
+                <div class="perf-row">
+                    <div class="perf-label">
+                        <div class="name">Product Page</div>
+                        <div class="meta">102 Guidelines</div>
+                    </div>
+                    <div class="perf-bar-container">
+                        <div class="perf-bar-fill" style="width: 50.6%;"></div>
+                    </div>
+                    <div class="perf-score">50.6</div>
+                </div>
+                
+                <div class="perf-row">
+                    <div class="perf-label">
+                        <div class="name">Site-Wide Features</div>
+                        <div class="meta">18 Guidelines</div>
+                    </div>
+                    <div class="perf-bar-container">
+                        <div class="perf-bar-fill good" style="width: 86.3%;"></div>
+                    </div>
+                    <div class="perf-score">86.3</div>
+                </div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="summary-card">
+                    <h4><span class="icon red"></span> Priority Items (30)</h4>
+                    <ul>
+                        <li><strong>Product Variations:</strong> Size/color selection doesn't persist or show unavailable options</li>
+                        <li><strong>PLP Navigation:</strong> Breadcrumbs not present on product listing pages</li>
+                        <li><strong>Filtering:</strong> No filter match counts, missing New/Sale filter options</li>
+                        <li><strong>Search:</strong> Query not visible in search box after searching</li>
+                        <li><strong>Image Gallery:</strong> No hover zoom on product images</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h4><span class="icon yellow"></span> Secondary Items (20)</h4>
+                    <ul>
+                        <li><strong>PDP Breadcrumbs:</strong> Hierarchy present but missing history-based navigation from search</li>
+                        <li><strong>Ratings:</strong> Distribution chart hidden by default</li>
+                        <li><strong>Shipping Estimate:</strong> No cost estimate shown in cart</li>
+                        <li><strong>Filter Truncation:</strong> Long filter lists not truncated</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h4><span class="icon green"></span> Working Well</h4>
+                    <ul>
+                        <li><strong>Product Pages:</strong> Clear product presentation and imagery</li>
+                        <li><strong>Cross-Sells:</strong> Add to cart functionality on recommendations</li>
+                        <li><strong>Cart Updates:</strong> Immediate quantity changes</li>
+                        <li><strong>Geotargeting:</strong> IP-based location detection active</li>
+                        <li><strong>PDP Breadcrumbs:</strong> Hierarchy breadcrumbs present</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- All Violations Tab -->
+        <div id="violations" class="tab-content">
+            <div class="section-header">
+                <h2>All Identified Items</h2>
+                <p>74 items identified across 424 guidelines evaluated</p>
+            </div>
+
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <label>Impact:</label>
+                    <select id="filter-impact" onchange="filterViolations()">
+                        <option value="all">All Impacts</option>
+                        <option value="Harmful">Harmful</option>
+                        <option value="Disruptive">Disruptive</option>
+                        <option value="Interruption">Interruption</option>
+                        <option value="Acceptable">Acceptable</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Judgement:</label>
+                    <select id="filter-judgement" onchange="filterViolations()">
+                        <option value="all">All</option>
+                        <option value="Violated High">Violated High (30)</option>
+                        <option value="Violated Low">Violated Low (20)</option>
+                        <option value="Neutral">Neutral (24)</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Section:</label>
+                    <select id="filter-topic" onchange="filterViolations()">
+                        <option value="all">All Sections</option>
+                        <option value="Product Page">Product Page</option>
+                        <option value="Product Lists">Product Lists & Filtering</option>
+                        <option value="On-Site Search">On-Site Search</option>
+                        <option value="Homepage">Homepage & Category</option>
+                        <option value="Cart">Cart & Checkout</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <div class="table-scroll">
+                    <table class="data-table" id="violations-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">Code</th>
+                                <th>Title</th>
+                                <th style="width: 140px;">Section</th>
+                                <th style="width: 110px;">Judgement</th>
+                                <th style="width: 100px;">Impact</th>
+                                <th style="width: 60px;">Score</th>
+                                <th style="width: 100px;">Est. KPI</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-impact="Harmful" data-judgement="Violated High" data-topic="Product Lists">
+                                <td class="code">#1024D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Return Users to the Same Place in Product Lists</div>
+                                    <div class="title-note">Product cards shift when returning from PDP, moving previous product higher</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-harmful">Harmful</td>
+                                <td>-3.8</td>
+                                <td><span class="kpi-tag">+3-5% Browse</span></td>
+                            </tr>
+                            <tr data-impact="Harmful" data-judgement="Violated High" data-topic="Homepage">
+                                <td class="code">#253D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Implement Product Types as Filters Instead of Categories</div>
+                                    <div class="title-note">Users can't "see all dresses" - product types silo users into narrow categories</div>
+                                </td>
+                                <td>Homepage</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-harmful">Harmful</td>
+                                <td>-2.8</td>
+                                <td><span class="kpi-tag">+5-8% Find</span></td>
+                            </tr>
+                            <tr data-impact="Harmful" data-judgement="Violated High" data-topic="Product Lists">
+                                <td class="code">#511D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Allow Sorting by Price, Rating, Best-Selling, Newest</div>
+                                    <div class="title-note">"Best Selling" sort type is missing</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-harmful">Harmful</td>
+                                <td>-2.8</td>
+                                <td><span class="kpi-tag">+2-4% Conv</span></td>
+                            </tr>
+                            <tr data-impact="Harmful" data-judgement="Violated High" data-topic="Cart">
+                                <td class="code">#2320D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Integrate Free Shipping Info in Cart Summary</div>
+                                    <div class="title-note">Include "free shipping" in cost summary in mini-cart</div>
+                                </td>
+                                <td>Cart</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-harmful">Harmful</td>
+                                <td>-2.8</td>
+                                <td><span class="kpi-tag">+2-3% Chk</span></td>
+                            </tr>
+                            <tr data-impact="Harmful" data-judgement="Violated High" data-topic="Product Lists">
+                                <td class="code">#2539D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Order Filter Options Alphabetically</div>
+                                    <div class="title-note">Order long lists alphabetically. If numeric, order numerically</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-harmful">Harmful</td>
+                                <td>-2.6</td>
+                                <td><span class="kpi-tag">+1-2% Filter</span></td>
+                            </tr>
+                            <tr data-impact="Harmful" data-judgement="Violated High" data-topic="Product Page">
+                                <td class="code">#2709D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Indicate Unavailable Variations After Selection</div>
+                                    <div class="title-note">No indication for unavailable color variations once size is selected</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-harmful">Harmful</td>
+                                <td>-2.6</td>
+                                <td><span class="kpi-tag">+3-5% ATC</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="On-Site Search">
+                                <td class="code">#346D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Persist Search Queries in Search Box</div>
+                                    <div class="title-note">Query only visible when clicking search box - appears empty</div>
+                                </td>
+                                <td>Search</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-2.0</td>
+                                <td><span class="kpi-tag">+1-2% Ref</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Lists">
+                                <td class="code">#531D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Display Total Number of List Items</div>
+                                    <div class="title-note">No product count indicated on PLP or search results</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-2.0</td>
+                                <td><span class="kpi-tag">+1-2% Browse</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Lists">
+                                <td class="code">#537D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Have Breadcrumbs in Category Product Lists</div>
+                                    <div class="title-note">No hierarchy-based breadcrumbs on PLP</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-2.0</td>
+                                <td><span class="kpi-tag">+2-3% Nav</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Lists">
+                                <td class="code">#467D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Show Number of Matches for Each Filter Option</div>
+                                    <div class="title-note">No match counts shown alongside filter options</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-2.0</td>
+                                <td><span class="kpi-tag">+2-4% Filter</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
+                                <td class="code">#828D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Have Both Hierarchy and History Breadcrumbs on PDP</div>
+                                    <div class="title-note">Hierarchy present. Missing history-based from search</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-2.0</td>
+                                <td><span class="kpi-tag">+2-3% Cross</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
+                                <td class="code">#781D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Provide Hover-Activated Zoom in Image Gallery</div>
+                                    <div class="title-note">No zoom available in main image gallery</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-2.0</td>
+                                <td><span class="kpi-tag">+2-4% Engage</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
+                                <td class="code">#787D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Have Site-Provided and User-Provided Q&A Content</div>
+                                    <div class="title-note">No Q&A/FAQs content on product pages</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-2.0</td>
+                                <td><span class="kpi-tag">+1-3% Support</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
+                                <td class="code">#2712D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Persist Selected Size Across Color Variations</div>
+                                    <div class="title-note">Size deselects when changing colors</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-2.0</td>
+                                <td><span class="kpi-tag">+2-4% ATC</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
+                                <td class="code">#791D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Style Primary Add to Cart Button Uniquely</div>
+                                    <div class="title-note">Secondary buttons use same styling as ATC</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-2.0</td>
+                                <td><span class="kpi-tag">+1-2% ATC</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
+                                <td class="code">#786D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Display Clickable Ratings Average at Top of PDP</div>
+                                    <div class="title-note">Limited products with reviews to test properly</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-2.0</td>
+                                <td><span class="kpi-tag">+1-2% Trust</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Lists">
+                                <td class="code">#416D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Provide Text Fields for Numeric Filtering</div>
+                                    <div class="title-note">No text fields for numeric filtering (e.g., price range)</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.8</td>
+                                <td><span class="kpi-tag">+1-2% Prec</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Lists">
+                                <td class="code">#415D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Have a "New Arrivals" Filter</div>
+                                    <div class="title-note">No "New Arrivals" filter - 80% of users find this useful</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.8</td>
+                                <td><span class="kpi-tag">+2-3% Disc</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Lists">
+                                <td class="code">#1191D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Have a "Sales" or "Deals" Filter Type</div>
+                                    <div class="title-note">No "Sales" filter - users like to "shop the sales first"</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.8</td>
+                                <td><span class="kpi-tag">+2-4% Sale</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
+                                <td class="code">#812D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Link to Parent Category for Cross-Sells</div>
+                                    <div class="title-note">Cross-sell sections don't link to parent category</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.8</td>
+                                <td><span class="kpi-tag">+1-2% Cross</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
+                                <td class="code">#836D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Place Free Shipping Info Near Buy Section</div>
+                                    <div class="title-note">Free shipping on page but not near the Buy Section</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.8</td>
+                                <td><span class="kpi-tag">+2-3% Conv</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated Low" data-topic="Product Page">
+                                <td class="code">#750D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Provide Ratings Distribution Chart</div>
+                                    <div class="title-note">Distribution chart available but hidden by default</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-warning">Low</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.7</td>
+                                <td><span class="kpi-tag">+0.5-1% Rev</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated Low" data-topic="Homepage">
+                                <td class="code">#263D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Ensure Categories are Clearly Delineated</div>
+                                    <div class="title-note">One or two redundant/overlapping categories present</div>
+                                </td>
+                                <td>Homepage</td>
+                                <td><span class="badge badge-warning">Low</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.4</td>
+                                <td><span class="kpi-tag">+1-2% Nav</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated Low" data-topic="Cart">
+                                <td class="code">#732D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Provide Full Order Cost or Estimate in Cart</div>
+                                    <div class="title-note">Display cheapest shipping as estimate</div>
+                                </td>
+                                <td>Cart</td>
+                                <td><span class="badge badge-warning">Low</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.4</td>
+                                <td><span class="kpi-tag">+1-2% Chk</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated High" data-topic="Homepage">
+                                <td class="code">#300D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Highlight Current Scope in Main Navigation</div>
+                                    <div class="title-note">No scope indicated in main navigation</div>
+                                </td>
+                                <td>Homepage</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-0.4</td>
+                                <td><span class="kpi-tag">+0.3% Nav</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated High" data-topic="Site-Wide">
+                                <td class="code">#255D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Don't Link to the Page Users Are Currently On</div>
+                                    <div class="title-note">Link to active page is not disabled</div>
+                                </td>
+                                <td>Site-Wide</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-0.4</td>
+                                <td><span class="kpi-tag">+0.2% Nav</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- By Section Tab -->
+        <div id="sections" class="tab-content">
+            <div class="section-header">
+                <h2>Items by Section</h2>
+                <p>Breakdown of identified items organized by site area</p>
+            </div>
+
+            <!-- Product Page -->
+            <div class="section-block">
+                <div class="section-block-header">
+                    <h3>Product Page</h3>
+                    <div class="section-block-stats">
+                        <div class="section-block-stat">
+                            <div class="value">102</div>
+                            <div class="label">Guidelines</div>
+                        </div>
+                        <div class="section-block-stat">
+                            <div class="value red">30</div>
+                            <div class="label">Items</div>
+                        </div>
+                        <div class="section-block-stat">
+                            <div class="value">50.6</div>
+                            <div class="label">Score</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-block-content">
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Product Variations (4)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#2709D: Indicate Unavailable Variations After Selection</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">No indication for unavailable color variations once size is selected.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Once a size or color has been selected, indicate unavailable variations (grey out, strike through, or hide). When more than 2 variation selectors exist, ensure changes to one automatically update availability for remaining selectors.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#2712D: Persist Selected Size Across Color Variations</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Size deselects when changing colors, creating inefficient back and forth.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Once an available size has been selected, persist that size across color variations. Only reset if the selected size is unavailable in the new color.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#850D: Use Individual Buttons for Each Size Variation</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Size is selected by default - users may overlook size selector entirely.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Use individual buttons for each size instead of dropdown. Don't pre-select a size - force users to actively choose their size to avoid wrong-size orders.
+                        </div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#853D: Provide Unique Images for All Visual Variations</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Consider providing "cut out" and "angle" images for each color variation.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">User Reviews (8)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#786D: Display Clickable Ratings Average at Top of PDP</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Too few products with reviews to test properly.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Ensure star rating average appears near product title and is clickable to jump to reviews section.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#2557D: Provide Gallery of Reviewer-Submitted Images</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Too few products with reviews to test properly.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Add a gallery of customer-submitted photos at the top of the review section to build trust and show real-world product usage.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#750D: Provide Ratings Distribution Chart</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Distribution chart available but hidden/collapsed by default.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Show the ratings distribution chart (5-star breakdown) by default at the top of the reviews section.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#768D: Display Minimum 6 Reviews by Default</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Too few products with reviews to test properly.</div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#746D: Allow Sorting by Lowest Rated, Most Recent, Most Helpful</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Too few products with reviews to test properly.</div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#1161D: Provide Key Review Attributes</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Too few products with reviews to test properly.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#785D: Respond to Negative User Reviews</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Too few products with reviews to test properly.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#2554D: Allow Navigation Using Reviewer-Submitted Images</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Too few products with reviews to test properly.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Shipping, Returns & Gifting (6)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#836D: Place Free Shipping Info Near Buy Section</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Free shipping indicated on page but not promoted near the Buy Section where purchase decisions happen.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Add visible "Free Shipping" badge or text line near Add to Cart button and price. 39% of shoppers abandon due to shipping costs.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#802D: Provide Estimated Delivery Date Near Buy Section</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Only shipping speed displayed using "X Business Days" - not actual date.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Show an actual estimated delivery date range (e.g., "Arrives Dec 15-18") rather than just "3-5 Business Days". Users care about when they'll receive the order.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#1501D: Make Return Policies Easy to Read</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Policy available but could use better formatting with headers, white space, and appropriate emphasis.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Provide answers to common return policy questions in an easy-to-read format with headers, sufficient white space, and appropriate use of different font sizes and bolding.
+                        </div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#825D: Provide Total Order Cost Estimate Near Buy Section</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Shipping information visible but very difficult to read.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#826D: Make Free Shipping Conditions Visible by Default</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Free shipping conditions could be communicated better.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#805D: Consider Providing Gifting Information</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Gifting specific tests skipped for non-gifting pages.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Cross-Sells & Cross-Navigation (4)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#828D: Have Both Hierarchy and History Breadcrumbs</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Hierarchy breadcrumbs present. Missing history-based breadcrumbs from search results.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Add history-based breadcrumbs alongside existing hierarchy breadcrumbs. Show "Back to Search Results" or similar when user arrives from search.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#812D: Link to Parent Category for Cross-Sells</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Cross-sell sections don't link to parent category (e.g., "Shop All Dresses").</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Add "Shop All [Category]" links to cross-sell carousels so users can explore more options if suggested products don't match their needs.
+                        </div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#814D: Include Enough Info for Cross-Sells Evaluation</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Cross-sells should include key product info for quick evaluation.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#821D: Provide Add to Cart for Supplementary Cross-Sells</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Always recommend that "Add to Cart" styling is completely unique.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Image Gallery UI (2)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#781D: Provide Hover-Activated Zoom in Image Gallery</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">No zoom available in main image gallery.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Implement hover-activated zoom in the main image gallery. On desktop, show magnified view on hover. Ensure high-resolution images are available.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#783D: Image Overlays Should Use 80-100% Page Width</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Full-screen overlay allows largest format images for detail inspection.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Product Descriptions (2)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#787D: Have Site-Provided and User-Provided Q&A Content</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">No Q&A/FAQs content available on product pages.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Add a Q&A section with common questions (sizing, material, care) and allow users to submit questions.
+                        </div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#2862D: Provide Specific Material and Care Information</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Always provide detailed material composition and care instructions for apparel.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">The Buy Section (2)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#791D: Style Primary Add to Cart Button Uniquely</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Secondary buttons use same styling as ATC - should be unique.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Update CSS to make primary ATC button visually distinct - unique color, larger size, or different style from other buttons.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#798D: Implement Save/Wishlist Features</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Wishlist icon on product card but not on PDP. Functionality unclear.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Product Images & Videos (2)</h4>
+                    
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#744D: Provide Lifestyle Images for Relevant Products</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">~25% of products include a lifestyle image.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#759D: Use Video to Showcase Products</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Consider adding video content to show product movement and fit.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Lists & Filtering -->
+            <div class="section-block">
+                <div class="section-block-header">
+                    <h3>Product Lists & Filtering</h3>
+                    <div class="section-block-stats">
+                        <div class="section-block-stat">
+                            <div class="value">70</div>
+                            <div class="label">Guidelines</div>
+                        </div>
+                        <div class="section-block-stat">
+                            <div class="value red">15</div>
+                            <div class="label">Items</div>
+                        </div>
+                        <div class="section-block-stat">
+                            <div class="value">46.7</div>
+                            <div class="label">Score</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-block-content">
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">List Layout (5)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#1024D: Return Users to Same Place in Product Lists</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Product cards shift when returning from PDP, moving previous product higher. Technically correct but bad UX.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Store scroll position and viewed product index when user navigates to PDP. Restore exact position when returning. Ensure product card grid doesn't reflow during navigation.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#531D: Display Total Number of List Items</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">No product count indicated on PLP or search results.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Add "Showing X products" text above and below product grid. Ensure count is prominently displayed with appropriate font size.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#537D: Have Breadcrumbs in Category Product Lists</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">No hierarchy-based breadcrumbs available in category product lists (PLP).</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Add clickable hierarchy-based breadcrumbs on category pages and product lists. Format: Home > Category > Subcategory.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#279D: Avoid Ads Above or Within Product Lists</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Live site not ready - rating based on old site.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#421D: Combine Product Variations in One List Item</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Consider combining color/size variations into single product cards.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Filtering: Interface & Layout (3)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#2539D: Order Filter Options Alphabetically</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Long filter lists not ordered alphabetically or numerically.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Order long lists of filter options alphabetically. If options are numeric, order them numerically.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#467D: Show Number of Matches for Each Filter Option</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">No match counts shown alongside filter options.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Show the number of matches for each filter option (e.g., "Red (24)"). Live update numbers as filters are applied or deselected.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#470D: Truncate Filter Lists Over 4-8 Options</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Long filter lists not truncated with "View More" link.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Truncate filter options if more than 4-8. Make "View More" link easy to discern and show number of truncated options.
+                        </div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Filtering: Available Filters (3)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#416D: Provide Text Fields for Numeric Filtering</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">No text fields for numeric filtering values (e.g., price range).</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Allow users to type specific min/max values for numeric filters like price, in addition to preset ranges.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#415D: Have a "New Arrivals" Filter</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">No "New Arrivals" filter available - 80% of users find this useful.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Add a "New Arrivals" or "New In" filter type to help users discover recently added products.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#1191D: Have a "Sales" or "Deals" Filter Type</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">No "Sales" filter type available - users like to "shop the sales first".</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Add a "Sale" or "On Sale" filter to allow bargain hunters to quickly find discounted items.
+                        </div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Sorting (2)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#511D: Allow Sorting by Price, Rating, Best-Selling, Newest</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">"Best Selling" sort type is missing. User rating filter visible but no ratings on products.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Add "Best Selling" as a sort option. Consider adding "Customer Rating" when reviews are populated.
+                        </div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#521D: Display Current Sort Order in Dropdown</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Sorting dropdown present but has no "Sort By" label.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">List Item Thumbnails & Features (2)</h4>
+                    
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#457D: Avoid Misleading List Item Thumbnails</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Lifestyle images with 2 women (only one wearing dress) can be confusing.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            For lifestyle images with multiple people, ensure the product being sold is clearly the focus. Consider reverting to single-model or product-only shots for thumbnails.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#2375D: Allow Guest Users to Save Items to Wishlists</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Wishlist functional but difficult to find (icon not in site nav).</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- On-Site Search -->
+            <div class="section-block">
+                <div class="section-block-header">
+                    <h3>On-Site Search</h3>
+                    <div class="section-block-stats">
+                        <div class="section-block-stat">
+                            <div class="value">28</div>
+                            <div class="label">Guidelines</div>
+                        </div>
+                        <div class="section-block-stat">
+                            <div class="value red">10</div>
+                            <div class="label">Items</div>
+                        </div>
+                        <div class="section-block-stat">
+                            <div class="value">54.4</div>
+                            <div class="label">Score</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-block-content">
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Search Form & Results (4)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#346D: Persist Search Queries in Search Box</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Query only visible when clicking search box - appears empty but search persists, which confused testers.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Keep search query visible in the search field after submitting. Simple CSS/JS adjustment to maintain input value visibility on results page.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#393D: Search Sorting Broken</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Feature broken on new site - attempting to sort opens the PDP instead.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Debug the sort functionality on search results page. Ensure sort dropdown triggers re-sort of results rather than navigation.
+                        </div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#358D: Provide Alternative Queries on Results Page</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Consider showing related search suggestions on results page.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#355D: Autocorrect Obvious Misspellings</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Consider auto-correcting common misspellings on results page.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Search Query Types (3)</h4>
+                    
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#344D: Support Abbreviations and Symbols</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">No support for abbreviation or symbol search queries.</div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#342D: Ensure Non-Product Content Is Findable</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Pages like returns policy, contact, FAQs should be searchable.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#399D: Support Subjective Search Queries</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Hard to test due to similar product catalog.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Search Autocomplete (3)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#369D: Copy Autocomplete Suggestion to Search Field</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">No modification available for active autocomplete suggestion via keyboard.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            When user navigates autocomplete with keyboard arrows, copy the selected suggestion to the search field so they can modify it before searching.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#363D: Display Autocomplete Suggestions Predictably</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Suggestions change after adding a single space to end of query.</div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#361D: Include Category Scope Suggestions</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Autocomplete should suggest category-scoped searches when relevant.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Homepage & Category -->
+            <div class="section-block">
+                <div class="section-block-header">
+                    <h3>Homepage & Category</h3>
+                    <div class="section-block-stats">
+                        <div class="section-block-stat">
+                            <div class="value">32</div>
+                            <div class="label">Guidelines</div>
+                        </div>
+                        <div class="section-block-stat">
+                            <div class="value red">9</div>
+                            <div class="label">Items</div>
+                        </div>
+                        <div class="section-block-stat">
+                            <div class="value">56.9</div>
+                            <div class="label">Score</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-block-content">
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Category Taxonomy (5)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#253D: Implement Product Types as Filters Instead of Categories</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Users can't "see all dresses" - product types silo users into narrow categories.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Implement product types as filters when attributes (brand, style) are shared across types. Keep as categories only when attributes aren't shared and types are mutually exclusive.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#263D: Ensure Categories are Clearly Delineated</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">One or two redundant/overlapping categories present.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Review category structure to eliminate overlaps. Each product should have a clear "home" category to avoid user confusion.
+                        </div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#261D: Divide Categories into Manageable Chunks</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">At least one parent category displays 15+ subcategory options.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#251D: Consider a "New In" Filter-Based Category</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">A dedicated "New In" category helps users discover recent additions.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#1008D: Consider a "Sales" or "Deals" Category</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">A dedicated sale category helps bargain hunters.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Homepage (2)</h4>
+                    
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#237D: Feature Broad Range of Product Types on Homepage</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Homepage categories appear duplicated in staging. Expected to change for go-live.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#239D: Use IP Geotargeting for Country/Language</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">IP-based location detection is active.</div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Main Navigation (1)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#300D: Highlight Current Scope in Main Navigation</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">No scope indicated in main navigation.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Add active state styling (underline, bold, or highlight) to current navigation item. CSS-only fix.
+                        </div>
+                    </div>
+
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Intermediary Category Pages (1)</h4>
+                    
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#309D: Use Thumbnails for Subcategories</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Ensure subcategory thumbnails clearly represent what products are included.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart & Checkout -->
+            <div class="section-block">
+                <div class="section-block-header">
+                    <h3>Cart & Checkout</h3>
+                    <div class="section-block-stats">
+                        <div class="section-block-stat">
+                            <div class="value">117</div>
+                            <div class="label">Guidelines</div>
+                        </div>
+                        <div class="section-block-stat">
+                            <div class="value red">7</div>
+                            <div class="label">Items</div>
+                        </div>
+                        <div class="section-block-stat">
+                            <div class="value">95.7%</div>
+                            <div class="label">Compliance</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-block-content">
+                    <h4 style="font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #eee;">Shopping Cart (7)</h4>
+                    
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#2320D: Integrate Free Shipping Info in Cart Summary</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Include "free shipping" in cost summary in mini-cart where possible.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Include "Free Shipping" as a line item in the cart order cost summary. Show "Shipping: FREE" or "$0.00" when conditions are met.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#620D: Provide Large Thumbnails and Key Product Details</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Include core product specs and allow editing of selected variation in cart.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Include core product specs (size, color, material) in cart items. Allow users to update selected variations directly from cart without returning to PDP.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#2151D: Use Buttons for Updating Cart Quantity</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Setting quantity to "0" not possible. No "undo" option when item removed.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Allow quantity to be set to 0 as an alternative removal method. Provide "Undo" option briefly after removing items.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#624D: Display Identical Products as Separate Items</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Identical products added show as one item with increased quantity.</div>
+                    </div>
+                    <div class="violation-item low">
+                        <div class="violation-header">
+                            <div class="violation-title">#732D: Provide Full Order Cost or Estimate</div>
+                            <span class="badge badge-warning">Low</span>
+                        </div>
+                        <div class="violation-note">Display cheapest shipping as estimate or "shipping calculated at checkout".</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Provide a total cost (or estimate) at cart step. Display the cheapest shipping price as a standard estimate.
+                        </div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#603D: Provide Clear Path to View Cart</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Disagree with system assessment based on product and site context.</div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#622D: Provide Save for Later Feature</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Wishlist feature not set up for testing on new site.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Site-Wide Features & Customer Accounts -->
+            <div class="section-block">
+                <div class="section-block-header">
+                    <h3>Site-Wide Features & Customer Accounts</h3>
+                    <div class="section-block-stats">
+                        <div class="section-block-stat">
+                            <div class="value">18</div>
+                            <div class="label">Guidelines</div>
+                        </div>
+                        <div class="section-block-stat">
+                            <div class="value red">3</div>
+                            <div class="label">Items</div>
+                        </div>
+                        <div class="section-block-stat">
+                            <div class="value">86.3</div>
+                            <div class="label">Score</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-block-content">
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#255D: Don't Link to Current Page</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Link to active page is not disabled.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Add CSS/JS to disable or remove links on current page (breadcrumbs, navigation, footer). Prevents confusion when clicking leads nowhere.
+                        </div>
+                    </div>
+                    <div class="violation-item">
+                        <div class="violation-header">
+                            <div class="violation-title">#2937D: Increase Visibility of Account Menu</div>
+                            <span class="badge badge-critical">High</span>
+                        </div>
+                        <div class="violation-note">Use both icon AND textual label with sufficient size and contrast.</div>
+                        <button class="how-to-fix-toggle" onclick="toggleFix(this)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                            How to Fix
+                        </button>
+                        <div class="how-to-fix-content">
+                            Ensure account menu is highly visible with both a clear icon and textual label ("Account" or "Sign In"). Use sufficient size, color, and contrast.
+                        </div>
+                    </div>
+                    <div class="violation-item neutral">
+                        <div class="violation-header">
+                            <div class="violation-title">#2673D: Avoid Overly Long Text Lines</div>
+                            <span class="badge badge-neutral">Neutral</span>
+                        </div>
+                        <div class="violation-note">Keep text blocks to a comfortable reading width.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Wins Tab -->
+        <div id="quick-wins" class="tab-content">
+            <div class="section-header">
+                <h2>Quick Wins</h2>
+                <p>9 low-effort items that can be addressed in the 1-2 week pre-launch window</p>
+            </div>
+
+            <div class="quick-win-card">
+                <div class="quick-win-header">
+                    <h4>#346D: Persist Search Queries in Search Box</h4>
+                    <span class="quick-win-effort">CSS/JS Fix</span>
+                </div>
+                <div class="quick-win-body">
+                    <p><strong>Issue:</strong> Search query only visible when clicking the search box. Appears empty but search persists.</p>
+                    <p><strong>Fix:</strong> Keep the search query visible in the search field after submitting. Adjust CSS to show input value or update JS to populate field on results page load.</p>
+                    <p class="quick-win-impact">📈 +1-2% Search Refinement Rate</p>
+                </div>
+            </div>
+
+            <div class="quick-win-card">
+                <div class="quick-win-header">
+                    <h4>#531D: Display Total Number of Products</h4>
+                    <span class="quick-win-effort">Template Update</span>
+                </div>
+                <div class="quick-win-body">
+                    <p><strong>Issue:</strong> No product count shown on PLP or search results.</p>
+                    <p><strong>Fix:</strong> Add "Showing X products" text above and below product grid. Ensure count is prominently displayed.</p>
+                    <p class="quick-win-impact">📈 +1-2% Browse Rate</p>
+                </div>
+            </div>
+
+            <div class="quick-win-card">
+                <div class="quick-win-header">
+                    <h4>#791D: Style Add to Cart Button Uniquely</h4>
+                    <span class="quick-win-effort">CSS Update</span>
+                </div>
+                <div class="quick-win-body">
+                    <p><strong>Issue:</strong> Secondary buttons use same styling as the Add to Cart button.</p>
+                    <p><strong>Fix:</strong> Update CSS to make primary ATC button visually distinct - unique color, larger size, or different style from other buttons.</p>
+                    <p class="quick-win-impact">📈 +1-2% Add to Cart Rate</p>
+                </div>
+            </div>
+
+            <div class="quick-win-card">
+                <div class="quick-win-header">
+                    <h4>#786D: Clickable Ratings Average at Top of PDP</h4>
+                    <span class="quick-win-effort">Template Update</span>
+                </div>
+                <div class="quick-win-body">
+                    <p><strong>Issue:</strong> Rating display may not be prominent.</p>
+                    <p><strong>Fix:</strong> Ensure star rating average appears near product title and is clickable to jump to reviews section.</p>
+                    <p class="quick-win-impact">📈 +1-2% Trust & Review Engagement</p>
+                </div>
+            </div>
+
+            <div class="quick-win-card">
+                <div class="quick-win-header">
+                    <h4>#300D: Highlight Current Scope in Navigation</h4>
+                    <span class="quick-win-effort">CSS Update</span>
+                </div>
+                <div class="quick-win-body">
+                    <p><strong>Issue:</strong> No scope indicated in main navigation.</p>
+                    <p><strong>Fix:</strong> Add active state styling (underline, bold, or highlight) to current navigation item.</p>
+                    <p class="quick-win-impact">📈 +0.3% Navigation Clarity</p>
+                </div>
+            </div>
+
+            <div class="quick-win-card">
+                <div class="quick-win-header">
+                    <h4>#812D: Link to Parent Category for Cross-Sells</h4>
+                    <span class="quick-win-effort">Template Update</span>
+                </div>
+                <div class="quick-win-body">
+                    <p><strong>Issue:</strong> Cross-sell sections don't link to parent category.</p>
+                    <p><strong>Fix:</strong> Add "Shop All [Category]" links to cross-sell carousels (e.g., "Shop All Dresses").</p>
+                    <p class="quick-win-impact">📈 +1-2% Cross-Browse Rate</p>
+                </div>
+            </div>
+
+            <div class="quick-win-card">
+                <div class="quick-win-header">
+                    <h4>#836D: Free Shipping Info Near Buy Section</h4>
+                    <span class="quick-win-effort">Template Update</span>
+                </div>
+                <div class="quick-win-body">
+                    <p><strong>Issue:</strong> Free shipping indicated on page but not promoted near the Buy Section.</p>
+                    <p><strong>Fix:</strong> Add visible "Free Shipping" badge or text line near Add to Cart button and price.</p>
+                    <p class="quick-win-impact">📈 +2-3% Conversion Rate</p>
+                </div>
+            </div>
+
+            <div class="quick-win-card">
+                <div class="quick-win-header">
+                    <h4>#255D: Disable Links to Current Page</h4>
+                    <span class="quick-win-effort">CSS/JS Fix</span>
+                </div>
+                <div class="quick-win-body">
+                    <p><strong>Issue:</strong> Link to active page is not disabled.</p>
+                    <p><strong>Fix:</strong> Add CSS/JS to disable or remove links on current page (breadcrumbs, navigation, footer).</p>
+                    <p class="quick-win-impact">📈 +0.2% Navigation Clarity</p>
+                </div>
+            </div>
+
+            <div class="quick-win-card">
+                <div class="quick-win-header">
+                    <h4>#521D: Display Current Sort Order</h4>
+                    <span class="quick-win-effort">Template Update</span>
+                </div>
+                <div class="quick-win-body">
+                    <p><strong>Issue:</strong> Sorting dropdown present but has no "Sort By" label.</p>
+                    <p><strong>Fix:</strong> Add "Sort By:" label before dropdown and ensure currently selected sort option is displayed.</p>
+                    <p class="quick-win-impact">📈 +0.5% Sort Feature Usage</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>Additional Items to Consider</h4>
+                <ul>
+                    <li><strong>#537D: Add Breadcrumbs to PLP</strong> — Template modification, helps users navigate (+2-3% Navigation)</li>
+                    <li><strong>#467D: Show Filter Match Counts</strong> — May require backend work but improves filtering (+2-4% Engagement)</li>
+                    <li><strong>#2709D: Indicate Unavailable Variations</strong> — JavaScript update to grey out unavailable combinations (+3-5% ATC)</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function filterViolations() {
+            const impact = document.getElementById('filter-impact').value;
+            const judgement = document.getElementById('filter-judgement').value;
+            const topic = document.getElementById('filter-topic').value;
+            
+            document.querySelectorAll('#violations-table tbody tr').forEach(row => {
+                const rowImpact = row.getAttribute('data-impact');
+                const rowJudgement = row.getAttribute('data-judgement');
+                const rowTopic = row.getAttribute('data-topic');
+                
+                let show = true;
+                if (impact !== 'all' && rowImpact !== impact) show = false;
+                if (judgement !== 'all' && rowJudgement !== judgement) show = false;
+                if (topic !== 'all' && !rowTopic.includes(topic)) show = false;
+                
+                row.style.display = show ? '' : 'none';
+            });
+        }
+
+        function toggleFix(btn) {
+            btn.classList.toggle('open');
+            btn.nextElementSibling.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
