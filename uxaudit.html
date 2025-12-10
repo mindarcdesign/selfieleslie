@@ -568,6 +568,35 @@
             color: #888;
         }
         
+        .data-table .title-note .note-preview {
+            display: inline;
+        }
+        
+        .data-table .title-note .note-full {
+            margin-top: 8px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 3px solid #0066cc;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        
+        .view-more-btn {
+            background: none;
+            border: none;
+            color: #0066cc;
+            font-size: 0.8rem;
+            cursor: pointer;
+            padding: 2px 6px;
+            margin-left: 4px;
+            text-decoration: underline;
+        }
+        
+        .view-more-btn:hover {
+            color: #004499;
+        }
+        
         .impact-harmful { color: #dc2626; font-weight: 600; }
         .impact-disruptive { color: #d97706; font-weight: 600; }
         .impact-interruption { color: #2563eb; font-weight: 600; }
@@ -1138,7 +1167,11 @@
                                 <td class="code">#1024D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Return Users to the Same Place in Product Lists and Search Results when Returnin</div>
-                                    <div class="title-note">Interaction here is technically correct but output is a bad user experience. User returns to the sam</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">Interaction here is technically correct but output is a bad user experience. Use...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">Interaction here is technically correct but output is a bad user experience. User returns to the same section of the PLP, but the product cards shift, and the product they were previously seeing moves higher up the page which creates a unusual experience</div>
+                                    </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1150,7 +1183,11 @@
                                 <td class="code">#253D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Implement Product Types with Shared Attributes as Filters Instead of Categories</div>
-                                    <div class="title-note">What&#x27;s the UX issue? During multiple rounds of both desktop and mobile testing, multiple sites had i</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>During multiple rounds of both desktop and mobile testing, multiple sites had implemented product types as categories or subcategories when, in fact, the product types should have been implemented as filters. This proved critically harmful, as participants were unable to get full lists of all the products of a certain product type; for example, they couldn’t “see all dresses” in a single product list, but rather had to browse dresses by product type — effectively “siloing” users into overly narrow categories. This often has the practical outcome of end users being unable to find a product they wish to purchase — even if the product exists on the site. During testing, this led many participants to abandon sites due to the confusion and limitations introduced by such mismatches.<br><br>How to improve the UX?<br>Implement product types as filters instead of categories when most product attributes (e.g., “brand” and “style”) are the same across the product type. Implement product types as categories instead of filters mainly when most of the product attributes aren’t shared and therefore the product types are mutually exclusive.</div>
+                                    </div>
                                 </td>
                                 <td>Homepage</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1162,7 +1199,11 @@
                                 <td class="code">#511D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Always Allow Users to Sort Product Lists and Search Results by “Price”, “User Ra</div>
-                                    <div class="title-note">User rating filter visible on both new and current site, but no ratings on products</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">User rating filter visible on both new and current site, but no ratings on produ...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">User rating filter visible on both new and current site, but no ratings on products</div>
+                                    </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1186,7 +1227,11 @@
                                 <td class="code">#2539D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Order Long Lists of Filter Options Alphabetically</div>
-                                    <div class="title-note">How to improve the UX? Order long lists of filter options alphabetically. If the options are numeric</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">How to improve the UX?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">How to improve the UX?<br>Order long lists of filter options alphabetically. If the options are numeric, order them numerically.</div>
+                                    </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1198,7 +1243,11 @@
                                 <td class="code">#2709D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Once a Size or Color Has Been Selected, Always Indicate Unavailable Variations</div>
-                                    <div class="title-note">What&#x27;s the UX issue? The interplay between size and color is a critical factor affecting users’ abil</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>The interplay between size and color is a critical factor affecting users’ ability to determine which colors for an apparel item are in stock in their size. However, in testing, several participants were unable to easily determine what colors were available for their selected size.<br><br>When color swatches appear to be available for all sizes when in fact some colors are unavailable, users experience needless frustration trying to find a color-size combination that meets their requirements.​‌‌‍‌‌‌‌‌‌‌‍‌‌‌‌‌‌‌‌‍‍‌‌‌‌‌‌‌‎<br><br>How to improve the UX?<br>Once a size or color has been selected, always indicate unavailable variations. When more than 2 variation selectors are provided, ensure that variation changes to one selector automatically updates the variation availability for the remaining selectors.</div>
+                                    </div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1210,7 +1259,11 @@
                                 <td class="code">#346D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Always Persist Search Queries in the Search Box on the Results Page</div>
-                                    <div class="title-note">This function technically works, but not in a efficient best practice way. The search query is only </div>
+                                    <div class="title-note">
+                                        <span class="note-preview">This function technically works, but not in a efficient best practice way. The s...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">This function technically works, but not in a efficient best practice way. The search query is only visible once you hit the search box. This creates a disconnect in the users brain, where they expect the search bar to be empty as it visually is empty, but the search persists which surprised and confused tester </div>
+                                    </div>
                                 </td>
                                 <td>On-Site Search</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1222,7 +1275,11 @@
                                 <td class="code">#531D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Prominently Display the Total Number of List Items or Search Results</div>
-                                    <div class="title-note">What&#x27;s the UX issue? Users typically perform a preliminary evaluation of both category product lists</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>Users typically perform a preliminary evaluation of both category product lists and search results prior to actually inspecting items in detail. One important consideration at this point is the number of items in the list because it helps them judge whether the list is too large, too small, or seems about right.<br><br>During Baymard’s large-scale usability testing, whenever the number of items wasn’t available (or simply not noticed) users often neglected to make an initial judgement of the list; e.g., Are these results too broad? Or perhaps they’re overly narrow? To answer those questions, users typically perform a preliminary snap evaluation of the list prior to actually inspecting its items in detail. If the number of items is missing or is hard to see, users lack the information they need to take action on modifying the list.<br><br>How to improve the UX?<br>Show the total number of items in the product list and on search results pages — both above and below the list — and ensure that the size of the number of items make it easy to discern.</div>
+                                    </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1234,7 +1291,11 @@
                                 <td class="code">#537D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Have Hierarchy-Based Breadcrumbs in Category Product Lists on Mobile and Desktop</div>
-                                    <div class="title-note">What&#x27;s the UX issue? Hierarchy-based breadcrumbs — which indicate where a user is in the site hierar</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>Hierarchy-based breadcrumbs — which indicate where a user is in the site hierarchy — fulfill 2 important functions. Firstly, they help users to orient themselves by showing where the category product list is within the site structure. Secondly, they provide users with a convenient and efficient way to navigate up the hierarchy to broaden the scope of the current category product list.<br><br>As observed during testing, without clickable hierarchy-based breadcrumbs, users in category product lists may not know where they are within the site structure, and may not be able to quickly widen the scope of the list and see more items.<br><br>How to improve the UX?<br>Provide clickable hierarchy-based breadcrumbs on category pages and in category product lists, and consider including &quot;Sideways Breadcrumbs&quot; as well.</div>
+                                    </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1246,7 +1307,11 @@
                                 <td class="code">#467D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Always Show the Number of Matches for Each Filter Option, and Update Them as Fil</div>
-                                    <div class="title-note">What&#x27;s the UX issue? Most sites display numbers alongside filter options that show the number of pro</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>Most sites display numbers alongside filter options that show the number of products that would match that option if selected. During Baymard&#x27;s testing, on sites that didn’t show the number of matches for each filter option, participants either wasted time applying filters that didn’t narrow the product lists or search results sufficiently, or ran into dead ends when the application of filters led to too few items being shown in the list.<br><br>Therefore, not knowing how many matches would correspond to each filter type slows product finding and makes it much harder for users to tailor product lists to their needs.<br><br>However, having numbers of matches besides filter options was observed not being enough — they have to be updated each time a filter is chosen. This is especially important when selecting multiple filters. In fact, unless matching values are updated as soon as a filter is chosen, there is no point in showing the numbers at all after users have selected a filter, as what the user is concerned about is the total size of the resulting product list or search results.<br><br>How to improve the UX?<br>Show the number of matches for each filtering option, and live update the numbers as filters are applied or deselected.</div>
+                                    </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1258,7 +1323,11 @@
                                 <td class="code">#828D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Have Both “Hierarchy” and “History” Breadcrumbs on Product Pages on Mobile and D</div>
-                                    <div class="title-note">What&#x27;s the UX issue? Breadcrumbs help users get an overview of where they are on the site, navigate </div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>Breadcrumbs help users get an overview of where they are on the site, navigate between categories, and return to search results. Baymard’s large-scale usability testing shows that without “Hierarchy” breadcrumbs on the product details page, it’s more difficult for users to understand where they are within the site structure, resulting in an altogether disorienting browsing experience. Not keeping users apprised of their current location is observed to increase the chance they will, at some point, feel lost and inhibits their ability to navigate confidently.<br><br>The absence of “Hierarchy” breadcrumbs also makes it challenging for users to continue their product browsing from the product details page because they’re unable to navigate up the hierarchy easily. They often either have to make drastic scope jumps (e.g., select a new top-level category, perform a new search, etc.), or remain stuck at the product details page searching for an escape route.<br><br>Furthermore, users were repeatedly observed getting stuck when sites only featured one type of breadcrumb and not both “Hierarchy” and “History” breadcrumbs.<br><br>How to improve the UX?<br>Always provide both “Hierarchy” and “History” breadcrumbs on product pages.</div>
+                                    </div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1294,7 +1363,11 @@
                                 <td class="code">#2712D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Always Persist a Selected, Available Size across Color Variations</div>
-                                    <div class="title-note">What&#x27;s the UX issue? In selecting a size for an item, users expect their size to remain selected for</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>In selecting a size for an item, users expect their size to remain selected for all available color options they subsequently look at. However, during testing, several participants had to reselect their size each time they viewed different available colors because their size had deselected.<br><br>This results in an inefficient, back and forth process where the user has to scroll down to select a size, scroll up to view the main product image, select a color variation, then scroll back down to reselect the size, and so on.<br><br>Size selectors that reset after users switch colors cause needless annoyance to those who notice this slippage, while users who don’t become aware of it will have trouble adding items to their cart.​‌‌‍‌‌‌‌‌‌‌‍‌‌‌‌‌‌‌‌‍‍‌‌‌‌‌‌‌‎<br><br>How to improve the UX?<br>Once an available size has been selected, always persist that size across color variations.</div>
+                                    </div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1330,7 +1403,11 @@
                                 <td class="code">#416D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Provide Text Fields for Numeric Filtering Values</div>
-                                    <div class="title-note">What&#x27;s the UX issue? Numeric product attributes such as weight, dimensions, and price are often key </div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>Numeric product attributes such as weight, dimensions, and price are often key factors when users are choosing among products. However, three main issues were observed during Baymard’s testing to affect users trying to filter product lists or search results by numeric attributes: unsuitable predefined numeric filter ranges, single-value numeric filters, and range sliders.<br><br>For predefined ranges, the issue is that users are likely to always see irrelevant results because they can’t select specific values. As a result, the product list or search results will contain too many items, and users will have to expend needless time and effort trying to find products that suit their needs.<br><br>For single-value numeric range filters, the issue is that users will have to select multiple values. This process of individually selecting individual numeric options greatly frustrated test participants and most lost patience before having selected the entire range.<br><br>Range sliders proved difficult to control, with a few participants being unable to correctly define a suitable range. As a result, the critical task to define a suitable price range became needlessly challenging.<br><br>How to improve the UX?<br>For numeric filtering values, provide both predefined values and text fields.</div>
+                                    </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1342,7 +1419,11 @@
                                 <td class="code">#415D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Have a &quot;New Arrivals&quot; Filter</div>
-                                    <div class="title-note">What&#x27;s the UX issue? New products are often of high interest — for example, the latest clothing for </div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>New products are often of high interest — for example, the latest clothing for the new season or the most up-to-date electronic gadget. Indeed, Baymard&#x27;s survey of 1,167 online US shoppers shows that 80% of respondents find &quot;New Arrivals&quot; to be a useful way to highlight products.<br><br>Additionally, during testing, participants returning to their favorite sites often looked first for products that had been added to the site since their last visit.<br><br>However, the inability to easily find newly arrived products resulted in participants having to take time-consuming detours as they struggled to find suitable items.<br><br>How to improve the UX?<br>Provide a “New Arrivals” filter as a top-level filter type that is visible by default in the filtering interface. Implementing &quot;New Arrivals&quot; as a filter allows users to see new arrivals within subcategories, search results, or filtered product lists.</div>
+                                    </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1354,7 +1435,11 @@
                                 <td class="code">#1191D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Have a “Sales” or “Deals” Filter Type</div>
-                                    <div class="title-note">What&#x27;s the UX issue? Many users browse product lists and search results to see if any items of inter</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>Many users browse product lists and search results to see if any items of interest are available at a discounted price — as one participant said during testing, “I always shop the sales first”.<br><br>However, on sites that have sale items available but that don’t have a way to isolate them, it’s significantly more difficult to find discounted items. As observed during testing, users looking for bargains will have to scan through product lists or search results that contain both full-price and discounted items, looking for labels or other indications that some products are discounted.<br><br>Even if the “On Sale” labels are clear, the presence of nonsale products clutters the list, making it harder to compare the discounted items because the nonsale items get in the way. Furthermore, if “On Sale” labels in list items are not easy to discern, product finding is even slower as users have to first work out which items are indeed discounted.<br><br>How to improve the UX?<br>Provide a “Sale” or “Deal” filter type, and ensure that it is always visible in the filter interface (e.g., don’t hide it in a “Price” filter type).</div>
+                                    </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1366,7 +1451,11 @@
                                 <td class="code">#812D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Link to the Parent Category for Alternative and Supplementary Cross-Sells</div>
-                                    <div class="title-note">What&#x27;s the UX issue? Cross-sell sections are observed to be very good for suggesting both alternativ</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>Cross-sell sections are observed to be very good for suggesting both alternative and supplementary products, however, the specific suggested products won’t always match the individual user’s needs — regardless the relevancy logic employed for those product suggestions — and leave users wanting to see more options.<br><br>Needless to say, the process of trying to manually identify and navigate to the parent category to view more alternative or supplementary items can be extremely time-consuming and risks users never finding items that may be a “perfect” match.<br><br>How to improve the UX?<br>Both alternative and supplementary cross-sells should have links to their parent product categories (e.g., “Shop All Hoodies”, or “View All Accessories”).</div>
+                                    </div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1378,7 +1467,11 @@
                                 <td class="code">#836D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Place &quot;Free Shipping&quot; Information In or Near the &quot;Buy&quot; Section</div>
-                                    <div class="title-note">What&#x27;s the UX issue? Knowing that “free shipping” is available for their order is a big motivating f</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>Knowing that “free shipping” is available for their order is a big motivating factor for users to shop at a particular site — indeed, 39% of online shoppers Baymard surveyed in the US have abandoned orders solely because extra order costs were too high.<br><br>During Baymard’s large-scale usability testing, it was clear that many sites attempted to highlight free shipping to users as a sitewide banner; however, many users will overlook it since most users still associate banners with ads.<br><br>As a result, when that information wasn’t near the “Buy” section, a large group of users overlooked it, and users were instead forced to add the product to the cart just to learn what the shipping cost would be. “Free Shipping” completely missed by the user is a missed opportunity, as it’s a major competitive advantage going unnoticed.<br><br>How to improve the UX?<br>Display “Free Shipping” information in or near the “Buy” section, even if the information is also displayed in other sitewide elements.</div>
+                                    </div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1402,7 +1495,11 @@
                                 <td class="code">#620D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Always Provide Large Thumbnails and Key Product Details in the Cart </div>
-                                    <div class="title-note">How to improve the UX? Include core product specs for items in the cart, and allow users to update t</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">How to improve the UX?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">How to improve the UX?<br>Include core product specs for items in the cart, and allow users to update the selected variation directly from the cart.</div>
+                                    </div>
                                 </td>
                                 <td>Cart</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1414,7 +1511,11 @@
                                 <td class="code">#2937D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Use Styling, Positioning, and Dynamic Highlighting to Increase the Visibility of</div>
-                                    <div class="title-note">How to improve the UX? Ensure the account menu is highly visible in the sitewide header. To do so, a</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">How to improve the UX?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">How to improve the UX?<br>Ensure the account menu is highly visible in the sitewide header. To do so, always use both a clear, conventional icon and textual label with sufficient size, color, contrast, and surrounding white space; avoid text- and icon-only links.</div>
+                                    </div>
                                 </td>
                                 <td>Accounts</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1438,7 +1539,11 @@
                                 <td class="code">#263D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Ensure Categories are Clearly Delineated</div>
-                                    <div class="title-note">What&#x27;s the UX issue? During Baymard’s large-scale testing overlapping categories caused severe usabi</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>During Baymard’s large-scale testing overlapping categories caused severe usability issues, often with abandonments as the outcome because the users were unable to find what they were looking for.<br><br>When categories are overlapping it makes it very difficult for users to know how the options differ and which they should select. Equally critical, it made many users lose confidence in the site, deeming it as “unprofessional” and often reasoning that when the redundant categories were this easy to spot, not enough care and attention were given to the site design. Furthermore, during testing, it often led to users missing out on &quot;the right&quot; category because they choose the first one they saw as a match.<br><br>How to improve the UX?<br>Combine overlapping categories and eliminate redundant categories. Sub-product-type filters can also be provided to allow users to narrow down product lists for combined categories.</div>
+                                    </div>
                                 </td>
                                 <td>Homepage</td>
                                 <td><span class="badge badge-low">Low</span></td>
@@ -1450,7 +1555,11 @@
                                 <td class="code">#732D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Always Provide the Full Order Cost, or an Estimate, in the Cart</div>
-                                    <div class="title-note">How to improve the UX? Provide a total cost (or estimate) displayed at the cart step. This could be </div>
+                                    <div class="title-note">
+                                        <span class="note-preview">How to improve the UX?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">How to improve the UX?<br>Provide a total cost (or estimate) displayed at the cart step. This could be done by, e.g., displaying the cheapest shipping price as a standard estimate, or &quot;shipping calculated at checkout&quot;</div>
+                                    </div>
                                 </td>
                                 <td>Cart</td>
                                 <td><span class="badge badge-low">Low</span></td>
@@ -1474,7 +1583,11 @@
                                 <td class="code">#470D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Truncate Lists of More than 4–8 Filter Options on Desktop</div>
-                                    <div class="title-note">How to improve the UX? Truncate filter options if there are more than 4-8, make sure that the “View </div>
+                                    <div class="title-note">
+                                        <span class="note-preview">How to improve the UX?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">How to improve the UX?<br>Truncate filter options if there are more than 4-8, make sure that the “View More” link is easy to discern, and show the number of truncated options in the truncation link. Avoid both inline scrollable areas and untruncated lists with more than 8 filter options.</div>
+                                    </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-low">Low</span></td>
@@ -1486,7 +1599,11 @@
                                 <td class="code">#1501D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Make Return Policies Easy to Read and Understand</div>
-                                    <div class="title-note">How to improve the UX? Provide answers to common return policy questions in an easy-to-read format —</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">How to improve the UX?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">How to improve the UX?<br>Provide answers to common return policy questions in an easy-to-read format — providing headers, sufficient white space, and appropriate use of different font sizes and bolding — to help these users both navigate the fully detailed policy efficiently for specific information and assist their general understanding of the return policy as a whole.</div>
+                                    </div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-low">Low</span></td>
@@ -1510,7 +1627,11 @@
                                 <td class="code">#2151D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Use Buttons or Buttons Plus an Open Text Field for Updating Cart Quantity</div>
-                                    <div class="title-note">Setting the quantity to &quot;0&quot; is not possible In testing, some participants’ initial reaction when loo</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">Setting the quantity to &quot;0&quot; is not possible...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">Setting the quantity to &quot;0&quot; is not possible<br>In testing, some participants’ initial reaction when looking to remove an item from the cart was to use the “minus” button associated with the quantity selector rather than the available separate “Remove” link. While all participants eventually were able to successfully remove the item, supporting users’ natural inclination for removing items creates the most seamless cart experience. Additionally, across multiple usability studies, we’ve observed that a subset of participants consistently attempt to delete an unwanted item by typing “0” when presented with an open text quantity field.<br><br>No “undo” option is available when the cart item is removed<br>Some users may accidentally remove an item, or may change their mind about removing an item. Yet refinding the item via the site navigation was observed during testing to be very difficult for some participants.<br><br>How to improve the UX?<br>Allow the “minus” button and text field to set quantity “0”. Provide an “undo” option if a cart item is removed. This offers users even more of a chance to “go back” if they unintentionally removed a product from the cart or changed their mind.</div>
+                                    </div>
                                 </td>
                                 <td>Cart</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1534,7 +1655,11 @@
                                 <td class="code">#261D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Divide Categories and Sub-Categories into Manageable Chunks</div>
-                                    <div class="title-note">What&#x27;s the UX issue? The hierarchy of the product catalog — as reflected in the main navigation — is</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>The hierarchy of the product catalog — as reflected in the main navigation — is often the first view users have of how products are organized and categorized. It’s important therefore that users can quickly work out which subcategory is likely to contain products of interest without undue effort. However, Baymard’s testing has shown that too many categories in the main navigation can be perceived by the test participants as “overwhelming”, “cluttered”, or “confusing”. In fact, participants began to feel overwhelmed when they were presented with more than 10-15 category or subcategory options to choose from.<br><br>How to improve the UX?<br>Divide categories and subcategories into manageable chunks.</div>
+                                    </div>
                                 </td>
                                 <td>Homepage</td>
                                 <td><span class="badge badge-low">Low</span></td>
@@ -1570,7 +1695,11 @@
                                 <td class="code">#798D</td>
                                 <td class="title-cell">
                                     <div class="title-main">How to Implement &#x27;Save&#x27; Features</div>
-                                    <div class="title-note">Wishlist functionality on new site still to be fully understood. Icon sits on product card but doesn</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">Wishlist functionality on new site still to be fully understood. Icon sits on pr...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">Wishlist functionality on new site still to be fully understood. Icon sits on product card but doesn&#x27;t exist on the product card.</div>
+                                    </div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-low">Low</span></td>
@@ -1582,7 +1711,11 @@
                                 <td class="code">#802D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Provide an Estimated Delivery Date or Range Near the “Buy” Section</div>
-                                    <div class="title-note">What&#x27;s the UX issue? When it comes to delivery speed, users have one main concern: “When will I rece</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>When it comes to delivery speed, users have one main concern: “When will I receive my order?” The solution historically used within e-commerce is to clearly state the ”delivery speed” for each of the shipping options: for example, “Standard: 2 Business Days - $4.95”.<br><br>However, during testing, this very business-centric way of conveying this information often had participants come to a complete halt in an attempt to extrapolate or guesstimate when their order would arrive, often leading to hesitation and confusion.<br><br>What’s more, when users are forced to guesstimate the delivery date themselves, they may end up being disappointed when it turns out their expectations were wrong and their products arrive later than expected.<br><br>How to improve the UX?<br>Provide a delivery-date estimate, or delivery-date range, near the “Buy” section. Consider embedding a delivery-date estimator tool (where users can enter their address information) to allow for a more accurate delivery-date estimate.</div>
+                                    </div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
@@ -1606,7 +1739,11 @@
                                 <td class="code">#783D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Product Image Overlays Should Use 80-100% of the Page Width </div>
-                                    <div class="title-note">What&#x27;s the UX issue? Employing a full-screen overlay allows sites to provide images in the largest f</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>Employing a full-screen overlay allows sites to provide images in the largest format possible, which was shown to be helpful to users who were seeking product information via images in Baymard’s large-scale usability testing.<br><br>However, when using a full-screen overlay be aware that most users will assume that the browser “Back” button will take them back to the default product page. If the “Back” button doesn’t take them back to the product page from a product image overlay users will be disoriented. For example, if they’ve arrived from an external source and landed directly on the product page, then clicking “Back” will take them off the site entirely and return them to wherever they were previously.<br><br>How to improve the UX?<br>Allow users to close the image gallery overlay by clicking the browser back button. Consider using the HTML5 History API’s url-rewrite, which allows a site to invoke a URL change without a page reload, meaning the site can align the browser history and back button behavior to match user expectations and close a product image overlay.</div>
+                                    </div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-low">Low</span></td>
@@ -1666,7 +1803,11 @@
                                 <td class="code">#457D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Avoid Misleading or Unclear List Item Thumbnails</div>
-                                    <div class="title-note">Although accurate for  a high (75+%) of products, there is a specific style where lifestyle images w</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">Although accurate for  a high (75+%) of products, there is a specific style wher...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">Although accurate for  a high (75+%) of products, there is a specific style where lifestyle images with 2 women, only one of which is wearing the dress is confusing. Revert these product card to default on base product image and show lifestyle on hover or other interaction</div>
+                                    </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-low">Low</span></td>
@@ -1678,7 +1819,11 @@
                                 <td class="code">#2375D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Always Allow Guest Users in Product Lists to Save Items to Wishlists</div>
-                                    <div class="title-note">Note: Based on old site the wishlist is easy to interact with, assuming this will be the same, altho</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">Note: Based on old site the wishlist is easy to interact with, assuming this wil...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">Note: Based on old site the wishlist is easy to interact with, assuming this will be the same, although wishlist icon is no longer visible on the site nav</div>
+                                    </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-low">Low</span></td>
@@ -1726,7 +1871,11 @@
                                 <td class="code">#850D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Use Individual &quot;Buttons&quot; for Each Size Variation</div>
-                                    <div class="title-note">What&#x27;s the UX issue? While a preselected size removes the issue of receiving a validation error it’s</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>While a preselected size removes the issue of receiving a validation error it’s not recommended to pre-select size variations, as it caused a few but extremely severe issues during testing.<br><br>All users who overlook the size selector will instead of an error, add a product to their cart in the default selected size, without being exposed to the fact that there are multiple sizes to select from.<br><br>While some users will catch themselves before they complete the purchase, perhaps while reviewing their order at the review step in Checkout, testing revealed there will be a few who won’t, and they will complete the checkout having purchased a product that may not be in their preferred size.<br><br>How to improve the UX?<br>Avoid selecting a size by default, and change other relevant information as necessary as different sizes are selected (e.g., the product price).</div>
+                                    </div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-low">Low</span></td>
@@ -1738,7 +1887,11 @@
                                 <td class="code">#237D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Feature a Broad Range of Product Types on the Homepage</div>
-                                    <div class="title-note">This section is questionable in current staging mode as homepage categories are duplicated. Expectat</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">This section is questionable in current staging mode as homepage categories are...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">This section is questionable in current staging mode as homepage categories are duplicated. Expectation is this will be changed for go live. If not this experience should be changed before go live.</div>
+                                    </div>
                                 </td>
                                 <td>Homepage</td>
                                 <td><span class="badge badge-neutral">Neutral</span></td>
@@ -1786,7 +1939,11 @@
                                 <td class="code">#309D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Use Thumbnails to Represent Subcategories on Intermediary Category Pages</div>
-                                    <div class="title-note">How to improve the UX? Ensure the subcategory thumbnails are easy to interpret at a glance, and that</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">How to improve the UX?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">How to improve the UX?<br>Ensure the subcategory thumbnails are easy to interpret at a glance, and that the subcategory thumbnail makes it clear what product type it represents. Intermediary category pages should feature thumbnails that clearly focus on the desired product. This can be done through composition (placing the focus of the thumbnail squarely on the relevant product), narrow cropping, or by avoiding overly contextual images altogether.</div>
+                                    </div>
                                 </td>
                                 <td>Homepage</td>
                                 <td><span class="badge badge-neutral">Neutral</span></td>
@@ -1798,7 +1955,11 @@
                                 <td class="code">#399D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Support &quot;Subjective&quot; Search Queries</div>
-                                    <div class="title-note">Hard to tell if result are actually accurate due to all products being very similar. Not treated as </div>
+                                    <div class="title-note">
+                                        <span class="note-preview">Hard to tell if result are actually accurate due to all products being very simi...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">Hard to tell if result are actually accurate due to all products being very similar. Not treated as relevant</div>
+                                    </div>
                                 </td>
                                 <td>On-Site Search</td>
                                 <td><span class="badge badge-neutral">Neutral</span></td>
@@ -1858,7 +2019,11 @@
                                 <td class="code">#814D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Include Enough Information for Cross-Sells to Facilitate Evaluation and Comparis</div>
-                                    <div class="title-note">What&#x27;s the UX issue? Providing cross-sells on the product details page saves users time and effort w</div>
+                                    <div class="title-note">
+                                        <span class="note-preview">What&#x27;s the UX issue?...</span>
+                                        <button class="view-more-btn" onclick="toggleNotes(this)">View More</button>
+                                        <div class="note-full" style="display: none;">What&#x27;s the UX issue?<br>Providing cross-sells on the product details page saves users time and effort when searching for alternative or supplementary products. However, without adequate information, it can be challenging for users to evaluate the suitability and compatibility of cross-sell recommendations.<br><br>Therefore, it&#x27;s important to offer a consistent level of basic product details for both alternative and supplementary cross-sell recommendations to give users intuitive and easy access to other products of potential interest.<br><br>How to improve the UX?<br>Provide the product information that&#x27;s currently missing in the cross-sell recommendations. It&#x27;s key to provide a high-quality thumbnail, title, price, user ratings average, brand, and the number of product variations or stock status, if relevant.</div>
+                                    </div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-neutral">Neutral</span></td>
@@ -3165,6 +3330,22 @@
         function toggleFix(btn) {
             btn.classList.toggle('open');
             btn.nextElementSibling.classList.toggle('open');
+        }
+
+        function toggleNotes(btn) {
+            const noteDiv = btn.parentElement;
+            const preview = noteDiv.querySelector('.note-preview');
+            const full = noteDiv.querySelector('.note-full');
+            
+            if (full.style.display === 'none') {
+                full.style.display = 'block';
+                preview.style.display = 'none';
+                btn.textContent = 'View Less';
+            } else {
+                full.style.display = 'none';
+                preview.style.display = 'inline';
+                btn.textContent = 'View More';
+            }
         }
     </script>
 </body>
