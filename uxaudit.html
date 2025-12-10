@@ -307,6 +307,73 @@
             background: #22c55e;
         }
         
+        /* Legend for stacked bars */
+        .perf-legend {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+        }
+        
+        /* Stacked bar segments */
+        .perf-bar-container.stacked {
+            display: flex;
+            background: #f0f0f0;
+            overflow: hidden;
+        }
+        
+        .perf-segment {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .perf-segment.high {
+            background: #8B7355;
+        }
+        
+        .perf-segment.low {
+            background: #E6C54A;
+        }
+        
+        .perf-segment.neutral {
+            background: #B8B8B8;
+        }
+        
+        .perf-segment.pass {
+            background: #4CAF50;
+        }
+        
+        /* Shopify footnote styling */
+        .shopify-note {
+            color: #999;
+            font-style: italic;
+        }
+        
+        .shopify-footnote {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .shopify-footnote .shopify-note {
+            color: #666;
+        }
+        
         .perf-score {
             width: 50px;
             text-align: right;
@@ -851,6 +918,27 @@
 
             <div class="performance-section">
                 <h3>Performance by Section</h3>
+                
+                <!-- Legend -->
+                <div class="perf-legend">
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #8B7355;"></span>
+                        <span>Violated High</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #E6C54A;"></span>
+                        <span>Violated Low</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #B8B8B8;"></span>
+                        <span>Neutral</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #4CAF50;"></span>
+                        <span>Adhered</span>
+                    </div>
+                </div>
+                
                 <div class="perf-scale">
                     <span>Poor</span>
                     <span>Mediocre</span>
@@ -864,8 +952,11 @@
                         <div class="name">Homepage & Category</div>
                         <div class="meta">32 Guidelines</div>
                     </div>
-                    <div class="perf-bar-container">
-                        <div class="perf-bar-fill" style="width: 56.9%;"></div>
+                    <div class="perf-bar-container stacked">
+                        <div class="perf-segment high" style="width: 8.0%;"></div>
+                        <div class="perf-segment low" style="width: 8.0%;"></div>
+                        <div class="perf-segment neutral" style="width: 20.0%;"></div>
+                        <div class="perf-segment pass" style="width: 64.0%;"></div>
                     </div>
                     <div class="perf-score">56.9</div>
                 </div>
@@ -875,8 +966,11 @@
                         <div class="name">On-Site Search</div>
                         <div class="meta">28 Guidelines</div>
                     </div>
-                    <div class="perf-bar-container">
-                        <div class="perf-bar-fill" style="width: 54.4%;"></div>
+                    <div class="perf-bar-container stacked">
+                        <div class="perf-segment high" style="width: 8.3%;"></div>
+                        <div class="perf-segment low" style="width: 20.8%;"></div>
+                        <div class="perf-segment neutral" style="width: 12.5%;"></div>
+                        <div class="perf-segment pass" style="width: 58.3%;"></div>
                     </div>
                     <div class="perf-score">54.4</div>
                 </div>
@@ -886,8 +980,11 @@
                         <div class="name">Product Lists & Filtering</div>
                         <div class="meta">70 Guidelines</div>
                     </div>
-                    <div class="perf-bar-container">
-                        <div class="perf-bar-fill" style="width: 46.7%;"></div>
+                    <div class="perf-bar-container stacked">
+                        <div class="perf-segment high" style="width: 20.5%;"></div>
+                        <div class="perf-segment low" style="width: 9.1%;"></div>
+                        <div class="perf-segment neutral" style="width: 4.5%;"></div>
+                        <div class="perf-segment pass" style="width: 65.9%;"></div>
                     </div>
                     <div class="perf-score">46.7</div>
                 </div>
@@ -897,8 +994,11 @@
                         <div class="name">Product Page</div>
                         <div class="meta">102 Guidelines</div>
                     </div>
-                    <div class="perf-bar-container">
-                        <div class="perf-bar-fill" style="width: 50.6%;"></div>
+                    <div class="perf-bar-container stacked">
+                        <div class="perf-segment high" style="width: 18.6%;"></div>
+                        <div class="perf-segment low" style="width: 13.6%;"></div>
+                        <div class="perf-segment neutral" style="width: 18.6%;"></div>
+                        <div class="perf-segment pass" style="width: 49.2%;"></div>
                     </div>
                     <div class="perf-score">50.6</div>
                 </div>
@@ -908,10 +1008,45 @@
                         <div class="name">Site-Wide Features</div>
                         <div class="meta">18 Guidelines</div>
                     </div>
-                    <div class="perf-bar-container">
-                        <div class="perf-bar-fill good" style="width: 86.3%;"></div>
+                    <div class="perf-bar-container stacked">
+                        <div class="perf-segment high" style="width: 10.0%;"></div>
+                        <div class="perf-segment low" style="width: 0%;"></div>
+                        <div class="perf-segment neutral" style="width: 10.0%;"></div>
+                        <div class="perf-segment pass" style="width: 80.0%;"></div>
                     </div>
                     <div class="perf-score">86.3</div>
+                </div>
+                
+                <div class="perf-row">
+                    <div class="perf-label">
+                        <div class="name">Cart & Checkout</div>
+                        <div class="meta">117 Guidelines <span class="shopify-note">*</span></div>
+                    </div>
+                    <div class="perf-bar-container stacked">
+                        <div class="perf-segment high" style="width: 40.0%;"></div>
+                        <div class="perf-segment low" style="width: 10.0%;"></div>
+                        <div class="perf-segment neutral" style="width: 20.0%;"></div>
+                        <div class="perf-segment pass" style="width: 30.0%;"></div>
+                    </div>
+                    <div class="perf-score">95.7</div>
+                </div>
+                
+                <div class="perf-row">
+                    <div class="perf-label">
+                        <div class="name">Customer Accounts</div>
+                        <div class="meta">45 Guidelines <span class="shopify-note">*</span></div>
+                    </div>
+                    <div class="perf-bar-container stacked">
+                        <div class="perf-segment high" style="width: 100%;"></div>
+                        <div class="perf-segment low" style="width: 0%;"></div>
+                        <div class="perf-segment neutral" style="width: 0%;"></div>
+                        <div class="perf-segment pass" style="width: 0%;"></div>
+                    </div>
+                    <div class="perf-score">75.0</div>
+                </div>
+                
+                <div class="shopify-footnote">
+                    <span class="shopify-note">*</span> Majority of tests skipped as they exist in a Shopify environment.
                 </div>
             </div>
 
@@ -1008,314 +1143,890 @@
                             <tr data-impact="Harmful" data-judgement="Violated High" data-topic="Product Lists">
                                 <td class="code">#1024D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Return Users to the Same Place in Product Lists</div>
-                                    <div class="title-note">Product cards shift when returning from PDP, moving previous product higher</div>
+                                    <div class="title-main">Return Users to the Same Place in Product Lists and Search Results when Returnin</div>
+                                    <div class="title-note">Interaction here is technically correct but output is a bad user experience. User returns to the sam</div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-harmful">Harmful</td>
                                 <td>-3.8</td>
-                                <td><span class="kpi-tag">+3-5% Browse</span></td>
+                                <td><span class="kpi-tag">+3-5%</span></td>
                             </tr>
                             <tr data-impact="Harmful" data-judgement="Violated High" data-topic="Homepage">
                                 <td class="code">#253D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Implement Product Types as Filters Instead of Categories</div>
-                                    <div class="title-note">Users can't "see all dresses" - product types silo users into narrow categories</div>
+                                    <div class="title-main">Implement Product Types with Shared Attributes as Filters Instead of Categories</div>
+                                    <div class="title-note">What&#x27;s the UX issue? During multiple rounds of both desktop and mobile testing, multiple sites had i</div>
                                 </td>
                                 <td>Homepage</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-harmful">Harmful</td>
                                 <td>-2.8</td>
-                                <td><span class="kpi-tag">+5-8% Find</span></td>
+                                <td><span class="kpi-tag">+3-5%</span></td>
                             </tr>
                             <tr data-impact="Harmful" data-judgement="Violated High" data-topic="Product Lists">
                                 <td class="code">#511D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Allow Sorting by Price, Rating, Best-Selling, Newest</div>
-                                    <div class="title-note">"Best Selling" sort type is missing</div>
+                                    <div class="title-main">Always Allow Users to Sort Product Lists and Search Results by “Price”, “User Ra</div>
+                                    <div class="title-note">User rating filter visible on both new and current site, but no ratings on products</div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-harmful">Harmful</td>
                                 <td>-2.8</td>
-                                <td><span class="kpi-tag">+2-4% Conv</span></td>
+                                <td><span class="kpi-tag">+3-5%</span></td>
                             </tr>
                             <tr data-impact="Harmful" data-judgement="Violated High" data-topic="Cart">
                                 <td class="code">#2320D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Integrate Free Shipping Info in Cart Summary</div>
-                                    <div class="title-note">Include "free shipping" in cost summary in mini-cart</div>
+                                    <div class="title-main">Always Integrate “Free Shipping” Information in the Cart Order Cost Summary</div>
+                                    <div class="title-note">Where possible, include &quot;free shipping&quot; in cost summary in mini-cart</div>
                                 </td>
                                 <td>Cart</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-harmful">Harmful</td>
                                 <td>-2.8</td>
-                                <td><span class="kpi-tag">+2-3% Chk</span></td>
+                                <td><span class="kpi-tag">+3-5%</span></td>
                             </tr>
                             <tr data-impact="Harmful" data-judgement="Violated High" data-topic="Product Lists">
                                 <td class="code">#2539D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Order Filter Options Alphabetically</div>
-                                    <div class="title-note">Order long lists alphabetically. If numeric, order numerically</div>
+                                    <div class="title-main">Order Long Lists of Filter Options Alphabetically</div>
+                                    <div class="title-note">How to improve the UX? Order long lists of filter options alphabetically. If the options are numeric</div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-harmful">Harmful</td>
                                 <td>-2.6</td>
-                                <td><span class="kpi-tag">+1-2% Filter</span></td>
+                                <td><span class="kpi-tag">+3-5%</span></td>
                             </tr>
                             <tr data-impact="Harmful" data-judgement="Violated High" data-topic="Product Page">
                                 <td class="code">#2709D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Indicate Unavailable Variations After Selection</div>
-                                    <div class="title-note">No indication for unavailable color variations once size is selected</div>
+                                    <div class="title-main">Once a Size or Color Has Been Selected, Always Indicate Unavailable Variations</div>
+                                    <div class="title-note">What&#x27;s the UX issue? The interplay between size and color is a critical factor affecting users’ abil</div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-harmful">Harmful</td>
                                 <td>-2.6</td>
-                                <td><span class="kpi-tag">+3-5% ATC</span></td>
+                                <td><span class="kpi-tag">+3-5%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="On-Site Search">
                                 <td class="code">#346D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Persist Search Queries in Search Box</div>
-                                    <div class="title-note">Query only visible when clicking search box - appears empty</div>
+                                    <div class="title-main">Always Persist Search Queries in the Search Box on the Results Page</div>
+                                    <div class="title-note">This function technically works, but not in a efficient best practice way. The search query is only </div>
                                 </td>
-                                <td>Search</td>
+                                <td>On-Site Search</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
-                                <td>-2.0</td>
-                                <td><span class="kpi-tag">+1-2% Ref</span></td>
+                                <td>-2</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Lists">
                                 <td class="code">#531D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Display Total Number of List Items</div>
-                                    <div class="title-note">No product count indicated on PLP or search results</div>
+                                    <div class="title-main">Prominently Display the Total Number of List Items or Search Results</div>
+                                    <div class="title-note">What&#x27;s the UX issue? Users typically perform a preliminary evaluation of both category product lists</div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
-                                <td>-2.0</td>
-                                <td><span class="kpi-tag">+1-2% Browse</span></td>
+                                <td>-2</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Lists">
                                 <td class="code">#537D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Have Breadcrumbs in Category Product Lists</div>
-                                    <div class="title-note">No hierarchy-based breadcrumbs on PLP</div>
+                                    <div class="title-main">Have Hierarchy-Based Breadcrumbs in Category Product Lists on Mobile and Desktop</div>
+                                    <div class="title-note">What&#x27;s the UX issue? Hierarchy-based breadcrumbs — which indicate where a user is in the site hierar</div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
-                                <td>-2.0</td>
-                                <td><span class="kpi-tag">+2-3% Nav</span></td>
+                                <td>-2</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Lists">
                                 <td class="code">#467D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Show Number of Matches for Each Filter Option</div>
-                                    <div class="title-note">No match counts shown alongside filter options</div>
+                                    <div class="title-main">Always Show the Number of Matches for Each Filter Option, and Update Them as Fil</div>
+                                    <div class="title-note">What&#x27;s the UX issue? Most sites display numbers alongside filter options that show the number of pro</div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
-                                <td>-2.0</td>
-                                <td><span class="kpi-tag">+2-4% Filter</span></td>
+                                <td>-2</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
                                 <td class="code">#828D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Have Both Hierarchy and History Breadcrumbs on PDP</div>
-                                    <div class="title-note">Hierarchy present. Missing history-based from search</div>
+                                    <div class="title-main">Have Both “Hierarchy” and “History” Breadcrumbs on Product Pages on Mobile and D</div>
+                                    <div class="title-note">What&#x27;s the UX issue? Breadcrumbs help users get an overview of where they are on the site, navigate </div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
-                                <td>-2.0</td>
-                                <td><span class="kpi-tag">+2-3% Cross</span></td>
+                                <td>-2</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
                                 <td class="code">#781D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Provide Hover-Activated Zoom in Image Gallery</div>
-                                    <div class="title-note">No zoom available in main image gallery</div>
+                                    <div class="title-main">Always Provide Hover-Activated Zoom in the Main Image Gallery</div>
+                                    <div class="title-note">No additional notes.</div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
-                                <td>-2.0</td>
-                                <td><span class="kpi-tag">+2-4% Engage</span></td>
+                                <td>-2</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
                                 <td class="code">#787D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Have Site-Provided and User-Provided Q&A Content</div>
-                                    <div class="title-note">No Q&A/FAQs content on product pages</div>
+                                    <div class="title-main">Have Both Site-Provided and User-Provided Q&amp;A Content</div>
+                                    <div class="title-note">No additional notes.</div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
-                                <td>-2.0</td>
-                                <td><span class="kpi-tag">+1-3% Support</span></td>
+                                <td>-2</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
                                 <td class="code">#2712D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Persist Selected Size Across Color Variations</div>
-                                    <div class="title-note">Size deselects when changing colors</div>
+                                    <div class="title-main">Always Persist a Selected, Available Size across Color Variations</div>
+                                    <div class="title-note">What&#x27;s the UX issue? In selecting a size for an item, users expect their size to remain selected for</div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
-                                <td>-2.0</td>
-                                <td><span class="kpi-tag">+2-4% ATC</span></td>
+                                <td>-2</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
                                 <td class="code">#791D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Style Primary Add to Cart Button Uniquely</div>
-                                    <div class="title-note">Secondary buttons use same styling as ATC</div>
+                                    <div class="title-main">Style the Primary “Add to Cart” Button to Be Unique and Prominent</div>
+                                    <div class="title-note">Add to Cart CTA should be unique where possible</div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
-                                <td>-2.0</td>
-                                <td><span class="kpi-tag">+1-2% ATC</span></td>
+                                <td>-2</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
                                 <td class="code">#786D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Display Clickable Ratings Average at Top of PDP</div>
-                                    <div class="title-note">Limited products with reviews to test properly</div>
+                                    <div class="title-main">Display a Clickable Ratings Average at the Top of the Product Page</div>
+                                    <div class="title-note">Too few products with reviews to test properly</div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
-                                <td>-2.0</td>
-                                <td><span class="kpi-tag">+1-2% Trust</span></td>
+                                <td>-2</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Lists">
                                 <td class="code">#416D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Provide Text Fields for Numeric Filtering</div>
-                                    <div class="title-note">No text fields for numeric filtering (e.g., price range)</div>
+                                    <div class="title-main">Provide Text Fields for Numeric Filtering Values</div>
+                                    <div class="title-note">What&#x27;s the UX issue? Numeric product attributes such as weight, dimensions, and price are often key </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
                                 <td>-1.8</td>
-                                <td><span class="kpi-tag">+1-2% Prec</span></td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Lists">
                                 <td class="code">#415D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Have a "New Arrivals" Filter</div>
-                                    <div class="title-note">No "New Arrivals" filter - 80% of users find this useful</div>
+                                    <div class="title-main">Have a &quot;New Arrivals&quot; Filter</div>
+                                    <div class="title-note">What&#x27;s the UX issue? New products are often of high interest — for example, the latest clothing for </div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
                                 <td>-1.8</td>
-                                <td><span class="kpi-tag">+2-3% Disc</span></td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Lists">
                                 <td class="code">#1191D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Have a "Sales" or "Deals" Filter Type</div>
-                                    <div class="title-note">No "Sales" filter - users like to "shop the sales first"</div>
+                                    <div class="title-main">Have a “Sales” or “Deals” Filter Type</div>
+                                    <div class="title-note">What&#x27;s the UX issue? Many users browse product lists and search results to see if any items of inter</div>
                                 </td>
                                 <td>Product Lists</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
                                 <td>-1.8</td>
-                                <td><span class="kpi-tag">+2-4% Sale</span></td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
                                 <td class="code">#812D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Link to Parent Category for Cross-Sells</div>
-                                    <div class="title-note">Cross-sell sections don't link to parent category</div>
+                                    <div class="title-main">Link to the Parent Category for Alternative and Supplementary Cross-Sells</div>
+                                    <div class="title-note">What&#x27;s the UX issue? Cross-sell sections are observed to be very good for suggesting both alternativ</div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
                                 <td>-1.8</td>
-                                <td><span class="kpi-tag">+1-2% Cross</span></td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
                                 <td class="code">#836D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Place Free Shipping Info Near Buy Section</div>
-                                    <div class="title-note">Free shipping on page but not near the Buy Section</div>
+                                    <div class="title-main">Place &quot;Free Shipping&quot; Information In or Near the &quot;Buy&quot; Section</div>
+                                    <div class="title-note">What&#x27;s the UX issue? Knowing that “free shipping” is available for their order is a big motivating f</div>
                                 </td>
                                 <td>Product Page</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
                                 <td>-1.8</td>
-                                <td><span class="kpi-tag">+2-3% Conv</span></td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Product Page">
+                                <td class="code">#2557D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Always Provide a Gallery of Reviewer-Submitted Images at the Top of the Reviews </div>
+                                    <div class="title-note">Too few products with reviews to test properly</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.8</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Cart">
+                                <td class="code">#620D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Always Provide Large Thumbnails and Key Product Details in the Cart </div>
+                                    <div class="title-note">How to improve the UX? Include core product specs for items in the cart, and allow users to update t</div>
+                                </td>
+                                <td>Cart</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.8</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated High" data-topic="Accounts">
+                                <td class="code">#2937D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Use Styling, Positioning, and Dynamic Highlighting to Increase the Visibility of</div>
+                                    <div class="title-note">How to improve the UX? Ensure the account menu is highly visible in the sitewide header. To do so, a</div>
+                                </td>
+                                <td>Accounts</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.8</td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated Low" data-topic="Product Page">
                                 <td class="code">#750D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Provide Ratings Distribution Chart</div>
-                                    <div class="title-note">Distribution chart available but hidden by default</div>
+                                    <div class="title-main">Provide a Ratings Distribution Chart at the Top of the Review Section</div>
+                                    <div class="title-note">No additional notes.</div>
                                 </td>
                                 <td>Product Page</td>
-                                <td><span class="badge badge-warning">Low</span></td>
+                                <td><span class="badge badge-low">Low</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
                                 <td>-1.7</td>
-                                <td><span class="kpi-tag">+0.5-1% Rev</span></td>
+                                <td><span class="kpi-tag">+2-3%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated Low" data-topic="Homepage">
                                 <td class="code">#263D</td>
                                 <td class="title-cell">
                                     <div class="title-main">Ensure Categories are Clearly Delineated</div>
-                                    <div class="title-note">One or two redundant/overlapping categories present</div>
+                                    <div class="title-note">What&#x27;s the UX issue? During Baymard’s large-scale testing overlapping categories caused severe usabi</div>
                                 </td>
                                 <td>Homepage</td>
-                                <td><span class="badge badge-warning">Low</span></td>
+                                <td><span class="badge badge-low">Low</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
                                 <td>-1.4</td>
-                                <td><span class="kpi-tag">+1-2% Nav</span></td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
                             </tr>
                             <tr data-impact="Disruptive" data-judgement="Violated Low" data-topic="Cart">
                                 <td class="code">#732D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Provide Full Order Cost or Estimate in Cart</div>
-                                    <div class="title-note">Display cheapest shipping as estimate</div>
+                                    <div class="title-main">Always Provide the Full Order Cost, or an Estimate, in the Cart</div>
+                                    <div class="title-note">How to improve the UX? Provide a total cost (or estimate) displayed at the cart step. This could be </div>
                                 </td>
                                 <td>Cart</td>
-                                <td><span class="badge badge-warning">Low</span></td>
+                                <td><span class="badge badge-low">Low</span></td>
                                 <td class="impact-disruptive">Disruptive</td>
                                 <td>-1.4</td>
-                                <td><span class="kpi-tag">+1-2% Chk</span></td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated Low" data-topic="On-Site Search">
+                                <td class="code">#344D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Provide Relevant Results for Search Queries That Include Abbreviations and Symbo</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>On-Site Search</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.3</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated Low" data-topic="Product Lists">
+                                <td class="code">#470D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Truncate Lists of More than 4–8 Filter Options on Desktop</div>
+                                    <div class="title-note">How to improve the UX? Truncate filter options if there are more than 4-8, make sure that the “View </div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.3</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Disruptive" data-judgement="Violated Low" data-topic="Product Page">
+                                <td class="code">#1501D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Make Return Policies Easy to Read and Understand</div>
+                                    <div class="title-note">How to improve the UX? Provide answers to common return policy questions in an easy-to-read format —</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-disruptive">Disruptive</td>
+                                <td>-1.3</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated High" data-topic="On-Site Search">
+                                <td class="code">#369D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Always Copy the Autocomplete Suggestion Selected by the Keyboard to the Search F</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>On-Site Search</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-1.2</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated High" data-topic="Cart">
+                                <td class="code">#2151D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Use Buttons or Buttons Plus an Open Text Field for Updating Cart Quantity</div>
+                                    <div class="title-note">Setting the quantity to &quot;0&quot; is not possible In testing, some participants’ initial reaction when loo</div>
+                                </td>
+                                <td>Cart</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-1.2</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="On-Site Search">
+                                <td class="code">#363D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Always Display Autocomplete Suggestions Quickly and Predictably</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>On-Site Search</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-1.1</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="Homepage">
+                                <td class="code">#261D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Divide Categories and Sub-Categories into Manageable Chunks</div>
+                                    <div class="title-note">What&#x27;s the UX issue? The hierarchy of the product catalog — as reflected in the main navigation — is</div>
+                                </td>
+                                <td>Homepage</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-1</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="On-Site Search">
+                                <td class="code">#393D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Use a Weighted Double Sorting Logic for Broad, Sitewide Search Results</div>
+                                    <div class="title-note">Feature is broken on new site. Attempting to sort open the PDP</div>
+                                </td>
+                                <td>On-Site Search</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-1</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="Product Lists">
+                                <td class="code">#279D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Avoid Placing Ads Directly above or within Product Lists or Search Results</div>
+                                    <div class="title-note">Live site is not ready to this cannot be rated. Rating will be based on old site</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-1</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="Product Page">
+                                <td class="code">#798D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">How to Implement &#x27;Save&#x27; Features</div>
+                                    <div class="title-note">Wishlist functionality on new site still to be fully understood. Icon sits on product card but doesn</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-1</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated High" data-topic="Product Page">
+                                <td class="code">#802D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Provide an Estimated Delivery Date or Range Near the “Buy” Section</div>
+                                    <div class="title-note">What&#x27;s the UX issue? When it comes to delivery speed, users have one main concern: “When will I rece</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-1</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="Product Page">
+                                <td class="code">#768D</td>
+                                <td class="title-cell">
+                                    <div class="title-main"> Display a Minimum of 6 Reviews by Default, with the Ability to ‘Load More’</div>
+                                    <div class="title-note">Too few products with reviews to test properly</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-1</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="Product Page">
+                                <td class="code">#783D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Product Image Overlays Should Use 80-100% of the Page Width </div>
+                                    <div class="title-note">What&#x27;s the UX issue? Employing a full-screen overlay allows sites to provide images in the largest f</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-0.9</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="Product Page">
+                                <td class="code">#746D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Allow Users to Sort Reviews by &#x27;Lowest Rated&#x27;, &#x27;Most Recent&#x27;, and &#x27;Most Helpful&#x27;</div>
+                                    <div class="title-note">Too few products with reviews to test properly</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-0.9</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="Product Page">
+                                <td class="code">#1161D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Provide Key Review Attributes</div>
+                                    <div class="title-note">Too few products with reviews to test properly</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-0.9</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="On-Site Search">
+                                <td class="code">#342D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Ensure &quot;Non-Product&quot; Content Is Findable with Search</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>On-Site Search</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-0.6</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="On-Site Search">
+                                <td class="code">#361D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Include Category Scope Suggestions in Autocomplete When Relevant</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>On-Site Search</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-0.6</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="Product Lists">
+                                <td class="code">#457D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Avoid Misleading or Unclear List Item Thumbnails</div>
+                                    <div class="title-note">Although accurate for  a high (75+%) of products, there is a specific style where lifestyle images w</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-0.6</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="Product Lists">
+                                <td class="code">#2375D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Always Allow Guest Users in Product Lists to Save Items to Wishlists</div>
+                                    <div class="title-note">Note: Based on old site the wishlist is easy to interact with, assuming this will be the same, altho</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-0.6</td>
+                                <td><span class="kpi-tag">+1-2%</span></td>
                             </tr>
                             <tr data-impact="Interruption" data-judgement="Violated High" data-topic="Homepage">
                                 <td class="code">#300D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Highlight Current Scope in Main Navigation</div>
-                                    <div class="title-note">No scope indicated in main navigation</div>
+                                    <div class="title-main">Highlight the Current Scope in the Main Navigation </div>
+                                    <div class="title-note">No additional notes.</div>
                                 </td>
                                 <td>Homepage</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-interruption">Interruption</td>
                                 <td>-0.4</td>
-                                <td><span class="kpi-tag">+0.3% Nav</span></td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated High" data-topic="Cart">
+                                <td class="code">#624D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Display Identical Accidentally Added Products as Separate Items in the Cart</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>Cart</td>
+                                <td><span class="badge badge-critical">High</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-0.4</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
                             </tr>
                             <tr data-impact="Interruption" data-judgement="Violated High" data-topic="Site-Wide">
                                 <td class="code">#255D</td>
                                 <td class="title-cell">
-                                    <div class="title-main">Don't Link to the Page Users Are Currently On</div>
-                                    <div class="title-note">Link to active page is not disabled</div>
+                                    <div class="title-main">Don’t Link to the Page Users Are Currently On</div>
+                                    <div class="title-note">No additional notes.</div>
                                 </td>
                                 <td>Site-Wide</td>
                                 <td><span class="badge badge-critical">High</span></td>
                                 <td class="impact-interruption">Interruption</td>
                                 <td>-0.4</td>
-                                <td><span class="kpi-tag">+0.2% Nav</span></td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Interruption" data-judgement="Violated Low" data-topic="Product Page">
+                                <td class="code">#850D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Use Individual &quot;Buttons&quot; for Each Size Variation</div>
+                                    <div class="title-note">What&#x27;s the UX issue? While a preselected size removes the issue of receiving a validation error it’s</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-low">Low</span></td>
+                                <td class="impact-interruption">Interruption</td>
+                                <td>-0.2</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Homepage">
+                                <td class="code">#237D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Feature a Broad Range of Product Types on the Homepage</div>
+                                    <div class="title-note">This section is questionable in current staging mode as homepage categories are duplicated. Expectat</div>
+                                </td>
+                                <td>Homepage</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Homepage">
+                                <td class="code">#239D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Consider Using IP Geotargeting to Select Country and Language </div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>Homepage</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Homepage">
+                                <td class="code">#251D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Consider Having a &quot;New In&quot; Filter-Based Category</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>Homepage</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Homepage">
+                                <td class="code">#1008D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Consider Having a &quot;Sales&quot; or &quot;Deals&quot; Filter-Based Category</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>Homepage</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Homepage">
+                                <td class="code">#309D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Use Thumbnails to Represent Subcategories on Intermediary Category Pages</div>
+                                    <div class="title-note">How to improve the UX? Ensure the subcategory thumbnails are easy to interpret at a glance, and that</div>
+                                </td>
+                                <td>Homepage</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="On-Site Search">
+                                <td class="code">#399D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Support &quot;Subjective&quot; Search Queries</div>
+                                    <div class="title-note">Hard to tell if result are actually accurate due to all products being very similar. Not treated as </div>
+                                </td>
+                                <td>On-Site Search</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="On-Site Search">
+                                <td class="code">#358D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Always Provide Highly Relevant Alternative Queries on the Results Page</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>On-Site Search</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="On-Site Search">
+                                <td class="code">#355D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Autocorrect Obvious Misspellings on the Search Results Page</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>On-Site Search</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Lists">
+                                <td class="code">#421D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Combine Variations of Products in One Item in Product Lists and Search Results</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Lists">
+                                <td class="code">#521D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Always Display the Current Sort Order in the Sorting Drop-Down</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>Product Lists</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Page">
+                                <td class="code">#814D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Include Enough Information for Cross-Sells to Facilitate Evaluation and Comparis</div>
+                                    <div class="title-note">What&#x27;s the UX issue? Providing cross-sells on the product details page saves users time and effort w</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Page">
+                                <td class="code">#821D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Provide “Add to Cart” Functionality for Some Supplementary Cross-Sells</div>
+                                    <div class="title-note">Always recommend that &quot;Add to Cart&quot; styling is completely unique</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Page">
+                                <td class="code">#744D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Provide &quot;Lifestyle&quot; Images for Relevant Products</div>
+                                    <div class="title-note">Seems ~25% of products include a Lifestyle image</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Page">
+                                <td class="code">#759D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Use Video to Showcase Products</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Page">
+                                <td class="code">#2862D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Always Provide Specific and Detailed Material and Care Information for Relevant </div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Page">
+                                <td class="code">#853D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Provide Unique “Cut Out” and “Angle” Images for All Visual Variations</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Page">
+                                <td class="code">#825D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Provide a “Total Order Cost” Estimate Near the “Buy” Section </div>
+                                    <div class="title-note">Shipping information visible but very difficult to read</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Page">
+                                <td class="code">#826D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Make the Essential Conditions for “Free Shipping” Offers Visible by Default</div>
+                                    <div class="title-note">Free Shipping Condition can be done much better</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Page">
+                                <td class="code">#805D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Consider Providing Gifting Information on the Product Page</div>
+                                    <div class="title-note">Gifting specific tests will be skipped for none gifting pages</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Page">
+                                <td class="code">#785D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Respond to Negative User Reviews</div>
+                                    <div class="title-note">Too few products with reviews to test properly</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Product Page">
+                                <td class="code">#2554D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Always Allow Users to Navigate across User Reviews Using Reviewer-Submitted Imag</div>
+                                    <div class="title-note">Too few products with reviews to test properly</div>
+                                </td>
+                                <td>Product Page</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Cart">
+                                <td class="code">#603D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Always Provide a Clear Path to “View Cart” in “Added to Cart” Confirmations </div>
+                                    <div class="title-note">I disagree with the systems assessment based on product and site</div>
+                                </td>
+                                <td>Cart</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Cart">
+                                <td class="code">#622D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Provide a “Save for Later” Feature in the Cart</div>
+                                    <div class="title-note">Wishlist feature note set up for testing on new site</div>
+                                </td>
+                                <td>Cart</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
+                            </tr>
+                            <tr data-impact="Acceptable" data-judgement="Neutral" data-topic="Site-Wide">
+                                <td class="code">#2673D</td>
+                                <td class="title-cell">
+                                    <div class="title-main">Avoid Overly Long Lines for Blocks of Text</div>
+                                    <div class="title-note">No additional notes.</div>
+                                </td>
+                                <td>Site-Wide</td>
+                                <td><span class="badge badge-neutral">Neutral</span></td>
+                                <td class="impact-acceptable">Acceptable</td>
+                                <td>0</td>
+                                <td><span class="kpi-tag">+0.5-1%</span></td>
                             </tr>
                         </tbody>
                     </table>
