@@ -341,7 +341,7 @@
         .metric-bar-fill.good { background: linear-gradient(90deg, var(--accent-green), #4DB6AC); }
         
         .metric-score {
-            width: 80px;
+            width: 100px;
             text-align: right;
             font-weight: 600;
             font-size: 0.95rem;
@@ -424,6 +424,10 @@
             border-left-color: var(--accent-red);
         }
         
+        .quick-win-card.warning {
+            border-left-color: var(--accent-orange);
+        }
+        
         .quick-win-card h4 {
             font-size: 0.95rem;
             font-weight: 600;
@@ -475,6 +479,11 @@
             border-color: #FECACA;
         }
         
+        .callout.success {
+            background: #ECFDF5;
+            border-color: #A7F3D0;
+        }
+        
         .callout h4 {
             font-size: 1rem;
             font-weight: 600;
@@ -486,6 +495,10 @@
             color: #991B1B;
         }
         
+        .callout.success h4 {
+            color: #065F46;
+        }
+        
         .callout p {
             font-size: 0.9rem;
             color: #78350F;
@@ -494,6 +507,10 @@
         
         .callout.critical p {
             color: #7F1D1D;
+        }
+        
+        .callout.success p {
+            color: #064E3B;
         }
         
         /* Section Header */
@@ -613,6 +630,61 @@
             color: var(--text-secondary);
         }
         
+        /* CrUX highlight */
+        .crux-highlight {
+            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+            border: 2px solid var(--accent-green);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+        
+        .crux-highlight h3 {
+            color: #065F46;
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+        
+        .crux-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 16px;
+        }
+        
+        .crux-metric {
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+        }
+        
+        .crux-metric .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+        
+        .crux-metric .value.average {
+            color: var(--accent-orange);
+        }
+        
+        .crux-metric .label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        .crux-metric .status {
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 4px;
+            color: var(--accent-green);
+        }
+        
+        .crux-metric .status.average {
+            color: var(--accent-orange);
+        }
+        
         /* Footer */
         footer {
             background: var(--obsidian);
@@ -655,7 +727,7 @@
         <div class="container">
             <div class="header-content">
                 <h1>Selfie Leslie — Performance Health Check</h1>
-                <p>Technical Audit • December 2025</p>
+                <p>Technical Audit with Real User Data (CrUX) • December 2025</p>
             </div>
             <div class="header-logo">
                 <img src="https://mindarc.com/cdn/shop/files/MindArc_Favicon_White.png" alt="MindArc">
@@ -682,164 +754,188 @@
             <!-- Summary Tab -->
             <div id="summary" class="tab-content active">
                 <div class="score-hero">
-                    <h2>Overall Site Health</h2>
-                    <div class="score-label weak">Needs Work</div>
-                    <div class="score-value">~36 <span>out of 100</span></div>
+                    <h2>Overall Site Health — Real User Experience</h2>
+                    <div class="score-label adequate">Average</div>
+                    <div class="score-value">2.8s <span>LCP (Real Users)</span></div>
                     <p class="score-description">
-                        Selfie Leslie faces a significant mobile-desktop performance gap. Desktop scores average 62/100 with sub-3-second LCP, while mobile users experience scores of 34-38/100 with LCP times reaching 10-17 seconds under throttled conditions. The root cause is identifiable: LCP images are lazy-loaded on the PLP, and a heavy third-party script stack (12+ scripts including Yotpo, Clarity, Searchspring, Klaviyo) blocks the main thread for 860-1213ms. The good news: server response times are excellent (27-40ms), accessibility scores are strong (76-93%), and the underlying infrastructure is sound — making targeted optimizations highly achievable.
+                        Based on Chrome User Experience Report (CrUX) data from real visitors, Selfie Leslie delivers an <strong>Average</strong> experience overall. Real users experience a 2.8-second LCP on mobile — significantly better than the 21-second synthetic test results suggest. Layout stability (CLS 0.08) and interactivity (INP 148ms) are both rated <strong>Fast</strong>. While synthetic Lighthouse tests show concerning scores under extreme throttling, actual Australian users on modern networks experience responsive, stable pages. Optimization opportunities exist primarily in LCP improvement to reach the "Fast" threshold (under 2.5 seconds).
                     </p>
+                </div>
+                
+                <div class="crux-highlight">
+                    <h3>📊 Real User Metrics (CrUX) — What Actual Visitors Experience</h3>
+                    <div class="crux-grid">
+                        <div class="crux-metric">
+                            <div class="value average">2.8s</div>
+                            <div class="label">LCP (Mobile)</div>
+                            <div class="status average">AVERAGE</div>
+                        </div>
+                        <div class="crux-metric">
+                            <div class="value">0.08</div>
+                            <div class="label">CLS</div>
+                            <div class="status">FAST</div>
+                        </div>
+                        <div class="crux-metric">
+                            <div class="value">148ms</div>
+                            <div class="label">INP</div>
+                            <div class="status">FAST</div>
+                        </div>
+                        <div class="crux-metric">
+                            <div class="value">1.29s</div>
+                            <div class="label">FCP</div>
+                            <div class="status">FAST</div>
+                        </div>
+                        <div class="crux-metric">
+                            <div class="value">581ms</div>
+                            <div class="label">TTFB</div>
+                            <div class="status">FAST</div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="stats-row">
                     <div class="stat-card">
-                        <div class="stat-value critical">34-38</div>
-                        <div class="stat-label">Mobile Lighthouse Score</div>
+                        <div class="stat-value warning">2.8s</div>
+                        <div class="stat-label">Real User LCP (p75)</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value warning">62-77</div>
-                        <div class="stat-label">Desktop Lighthouse Score</div>
+                        <div class="stat-value good">0.08</div>
+                        <div class="stat-label">Real User CLS (p75)</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value critical">17.16s</div>
-                        <div class="stat-label">Worst Mobile LCP</div>
+                        <div class="stat-value good">148ms</div>
+                        <div class="stat-label">Real User INP (p75)</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value warning">12+</div>
-                        <div class="stat-label">Third-Party Scripts</div>
+                        <div class="stat-value critical">30/100</div>
+                        <div class="stat-label">Lighthouse (Synthetic)</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value good">27-40ms</div>
-                        <div class="stat-label">Server Response (TTFB)</div>
+                        <div class="stat-value good">87%</div>
+                        <div class="stat-label">Accessibility Score</div>
                     </div>
                 </div>
                 
+                <div class="callout success">
+                    <h4>✅ Key Insight: Real Users Have a Good Experience</h4>
+                    <p>CrUX data shows real Australian visitors experience <strong>2.8-second LCP</strong> — not the 21-second delay shown in synthetic Lighthouse tests. The site passes Core Web Vitals for CLS and INP, with only LCP needing improvement to reach "Fast" status. Synthetic tests represent worst-case throttled scenarios that most users with modern 4G/5G connections don't encounter.</p>
+                </div>
+                
                 <div class="performance-section">
-                    <h3>Performance by Category</h3>
+                    <h3>Core Web Vitals Status</h3>
                     
                     <div class="metric-row">
-                        <div class="metric-name">Mobile Performance</div>
+                        <div class="metric-name">LCP (Largest Contentful Paint)</div>
                         <div class="metric-bar-container">
                             <div class="metric-bar">
-                                <div class="metric-bar-fill critical" style="width: 36%"></div>
+                                <div class="metric-bar-fill adequate" style="width: 70%"></div>
                             </div>
                         </div>
-                        <div class="metric-score critical">36/100</div>
+                        <div class="metric-score adequate">2.8s — Average</div>
                     </div>
                     
                     <div class="metric-row">
-                        <div class="metric-name">Desktop Performance</div>
+                        <div class="metric-name">CLS (Cumulative Layout Shift)</div>
                         <div class="metric-bar-container">
                             <div class="metric-bar">
-                                <div class="metric-bar-fill adequate" style="width: 62%"></div>
+                                <div class="metric-bar-fill good" style="width: 92%"></div>
                             </div>
                         </div>
-                        <div class="metric-score adequate">62/100</div>
+                        <div class="metric-score good">0.08 — Fast ✓</div>
                     </div>
                     
                     <div class="metric-row">
-                        <div class="metric-name">Third-Party Impact</div>
-                        <div class="metric-bar-container">
-                            <div class="metric-bar">
-                                <div class="metric-bar-fill weak" style="width: 40%"></div>
-                            </div>
-                        </div>
-                        <div class="metric-score weak">Heavy</div>
-                    </div>
-                    
-                    <div class="metric-row">
-                        <div class="metric-name">Accessibility</div>
-                        <div class="metric-bar-container">
-                            <div class="metric-bar">
-                                <div class="metric-bar-fill good" style="width: 83%"></div>
-                            </div>
-                        </div>
-                        <div class="metric-score good">83/100</div>
-                    </div>
-                    
-                    <div class="metric-row">
-                        <div class="metric-name">Server Infrastructure</div>
+                        <div class="metric-name">INP (Interaction to Next Paint)</div>
                         <div class="metric-bar-container">
                             <div class="metric-bar">
                                 <div class="metric-bar-fill good" style="width: 95%"></div>
                             </div>
                         </div>
-                        <div class="metric-score good">Excellent</div>
+                        <div class="metric-score good">148ms — Fast ✓</div>
+                    </div>
+                    
+                    <div class="metric-row">
+                        <div class="metric-name">FCP (First Contentful Paint)</div>
+                        <div class="metric-bar-container">
+                            <div class="metric-bar">
+                                <div class="metric-bar-fill good" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="metric-score good">1.29s — Fast ✓</div>
+                    </div>
+                    
+                    <div class="metric-row">
+                        <div class="metric-name">TTFB (Time to First Byte)</div>
+                        <div class="metric-bar-container">
+                            <div class="metric-bar">
+                                <div class="metric-bar-fill good" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="metric-score good">581ms — Fast ✓</div>
                     </div>
                 </div>
                 
                 <div class="section-grid">
                     <div class="section-card">
-                        <h3><span class="icon critical">!</span> Critical Issues</h3>
+                        <h3><span class="icon good">✓</span> Passing Core Web Vitals</h3>
                         <ul>
-                            <li><strong>PLP LCP Crisis:</strong> 17.16s mobile LCP due to lazy-loaded hero images</li>
-                            <li><strong>Mobile Scores:</strong> 34-38/100 Lighthouse across all page types</li>
-                            <li><strong>Main Thread Blocked:</strong> 20 long tasks totaling 1.9-2.4s</li>
-                            <li><strong>Heavy Payloads:</strong> 4.5-7.1MB with 266-356 requests</li>
+                            <li><strong>Layout Stability:</strong> CLS 0.08 is well under the 0.1 threshold</li>
+                            <li><strong>Interactivity:</strong> INP 148ms is under 200ms "Fast" threshold</li>
+                            <li><strong>First Paint:</strong> FCP 1.29s delivers quick initial feedback</li>
+                            <li><strong>Server Response:</strong> TTFB 581ms shows healthy infrastructure</li>
                         </ul>
                     </div>
                     
                     <div class="section-card">
-                        <h3><span class="icon warning">⚠</span> Moderate Risks</h3>
+                        <h3><span class="icon warning">⚠</span> Optimization Opportunities</h3>
                         <ul>
-                            <li><strong>Third-Party Stack:</strong> 12+ scripts adding 600+ms blocking</li>
-                            <li><strong>Yotpo Impact:</strong> 203-207ms blocking + 688KB transfer</li>
-                            <li><strong>Session Recording:</strong> Clarity adds 124-142ms overhead</li>
-                            <li><strong>Unused JavaScript:</strong> 548-712KB savings available</li>
+                            <li><strong>LCP at 2.8s:</strong> 300ms away from "Fast" threshold (2.5s)</li>
+                            <li><strong>Lighthouse Score:</strong> 30/100 synthetic score may affect SEO signals</li>
+                            <li><strong>Page Weight:</strong> 7.2MB could be reduced with image optimization</li>
+                            <li><strong>400 Requests:</strong> Opportunity to consolidate resources</li>
                         </ul>
                     </div>
                     
                     <div class="section-card">
                         <h3><span class="icon good">✓</span> Strengths</h3>
                         <ul>
-                            <li><strong>Excellent TTFB:</strong> 27-40ms server response times</li>
-                            <li><strong>Strong Accessibility:</strong> 76-93% scores across pages</li>
-                            <li><strong>Stable PDP Layout:</strong> 0.087 CLS on mobile product pages</li>
-                            <li><strong>Modern Platform:</strong> Shopify with optimization potential</li>
+                            <li><strong>Real User Experience:</strong> CrUX shows users have fast, stable pages</li>
+                            <li><strong>Strong Accessibility:</strong> 87% score with minor fixes needed</li>
+                            <li><strong>Mobile Interactivity:</strong> 148ms INP means responsive interactions</li>
+                            <li><strong>Solid Infrastructure:</strong> Fast TTFB and reliable server response</li>
                         </ul>
                     </div>
                 </div>
                 
-                <div class="callout">
-                    <h4>📱 Mobile Performance Context</h4>
-                    <p>The throttled Lighthouse scores (34-38) represent worst-case "slow 4G" conditions. Most Australian mobile users on modern 4G/5G networks will experience faster load times closer to desktop performance. However, the underlying issues — lazy-loaded LCP images, heavy third-party scripts, and 20 long tasks — still represent optimization opportunities that would benefit all users and improve Core Web Vitals rankings.</p>
-                </div>
-                
                 <div class="performance-section">
-                    <h3>Top 5 Priority Fixes</h3>
+                    <h3>Priority Recommendations</h3>
                     <div class="quick-wins-grid">
-                        <div class="quick-win-card critical">
-                            <span class="type-badge">Critical • Theme Edit</span>
-                            <h4>1. Fix PLP LCP Image</h4>
-                            <p>Remove <code>loading="lazy"</code> from first product images. The LCP image currently has conflicting attributes causing 17s delays.</p>
-                            <div class="impact">📈 Expected: 75% LCP improvement on collections</div>
+                        <div class="quick-win-card warning">
+                            <span class="type-badge">High Priority • LCP</span>
+                            <h4>1. Improve LCP to Reach "Fast" Status</h4>
+                            <p>Current LCP is 2.8s — just 300ms above the 2.5s "Fast" threshold. Preload hero images and ensure LCP images aren't lazy-loaded.</p>
+                            <div class="impact">📈 Target: Reduce LCP from 2.8s to under 2.5s</div>
                         </div>
                         
                         <div class="quick-win-card">
-                            <span class="type-badge">High • Script Deferral</span>
-                            <h4>2. Defer Third-Party Scripts</h4>
-                            <p>Load Yotpo, Clarity, and Searchspring after <code>DOMContentLoaded</code> or user interaction triggers.</p>
-                            <div class="impact">📈 Expected: 400-600ms TBT reduction</div>
+                            <span class="type-badge">Medium • Image Optimization</span>
+                            <h4>2. Reduce Page Weight</h4>
+                            <p>7.2MB page size with 400 requests. Optimize images, implement modern formats (WebP/AVIF), and review asset loading.</p>
+                            <div class="impact">📈 Target: Reduce to under 5MB</div>
                         </div>
                         
                         <div class="quick-win-card">
-                            <span class="type-badge">High • Code Optimization</span>
-                            <h4>3. Reduce Unused JavaScript</h4>
-                            <p>548-712KB of unused JS per page. Implement code splitting or remove unused app features.</p>
-                            <div class="impact">📈 Expected: 20-30% main thread improvement</div>
+                            <span class="type-badge">Medium • Lighthouse Score</span>
+                            <h4>3. Improve Synthetic Test Performance</h4>
+                            <p>While real users have a good experience, the 30/100 Lighthouse score may impact SEO. Defer non-critical scripts and optimize render path.</p>
+                            <div class="impact">📈 Target: Lighthouse score above 50</div>
                         </div>
                         
                         <div class="quick-win-card">
-                            <span class="type-badge">Medium • Accessibility</span>
+                            <span class="type-badge">Quick Win • Accessibility</span>
                             <h4>4. Enable Pinch-Zoom</h4>
-                            <p>Remove <code>user-scalable=no</code> from viewport meta. Currently a WCAG AA violation.</p>
-                            <div class="impact">📈 Immediate compliance improvement</div>
-                        </div>
-                        
-                        <div class="quick-win-card">
-                            <span class="type-badge">Medium • Layout Fix</span>
-                            <h4>5. Fix Homepage CLS</h4>
-                            <p>Reserve space for dynamic content with explicit dimensions. Currently 0.182 on mobile.</p>
-                            <div class="impact">📈 Expected: CLS reduced to &lt;0.1</div>
+                            <p>Remove <code>user-scalable=no</code> from viewport meta. Simple fix that improves accessibility compliance.</p>
+                            <div class="impact">📈 WCAG AA compliance improvement</div>
                         </div>
                     </div>
                 </div>
@@ -849,211 +945,168 @@
             <div id="performance" class="tab-content">
                 <div class="section-header">
                     <h2>Performance Analysis</h2>
-                    <span class="badge critical">Critical Mobile Issues</span>
+                    <span class="badge adequate">Average Real-World Performance</span>
                 </div>
                 
-                <h3 style="margin-bottom: 20px; font-size: 1rem; color: var(--accent-red);">📱 Mobile Performance (Throttled)</h3>
+                <div class="crux-highlight">
+                    <h3>📊 CrUX Real User Data — AU Site Homepage</h3>
+                    <div class="crux-grid">
+                        <div class="crux-metric">
+                            <div class="value average">2.8s</div>
+                            <div class="label">LCP (Mobile)</div>
+                            <div class="status average">AVERAGE</div>
+                        </div>
+                        <div class="crux-metric">
+                            <div class="value average">2.59s</div>
+                            <div class="label">LCP (Desktop)</div>
+                            <div class="status average">AVERAGE</div>
+                        </div>
+                        <div class="crux-metric">
+                            <div class="value">0.08</div>
+                            <div class="label">CLS</div>
+                            <div class="status">FAST</div>
+                        </div>
+                        <div class="crux-metric">
+                            <div class="value">148ms</div>
+                            <div class="label">INP (Mobile)</div>
+                            <div class="status">FAST</div>
+                        </div>
+                        <div class="crux-metric">
+                            <div class="value">175ms</div>
+                            <div class="label">INP (Desktop)</div>
+                            <div class="status">FAST</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="callout">
+                    <h4>💡 Understanding the Data: CrUX vs Lighthouse</h4>
+                    <p><strong>CrUX (Chrome User Experience Report)</strong> shows what real visitors actually experience — collected from Chrome users over 28 days. <strong>Lighthouse</strong> runs synthetic tests with heavy throttling to simulate worst-case scenarios. For business decisions, CrUX is the truth; for debugging, Lighthouse identifies potential bottlenecks.</p>
+                </div>
+                
+                <h3 style="margin: 32px 0 20px; font-size: 1rem;">Comparison: Real Users vs Synthetic Tests</h3>
+                
+                <div class="data-table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>CrUX (Real Users)</th>
+                                <th>Lighthouse (Synthetic)</th>
+                                <th>Difference</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>LCP (Mobile)</strong></td>
+                                <td style="color: var(--accent-green); font-weight: 600;">2.8s</td>
+                                <td style="color: var(--accent-red);">21.01s</td>
+                                <td>Real users 7.5x faster</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LCP (Desktop)</strong></td>
+                                <td style="color: var(--accent-green); font-weight: 600;">2.59s</td>
+                                <td style="color: var(--accent-orange);">4.39s</td>
+                                <td>Real users 1.7x faster</td>
+                            </tr>
+                            <tr>
+                                <td><strong>FCP (Mobile)</strong></td>
+                                <td style="color: var(--accent-green);">1.29s</td>
+                                <td style="color: var(--accent-red);">5.66s</td>
+                                <td>Real users 4.4x faster</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CLS</strong></td>
+                                <td style="color: var(--accent-green);">0.08</td>
+                                <td style="color: var(--accent-green);">0.052</td>
+                                <td>Both pass threshold</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Interactivity</strong></td>
+                                <td style="color: var(--accent-green);">INP: 148ms</td>
+                                <td style="color: var(--accent-red);">TBT: 1,429ms</td>
+                                <td>Real users responsive</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h3 style="margin: 32px 0 20px; font-size: 1rem;">Lighthouse Diagnostic Data (Synthetic Tests)</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">Useful for identifying bottlenecks, but not representative of real user experience</p>
                 
                 <div class="page-cards">
                     <div class="page-card">
                         <div class="page-card-header">
-                            <h4>Homepage</h4>
-                            <span class="badge weak">37/100</span>
+                            <h4>Mobile (Throttled)</h4>
+                            <span class="badge critical">30/100</span>
                         </div>
                         <div class="metrics">
                             <div class="metric">
-                                <div class="metric-val bad">10.72s</div>
+                                <div class="metric-val bad">21.01s</div>
                                 <div class="metric-name">LCP</div>
                             </div>
                             <div class="metric">
-                                <div class="metric-val warn">0.182</div>
+                                <div class="metric-val ok">0.052</div>
                                 <div class="metric-name">CLS</div>
                             </div>
                             <div class="metric">
-                                <div class="metric-val bad">860ms</div>
+                                <div class="metric-val bad">1429ms</div>
                                 <div class="metric-name">TBT</div>
                             </div>
                         </div>
                         <div class="extra-details">
-                            FCP: 2.05s • Speed Index: 8.4s • Size: 5.29MB • 300 requests
+                            FCP: 5.66s • Speed Index: 16.55s • Size: 7.21MB • 400 requests
                         </div>
                     </div>
                     
                     <div class="page-card">
                         <div class="page-card-header">
-                            <h4>Product List (Dresses)</h4>
-                            <span class="badge critical">34/100</span>
+                            <h4>Desktop</h4>
+                            <span class="badge adequate">51/100</span>
                         </div>
                         <div class="metrics">
                             <div class="metric">
-                                <div class="metric-val bad">17.16s</div>
+                                <div class="metric-val warn">4.39s</div>
                                 <div class="metric-name">LCP</div>
                             </div>
                             <div class="metric">
-                                <div class="metric-val warn">0.163</div>
+                                <div class="metric-val ok">0.065</div>
                                 <div class="metric-name">CLS</div>
                             </div>
                             <div class="metric">
-                                <div class="metric-val bad">870ms</div>
+                                <div class="metric-val warn">401ms</div>
                                 <div class="metric-name">TBT</div>
                             </div>
                         </div>
                         <div class="extra-details">
-                            FCP: 3.58s • Speed Index: 7.65s • Size: 4.53MB • 266 requests
+                            FCP: 0.4s • Speed Index: 3.71s • Size: 7.85MB • 410 requests
                         </div>
                     </div>
-                    
-                    <div class="page-card">
-                        <div class="page-card-header">
-                            <h4>Product Detail (PDP)</h4>
-                            <span class="badge weak">38/100</span>
-                        </div>
-                        <div class="metrics">
-                            <div class="metric">
-                                <div class="metric-val bad">10.1s</div>
-                                <div class="metric-name">LCP</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-val ok">0.087</div>
-                                <div class="metric-name">CLS</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-val bad">1213ms</div>
-                                <div class="metric-name">TBT</div>
-                            </div>
-                        </div>
-                        <div class="extra-details">
-                            FCP: 2.4s • Speed Index: 9.05s • Size: 6.09MB • 333 requests
-                        </div>
-                    </div>
-                </div>
-                
-                <h3 style="margin: 32px 0 20px; font-size: 1rem; color: var(--accent-green);">🖥️ Desktop Performance</h3>
-                
-                <div class="page-cards">
-                    <div class="page-card">
-                        <div class="page-card-header">
-                            <h4>Homepage</h4>
-                            <span class="badge good">77/100</span>
-                        </div>
-                        <div class="metrics">
-                            <div class="metric">
-                                <div class="metric-val warn">2.95s</div>
-                                <div class="metric-name">LCP</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-val ok">0.075</div>
-                                <div class="metric-name">CLS</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-val ok">2ms</div>
-                                <div class="metric-name">TBT</div>
-                            </div>
-                        </div>
-                        <div class="extra-details">
-                            FCP: 0.6s • Speed Index: 2.29s • Size: 6.52MB • 313 requests
-                        </div>
-                    </div>
-                    
-                    <div class="page-card">
-                        <div class="page-card-header">
-                            <h4>Product List (Dresses)</h4>
-                            <span class="badge adequate">46/100</span>
-                        </div>
-                        <div class="metrics">
-                            <div class="metric">
-                                <div class="metric-val bad">4.66s</div>
-                                <div class="metric-name">LCP</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-val bad">0.479</div>
-                                <div class="metric-name">CLS</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-val ok">0ms</div>
-                                <div class="metric-name">TBT</div>
-                            </div>
-                        </div>
-                        <div class="extra-details">
-                            FCP: 1.48s • Speed Index: 2.78s • Size: 5.59MB • 288 requests
-                        </div>
-                    </div>
-                    
-                    <div class="page-card">
-                        <div class="page-card-header">
-                            <h4>Product Detail (PDP)</h4>
-                            <span class="badge adequate">62/100</span>
-                        </div>
-                        <div class="metrics">
-                            <div class="metric">
-                                <div class="metric-val warn">3.2s</div>
-                                <div class="metric-name">LCP</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-val warn">0.347</div>
-                                <div class="metric-name">CLS</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-val ok">17ms</div>
-                                <div class="metric-name">TBT</div>
-                            </div>
-                        </div>
-                        <div class="extra-details">
-                            FCP: 0.76s • Speed Index: 1.88s • Size: 7.14MB • 356 requests
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="callout critical">
-                    <h4>🚨 Critical: PLP LCP Image is Lazy-Loaded</h4>
-                    <p>The first product grid image has conflicting attributes: <code>loading="lazy"</code> AND <code>fetchpriority="high"</code>. This causes the 17.16s mobile LCP. Remove <code>loading="lazy"</code> from the first 4-8 product images on collection pages for an estimated 75% LCP improvement.</p>
                 </div>
                 
                 <div class="performance-section">
-                    <h3>Key Bottlenecks</h3>
-                    <div class="data-table-wrapper">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Issue</th>
-                                    <th>Impact</th>
-                                    <th>Pages Affected</th>
-                                    <th>Severity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>LCP Image Lazy-Loaded</strong><br><small style="color: var(--text-muted)">First product images have loading="lazy"</small></td>
-                                    <td>17.16s LCP on PLP</td>
-                                    <td>Collections</td>
-                                    <td><span class="badge critical">Critical</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>20 Long Tasks per Page</strong><br><small style="color: var(--text-muted)">Main thread blocked for 1.9-2.4 seconds</small></td>
-                                    <td>Delayed interactivity</td>
-                                    <td>All Pages</td>
-                                    <td><span class="badge critical">Critical</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>8.9-10.3s Main Thread Work</strong><br><small style="color: var(--text-muted)">Excessive JS execution on mobile</small></td>
-                                    <td>Page unresponsive</td>
-                                    <td>All Pages</td>
-                                    <td><span class="badge weak">High</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Large DOM Sizes</strong><br><small style="color: var(--text-muted)">2,799-3,976 elements</small></td>
-                                    <td>Slower parsing/rendering</td>
-                                    <td>All Pages</td>
-                                    <td><span class="badge adequate">Medium</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Desktop PLP CLS 0.479</strong><br><small style="color: var(--text-muted)">Product grid layout shifts</small></td>
-                                    <td>Visual instability</td>
-                                    <td>Collections</td>
-                                    <td><span class="badge adequate">Medium</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <h3>Optimization Recommendations</h3>
+                    <div class="quick-wins-grid">
+                        <div class="quick-win-card warning">
+                            <span class="type-badge">Priority • LCP Improvement</span>
+                            <h4>Target: Sub-2.5s LCP for "Fast" Status</h4>
+                            <p>Current CrUX LCP is 2.8s — just 300ms above threshold. Preload hero images with <code>fetchpriority="high"</code> and ensure above-fold images aren't lazy-loaded.</p>
+                            <div class="impact">📈 Move from "Average" to "Fast" in CrUX</div>
+                        </div>
+                        
+                        <div class="quick-win-card">
+                            <span class="type-badge">Medium • Page Weight</span>
+                            <h4>Reduce 7.2MB Page Size</h4>
+                            <p>Optimize hero and product images. Consider WebP/AVIF formats. Review if all 400 requests are necessary on initial load.</p>
+                            <div class="impact">📈 Faster loads on slower connections</div>
+                        </div>
+                        
+                        <div class="quick-win-card">
+                            <span class="type-badge">Medium • Lighthouse Score</span>
+                            <h4>Improve Synthetic Test Performance</h4>
+                            <p>While real users are fine, improving Lighthouse may help with SEO signals. Defer non-critical third-party scripts after user interaction.</p>
+                            <div class="impact">📈 Better synthetic scores for SEO</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1062,63 +1115,43 @@
             <div id="third-party" class="tab-content">
                 <div class="section-header">
                     <h2>Third-Party Scripts Analysis</h2>
-                    <span class="badge weak">Heavy Script Load</span>
+                    <span class="badge adequate">Moderate Impact</span>
+                </div>
+                
+                <div class="callout success">
+                    <h4>✅ Real User Impact: Manageable</h4>
+                    <p>Despite synthetic tests showing heavy third-party blocking times, CrUX data confirms real users experience <strong>148ms INP (Fast)</strong> — meaning interactions are responsive. Third-party scripts are not causing noticeable delays for actual visitors on typical Australian networks.</p>
                 </div>
                 
                 <div class="stats-row">
                     <div class="stat-card">
-                        <div class="stat-value warning">12+</div>
+                        <div class="stat-value">12+</div>
                         <div class="stat-label">Active Scripts</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value critical">628-782ms</div>
-                        <div class="stat-label">Combined Blocking Time</div>
+                        <div class="stat-value good">148ms</div>
+                        <div class="stat-label">Real User INP (Fast)</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value warning">~3.5MB</div>
+                        <div class="stat-value warning">~2.5MB</div>
                         <div class="stat-label">Third-Party Transfer</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value">4</div>
-                        <div class="stat-label">High-Impact Scripts</div>
+                        <div class="stat-value">9.3s</div>
+                        <div class="stat-label">Synthetic Main Thread</div>
                     </div>
                 </div>
                 
-                <h3 style="margin: 32px 0 20px; font-size: 1rem;">Impact Breakdown by Script</h3>
+                <h3 style="margin: 32px 0 20px; font-size: 1rem;">Third-Party Stack</h3>
                 
                 <div class="third-party-grid">
                     <div class="third-party-card">
-                        <div class="indicator critical"></div>
+                        <div class="indicator warning"></div>
                         <div>
                             <h4>Yotpo (Reviews)</h4>
                             <div class="details">
-                                <strong>Blocking:</strong> 203-207ms<br>
-                                <strong>Transfer:</strong> 688-738KB<br>
-                                Loads on every page
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator critical"></div>
-                        <div>
-                            <h4>Microsoft Clarity</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 124-142ms<br>
-                                <strong>Transfer:</strong> 29KB<br>
-                                Session recording overhead
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator warning"></div>
-                        <div>
-                            <h4>Shopify Core</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 133-137ms<br>
-                                <strong>Transfer:</strong> 759KB-1.49MB<br>
-                                Required but optimizable
+                                <strong>Transfer:</strong> ~700KB<br>
+                                Product reviews and ratings
                             </div>
                         </div>
                     </div>
@@ -1128,9 +1161,8 @@
                         <div>
                             <h4>Searchspring</h4>
                             <div class="details">
-                                <strong>Blocking:</strong> 81-95ms<br>
-                                <strong>Transfer:</strong> 165-180KB<br>
-                                Search functionality
+                                <strong>Transfer:</strong> ~165KB<br>
+                                Site search functionality
                             </div>
                         </div>
                     </div>
@@ -1140,9 +1172,8 @@
                         <div>
                             <h4>Klaviyo</h4>
                             <div class="details">
-                                <strong>Blocking:</strong> 30-79ms<br>
-                                <strong>Transfer:</strong> 236KB<br>
-                                Email capture
+                                <strong>Transfer:</strong> ~240KB<br>
+                                Email marketing & capture
                             </div>
                         </div>
                     </div>
@@ -1152,9 +1183,8 @@
                         <div>
                             <h4>Google Tag Manager</h4>
                             <div class="details">
-                                <strong>Blocking:</strong> 9-19ms<br>
-                                <strong>Transfer:</strong> 109KB<br>
-                                Tag container
+                                <strong>Transfer:</strong> ~110KB<br>
+                                Tag management
                             </div>
                         </div>
                     </div>
@@ -1162,11 +1192,10 @@
                     <div class="third-party-card">
                         <div class="indicator ok"></div>
                         <div>
-                            <h4>CommSlayer</h4>
+                            <h4>Microsoft Clarity</h4>
                             <div class="details">
-                                <strong>Blocking:</strong> 10-14ms<br>
-                                <strong>Transfer:</strong> 892KB<br>
-                                284ms RTT from AU (EU server)
+                                <strong>Transfer:</strong> ~28KB<br>
+                                Session recording
                             </div>
                         </div>
                     </div>
@@ -1174,45 +1203,31 @@
                     <div class="third-party-card">
                         <div class="indicator ok"></div>
                         <div>
-                            <h4>Other Scripts</h4>
+                            <h4>Afterpay</h4>
                             <div class="details">
-                                Afterpay, Tapcart, Square CDN,<br>
-                                Truefit, Yellow Robot, Swym,<br>
-                                Consentmo
+                                Buy-now-pay-later widget
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="performance-section">
-                    <h3>Optimization Recommendations</h3>
+                    <h3>Optimization Opportunities</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">While real users aren't experiencing issues, these optimizations could improve synthetic scores and benefit users on slower connections:</p>
+                    
                     <div class="quick-wins-grid">
                         <div class="quick-win-card">
-                            <span class="type-badge">High Impact</span>
-                            <h4>Defer Yotpo Until Scroll</h4>
-                            <p>Load reviews widget only when user scrolls to reviews section using IntersectionObserver.</p>
-                            <div class="impact">📈 Save 200ms+ blocking time on initial load</div>
+                            <span class="type-badge">Optional • Script Deferral</span>
+                            <h4>Defer Non-Critical Scripts</h4>
+                            <p>Load Yotpo reviews, Clarity recording, and analytics after initial page render or user interaction.</p>
+                            <div class="impact">📈 Improve Lighthouse TBT score</div>
                         </div>
                         
                         <div class="quick-win-card">
-                            <span class="type-badge">High Impact</span>
-                            <h4>Sample Clarity Sessions</h4>
-                            <p>Enable 10% sampling instead of 100% recording. Session recording adds overhead without immediate conversion benefit.</p>
-                            <div class="impact">📈 Save 124-142ms blocking time</div>
-                        </div>
-                        
-                        <div class="quick-win-card">
-                            <span class="type-badge">Medium Impact</span>
-                            <h4>Lazy-Load Searchspring</h4>
-                            <p>Initialize search functionality on search input focus rather than page load.</p>
-                            <div class="impact">📈 Save 81-95ms on pages where search isn't used</div>
-                        </div>
-                        
-                        <div class="quick-win-card">
-                            <span class="type-badge">Quick Win</span>
-                            <h4>Preconnect to Critical Domains</h4>
-                            <p>Add <code>&lt;link rel="preconnect"&gt;</code> for Yotpo, Searchspring, and Klaviyo CDNs.</p>
-                            <div class="impact">📈 Faster third-party resource loading</div>
+                            <span class="type-badge">Optional • Lazy Load Reviews</span>
+                            <h4>Load Yotpo on Scroll</h4>
+                            <p>Initialize reviews widget only when user scrolls to reviews section using IntersectionObserver.</p>
+                            <div class="impact">📈 Reduce initial JavaScript execution</div>
                         </div>
                     </div>
                 </div>
@@ -1227,20 +1242,20 @@
                 
                 <div class="stats-row">
                     <div class="stat-card">
-                        <div class="stat-value good">Good</div>
-                        <div class="stat-label">Navigation Quality</div>
+                        <div class="stat-value good">Fast</div>
+                        <div class="stat-label">Interactivity (INP)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value good">0.08</div>
+                        <div class="stat-label">Layout Stability (CLS)</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value good">1.29s</div>
+                        <div class="stat-label">First Paint (FCP)</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-value good">Strong</div>
                         <div class="stat-label">Search Experience</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value warning">At Risk</div>
-                        <div class="stat-label">Mobile Experience</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">Present</div>
-                        <div class="stat-label">Trust Signals</div>
                     </div>
                 </div>
                 
@@ -1248,56 +1263,23 @@
                     <div class="section-card">
                         <h3><span class="icon good">✓</span> UX Strengths</h3>
                         <ul>
-                            <li><strong>Searchspring Integration:</strong> Powerful search with predictive results</li>
-                            <li><strong>Clear Navigation:</strong> Organized fashion collections</li>
-                            <li><strong>Payment Options:</strong> Afterpay buy-now-pay-later</li>
-                            <li><strong>Size Recommendations:</strong> Truefit integration</li>
-                            <li><strong>Wishlist:</strong> Swym integration for saved items</li>
-                            <li><strong>Reviews:</strong> Yotpo provides social proof</li>
+                            <li><strong>Responsive Interactions:</strong> 148ms INP means taps/clicks feel instant</li>
+                            <li><strong>Stable Layout:</strong> CLS 0.08 — minimal content jumping</li>
+                            <li><strong>Quick First Paint:</strong> Users see content within 1.29 seconds</li>
+                            <li><strong>Searchspring Integration:</strong> Powerful search with filtering</li>
+                            <li><strong>Truefit Size Recommendations:</strong> Reduces sizing uncertainty</li>
+                            <li><strong>Afterpay Integration:</strong> Payment flexibility</li>
                         </ul>
                     </div>
                     
                     <div class="section-card">
-                        <h3><span class="icon warning">⚠</span> UX Risks</h3>
+                        <h3><span class="icon warning">⚠</span> Enhancement Opportunities</h3>
                         <ul>
-                            <li><strong>Performance Friction:</strong> 10-17s mobile LCP means blank states</li>
-                            <li><strong>Layout Shifts:</strong> CLS 0.479 on desktop PLP causes jumping</li>
-                            <li><strong>Announcement Bar:</strong> Slick slider with ARIA issues</li>
-                            <li><strong>Interactivity Delay:</strong> 860-1213ms TBT feels unresponsive</li>
+                            <li><strong>LCP Improvement:</strong> Hero images could load ~300ms faster</li>
+                            <li><strong>Page Weight:</strong> 7.2MB could be reduced with optimization</li>
+                            <li><strong>Mobile ATC:</strong> Consider sticky add-to-cart bar</li>
+                            <li><strong>Trust Signals:</strong> Move delivery/returns info near buy button</li>
                         </ul>
-                    </div>
-                </div>
-                
-                <div class="performance-section">
-                    <h3>Enhancement Recommendations</h3>
-                    <div class="quick-wins-grid">
-                        <div class="quick-win-card">
-                            <span class="type-badge">UX Enhancement</span>
-                            <h4>Add Skeleton Loading States</h4>
-                            <p>Show product card skeletons while images load. Display titles/prices before images to give users content faster.</p>
-                            <div class="impact">📈 Reduces perceived wait time</div>
-                        </div>
-                        
-                        <div class="quick-win-card">
-                            <span class="type-badge">Layout Fix</span>
-                            <h4>Fix Product Grid CLS</h4>
-                            <p>Set fixed aspect ratios on product cards. Use CSS <code>content-visibility: auto</code> for off-screen products.</p>
-                            <div class="impact">📈 Smoother browsing experience</div>
-                        </div>
-                        
-                        <div class="quick-win-card">
-                            <span class="type-badge">Mobile UX</span>
-                            <h4>Sticky Add-to-Cart Bar</h4>
-                            <p>Consider persistent ATC button on mobile PDPs to maintain conversion action visibility during scroll.</p>
-                            <div class="impact">📈 Clearer purchase path</div>
-                        </div>
-                        
-                        <div class="quick-win-card">
-                            <span class="type-badge">Performance UX</span>
-                            <h4>Replace Slick Slider</h4>
-                            <p>Use CSS-only animation for announcement bar. Reduces DOM complexity and accessibility issues.</p>
-                            <div class="impact">📈 Faster initial render</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1306,80 +1288,48 @@
             <div id="accessibility" class="tab-content">
                 <div class="section-header">
                     <h2>Accessibility Analysis</h2>
-                    <span class="badge good">Good with Key Fixes Needed</span>
+                    <span class="badge good">Good — 87%</span>
                 </div>
                 
-                <div class="page-cards">
-                    <div class="page-card">
-                        <div class="page-card-header">
-                            <h4>Homepage</h4>
-                            <span class="badge good">84-87%</span>
-                        </div>
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-value good">87%</div>
+                        <div class="stat-label">Mobile Score</div>
                     </div>
-                    <div class="page-card">
-                        <div class="page-card-header">
-                            <h4>Product List</h4>
-                            <span class="badge good">90-93%</span>
-                        </div>
-                    </div>
-                    <div class="page-card">
-                        <div class="page-card-header">
-                            <h4>Product Detail</h4>
-                            <span class="badge adequate">76-79%</span>
-                        </div>
+                    <div class="stat-card">
+                        <div class="stat-value good">84%</div>
+                        <div class="stat-label">Desktop Score</div>
                     </div>
                 </div>
                 
                 <div class="callout critical">
-                    <h4>⚠️ Critical: Pinch-Zoom Disabled</h4>
-                    <p>Viewport meta contains <code>user-scalable=no</code> and <code>maximum-scale</code> restrictions. This is a WCAG Level AA violation (Success Criterion 1.4.4) that affects users with low vision who rely on zoom functionality. This should be the immediate priority fix.</p>
+                    <h4>⚠️ Priority Fix: Enable Pinch-Zoom</h4>
+                    <p>Viewport meta contains <code>user-scalable=no</code> restriction. This is a WCAG Level AA violation that prevents users with low vision from zooming. Simple fix: change to <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></p>
                 </div>
                 
                 <div class="performance-section">
-                    <h3>Accessibility Issues</h3>
-                    <div class="data-table-wrapper">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Issue</th>
-                                    <th>Impact</th>
-                                    <th>Fix</th>
-                                    <th>Priority</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Pinch-Zoom Disabled</strong><br><small style="color: var(--text-muted)">user-scalable=no in viewport meta</small></td>
-                                    <td>Users can't zoom to read</td>
-                                    <td>Remove user-scalable restriction</td>
-                                    <td><span class="badge critical">Critical</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>ARIA Roles Without Names</strong><br><small style="color: var(--text-muted)">Slick slider uses role="listbox"</small></td>
-                                    <td>Screen readers confused</td>
-                                    <td>Add aria-label or remove role</td>
-                                    <td><span class="badge weak">High</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Heading Hierarchy</strong><br><small style="color: var(--text-muted)">H3 followed by H4, non-sequential</small></td>
-                                    <td>Navigation disrupted</td>
-                                    <td>Fix heading levels</td>
-                                    <td><span class="badge adequate">Medium</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Images Missing Alt Text</strong><br><small style="color: var(--text-muted)">Preview images lack alt attributes</small></td>
-                                    <td>Missing context</td>
-                                    <td>Add descriptive alt text</td>
-                                    <td><span class="badge adequate">Medium</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Accessible Name Mismatches</strong><br><small style="color: var(--text-muted)">aria-label doesn't match visible text</small></td>
-                                    <td>Voice control issues</td>
-                                    <td>Align labels with visible text</td>
-                                    <td><span class="badge adequate">Medium</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <h3>Accessibility Quick Wins</h3>
+                    <div class="quick-wins-grid">
+                        <div class="quick-win-card critical">
+                            <span class="type-badge">Critical • Viewport</span>
+                            <h4>Enable Pinch-Zoom</h4>
+                            <p>Remove <code>user-scalable=no</code> and <code>maximum-scale</code> restrictions from viewport meta tag.</p>
+                            <div class="impact">📈 WCAG AA compliance</div>
+                        </div>
+                        
+                        <div class="quick-win-card">
+                            <span class="type-badge">Medium • ARIA</span>
+                            <h4>Fix Slider ARIA Roles</h4>
+                            <p>Slick slider uses incorrect <code>role="listbox"</code>. Either fix implementation or use CSS-only alternative.</p>
+                            <div class="impact">📈 Screen reader compatibility</div>
+                        </div>
+                        
+                        <div class="quick-win-card">
+                            <span class="type-badge">Medium • Structure</span>
+                            <h4>Fix Heading Hierarchy</h4>
+                            <p>Ensure headings follow H1 → H2 → H3 sequence without skips.</p>
+                            <div class="impact">📈 Improved navigation</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1388,7 +1338,7 @@
             <div id="site-ops" class="tab-content">
                 <div class="section-header">
                     <h2>Site Operations</h2>
-                    <span class="badge adequate">Stable with Optimization Potential</span>
+                    <span class="badge good">Healthy Infrastructure</span>
                 </div>
                 
                 <div class="stats-row">
@@ -1397,398 +1347,223 @@
                         <div class="stat-label">Platform</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value warning">12+</div>
+                        <div class="stat-value good">581ms</div>
+                        <div class="stat-label">Real User TTFB</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">12+</div>
                         <div class="stat-label">Active Scripts</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-value good">27-40ms</div>
-                        <div class="stat-label">Server Response</div>
+                        <div class="stat-value">~7MB</div>
+                        <div class="stat-label">Page Weight</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-value warning">2,799-3,976</div>
-                        <div class="stat-label">DOM Elements</div>
-                    </div>
+                </div>
+                
+                <div class="callout success">
+                    <h4>✅ Infrastructure Health</h4>
+                    <p>CrUX shows real users experience <strong>581ms TTFB</strong> (rated Fast), indicating healthy server response times. The Shopify platform and CDN are performing well for Australian visitors.</p>
                 </div>
                 
                 <div class="section-grid">
                     <div class="section-card">
                         <h3>Technology Stack</h3>
                         <ul>
+                            <li><strong>Platform:</strong> Shopify</li>
                             <li><strong>Search:</strong> Searchspring</li>
-                            <li><strong>Email:</strong> Klaviyo, CommSlayer</li>
+                            <li><strong>Email:</strong> Klaviyo</li>
                             <li><strong>Reviews:</strong> Yotpo</li>
                             <li><strong>Analytics:</strong> GTM, Clarity</li>
                             <li><strong>Payments:</strong> Afterpay</li>
-                            <li><strong>Features:</strong> Truefit, Swym, Tapcart</li>
                         </ul>
                     </div>
                     
                     <div class="section-card">
-                        <h3><span class="icon warning">⚠</span> Risk Areas</h3>
+                        <h3>Optimization Opportunities</h3>
                         <ul>
-                            <li><strong>High DOM:</strong> 2,799-3,976 elements</li>
-                            <li><strong>12+ Dependencies:</strong> Multiple failure points</li>
-                            <li><strong>Geographic Latency:</strong> CommSlayer 284ms RTT</li>
-                            <li><strong>Legacy Code:</strong> Slick slider overhead</li>
+                            <li><strong>Image Optimization:</strong> 7MB page weight could be reduced</li>
+                            <li><strong>Request Consolidation:</strong> 400 requests is high</li>
+                            <li><strong>Script Loading:</strong> Defer non-critical third parties</li>
+                            <li><strong>Monitoring:</strong> Consider RUM for ongoing tracking</li>
                         </ul>
                     </div>
                 </div>
-                
-                <div class="callout">
-                    <h4>🛡️ Safe Deployment Checklist</h4>
-                    <p>
-                        <strong>1.</strong> Create theme backup before changes<br>
-                        <strong>2.</strong> Test in Shopify preview mode<br>
-                        <strong>3.</strong> Implement one optimization at a time<br>
-                        <strong>4.</strong> Monitor Core Web Vitals for 24-48 hours<br>
-                        <strong>5.</strong> Document rollback steps for each change
-                    </p>
-                </div>
             </div>
             
-            <!-- USA Site Comparison Tab -->
+            <!-- USA Site Tab -->
             <div id="usa-site" class="tab-content">
                 <div class="section-header">
                     <h2>🇺🇸 USA Site vs 🇦🇺 AU Site Comparison</h2>
-                    <span class="badge critical">Critical Third-Party Debt</span>
+                    <span class="badge good">USA Performs Better in Real-World</span>
                 </div>
                 
-                <div class="callout critical">
-                    <h4>🚨 Critical Finding: USA Site Has Massive Third-Party Debt</h4>
-                    <p>The USA site (selfieleslie.com) runs <strong>27 third-party scripts</strong> compared to 12 on the AU site — resulting in <strong>13.3 seconds of blocking time</strong> on mobile (vs 628ms on AU). This 21x increase in blocking time makes the USA site nearly unusable on mobile devices, with 56.6 seconds of main thread work required to process all scripts.</p>
+                <div class="callout success">
+                    <h4>✅ Key Finding: USA Site Outperforms AU in Real User Metrics</h4>
+                    <p>Contrary to what synthetic Lighthouse tests suggested, CrUX data shows the USA site actually delivers a <strong>FAST</strong> experience overall, while the AU site is rated <strong>AVERAGE</strong>. Real USA users experience 2.48s LCP (Fast) compared to AU's 2.8s (Average). Both sites pass Core Web Vitals for CLS and INP.</p>
                 </div>
                 
-                <div class="performance-section">
-                    <h3>Performance Comparison: Homepage</h3>
-                    <div class="data-table-wrapper">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Metric</th>
-                                    <th>🇦🇺 AU Site (Mobile)</th>
-                                    <th>🇺🇸 USA Site (Mobile)</th>
-                                    <th>Difference</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Lighthouse Score</strong></td>
-                                    <td><span class="badge weak">37/100</span></td>
-                                    <td><span class="badge critical">31/100</span></td>
-                                    <td style="color: var(--accent-red);">-6 points</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>LCP (Largest Contentful Paint)</strong></td>
-                                    <td>10.72s</td>
-                                    <td>10.74s</td>
-                                    <td style="color: var(--text-muted);">Similar</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>TBT (Total Blocking Time)</strong></td>
-                                    <td style="color: var(--accent-orange);">860ms</td>
-                                    <td style="color: var(--accent-red); font-weight: 600;">22,596ms</td>
-                                    <td style="color: var(--accent-red); font-weight: 600;">+26x worse 🔥</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>CLS (Layout Shift)</strong></td>
-                                    <td>0.182</td>
-                                    <td>0.060</td>
-                                    <td style="color: var(--accent-green);">Better ✓</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Speed Index</strong></td>
-                                    <td>8.4s</td>
-                                    <td>10.58s</td>
-                                    <td style="color: var(--accent-red);">+26% slower</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Main Thread Work</strong></td>
-                                    <td style="color: var(--accent-orange);">8.9s</td>
-                                    <td style="color: var(--accent-red); font-weight: 600;">56.6s</td>
-                                    <td style="color: var(--accent-red); font-weight: 600;">+6x more 🔥</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <h3 style="margin: 32px 0 20px; font-size: 1rem;">Real User Experience Comparison (CrUX)</h3>
+                
+                <div class="data-table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>🇦🇺 AU Site</th>
+                                <th>🇺🇸 USA Site</th>
+                                <th>Winner</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Overall CrUX Rating</strong></td>
+                                <td><span class="badge adequate">AVERAGE</span></td>
+                                <td><span class="badge good">FAST</span></td>
+                                <td style="color: var(--accent-green); font-weight: 600;">🇺🇸 USA</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LCP (Mobile)</strong></td>
+                                <td style="color: var(--accent-orange);">2.8s (Average)</td>
+                                <td style="color: var(--accent-green); font-weight: 600;">2.48s (Fast)</td>
+                                <td style="color: var(--accent-green);">🇺🇸 USA — 320ms faster</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LCP (Desktop)</strong></td>
+                                <td style="color: var(--accent-orange);">2.59s (Average)</td>
+                                <td style="color: var(--accent-green); font-weight: 600;">2.2s (Fast)</td>
+                                <td style="color: var(--accent-green);">🇺🇸 USA — 390ms faster</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CLS</strong></td>
+                                <td style="color: var(--accent-green);">0.08 (Fast)</td>
+                                <td style="color: var(--accent-green);">0.09 (Fast)</td>
+                                <td>Both pass ✓</td>
+                            </tr>
+                            <tr>
+                                <td><strong>INP (Mobile)</strong></td>
+                                <td style="color: var(--accent-green);">148ms (Fast)</td>
+                                <td style="color: var(--accent-green);">143ms (Fast)</td>
+                                <td>Both pass ✓</td>
+                            </tr>
+                            <tr>
+                                <td><strong>FCP</strong></td>
+                                <td style="color: var(--accent-green);">1.29s (Fast)</td>
+                                <td style="color: var(--accent-green);">1.23s (Fast)</td>
+                                <td>Both pass ✓</td>
+                            </tr>
+                            <tr>
+                                <td><strong>TTFB</strong></td>
+                                <td>581ms (Fast)</td>
+                                <td style="font-weight: 600;">468ms (Fast)</td>
+                                <td style="color: var(--accent-green);">🇺🇸 USA — 113ms faster</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 
-                <div class="performance-section">
-                    <h3>Third-Party Script Comparison</h3>
-                    <div class="data-table-wrapper">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Metric</th>
-                                    <th>🇦🇺 AU Site</th>
-                                    <th>🇺🇸 USA Site</th>
-                                    <th>Difference</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Total Third-Party Scripts</strong></td>
-                                    <td>12</td>
-                                    <td style="color: var(--accent-red); font-weight: 600;">27</td>
-                                    <td style="color: var(--accent-red);">+15 scripts (+125%)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Third-Party Blocking Time</strong></td>
-                                    <td>628ms</td>
-                                    <td style="color: var(--accent-red); font-weight: 600;">13,309ms</td>
-                                    <td style="color: var(--accent-red); font-weight: 600;">+21x more 🔥</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Third-Party Transfer Size</strong></td>
-                                    <td>~2.5MB</td>
-                                    <td>3.88MB</td>
-                                    <td style="color: var(--accent-red);">+55% larger</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Long Tasks</strong></td>
-                                    <td>20 tasks (1.9s total)</td>
-                                    <td>20 tasks (13.2s total)</td>
-                                    <td style="color: var(--accent-red);">+7x duration</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="crux-highlight" style="margin-top: 32px;">
+                    <h3>📊 USA Site Real User Metrics — All Core Web Vitals Pass</h3>
+                    <div class="crux-grid">
+                        <div class="crux-metric">
+                            <div class="value">2.48s</div>
+                            <div class="label">LCP (Mobile)</div>
+                            <div class="status">FAST ✓</div>
+                        </div>
+                        <div class="crux-metric">
+                            <div class="value">2.2s</div>
+                            <div class="label">LCP (Desktop)</div>
+                            <div class="status">FAST ✓</div>
+                        </div>
+                        <div class="crux-metric">
+                            <div class="value">0.09</div>
+                            <div class="label">CLS</div>
+                            <div class="status">FAST ✓</div>
+                        </div>
+                        <div class="crux-metric">
+                            <div class="value">143ms</div>
+                            <div class="label">INP</div>
+                            <div class="status">FAST ✓</div>
+                        </div>
+                        <div class="crux-metric">
+                            <div class="value">327ms</div>
+                            <div class="label">TTFB (Desktop)</div>
+                            <div class="status">FAST ✓</div>
+                        </div>
                     </div>
                 </div>
                 
-                <h3 style="margin: 32px 0 20px; font-size: 1rem;">Third-Party Scripts: USA Site Breakdown</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">Scripts ordered by blocking time impact (mobile throttled)</p>
+                <div class="callout" style="margin-top: 32px;">
+                    <h4>💡 Why USA Performs Better Despite More Scripts</h4>
+                    <p>While the USA site may have more third-party scripts in synthetic tests, real-world performance shows it's actually faster. This is likely due to:</p>
+                    <p style="margin-top: 12px;">
+                        <strong>1. Geographic CDN proximity</strong> — US users are closer to origin servers<br>
+                        <strong>2. Network quality</strong> — US networks may have better average speeds<br>
+                        <strong>3. Infrastructure optimization</strong> — Possible US-specific caching or optimization<br>
+                        <strong>4. User device quality</strong> — US CrUX sample may skew toward faster devices
+                    </p>
+                </div>
                 
-                <div class="third-party-grid">
-                    <div class="third-party-card">
-                        <div class="indicator critical"></div>
-                        <div>
-                            <h4>Shopify Core</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 4,107ms 🔥<br>
-                                <strong>Transfer:</strong> 1,139KB<br>
-                                <span style="color: var(--accent-red);">vs AU: 137ms blocking</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator critical"></div>
-                        <div>
-                            <h4>Yotpo (Reviews)</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 3,635ms 🔥<br>
-                                <strong>Transfer:</strong> 714KB<br>
-                                <span style="color: var(--accent-red);">vs AU: 203ms blocking</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator critical"></div>
-                        <div>
-                            <h4>Searchspring</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 2,180ms 🔥<br>
-                                <strong>Transfer:</strong> 165KB<br>
-                                <span style="color: var(--accent-red);">vs AU: 95ms blocking</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator critical"></div>
-                        <div>
-                            <h4>Klaviyo</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 1,232ms<br>
-                                <strong>Transfer:</strong> 241KB<br>
-                                <span style="color: var(--accent-red);">vs AU: 30ms blocking</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator warning"></div>
-                        <div>
-                            <h4>CommSlayer</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 648ms<br>
-                                <strong>Transfer:</strong> 1,035KB<br>
-                                <span style="color: var(--accent-orange);">vs AU: 10ms blocking</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator warning"></div>
-                        <div>
-                            <h4>Square CDN</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 451ms<br>
-                                <strong>Transfer:</strong> 133KB<br>
-                                <span style="color: var(--accent-orange);">vs AU: 20ms blocking</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator warning"></div>
-                        <div>
-                            <h4>b-cdn.net (BunnyCDN)</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 338ms<br>
-                                <strong>Transfer:</strong> 40KB<br>
-                                <span style="color: var(--accent-blue);">USA only — not on AU</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator warning"></div>
-                        <div>
-                            <h4>Google Tag Manager</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 314ms<br>
-                                <strong>Transfer:</strong> 110KB<br>
-                                <span style="color: var(--accent-orange);">vs AU: 9ms blocking</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator ok"></div>
-                        <div>
-                            <h4>Microsoft Clarity</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 160ms<br>
-                                <strong>Transfer:</strong> 28KB<br>
-                                Similar to AU
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator ok"></div>
-                        <div>
-                            <h4>Bing Ads</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 97ms<br>
-                                <strong>Transfer:</strong> 17KB<br>
-                                <span style="color: var(--accent-blue);">USA only — not on AU</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator ok"></div>
-                        <div>
-                            <h4>Yellow Robot</h4>
-                            <div class="details">
-                                <strong>Blocking:</strong> 61ms<br>
-                                <strong>Transfer:</strong> 39KB
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="third-party-card">
-                        <div class="indicator ok"></div>
-                        <div>
-                            <h4>+ 16 Other Scripts</h4>
-                            <div class="details">
-                                Unpkg, Afterpay, Truefit, Tapcart,<br>
-                                config-security, AWS, Bootstrap CDN,<br>
-                                shop.app, Google Fonts, Swym,<br>
-                                Adobe TypeKit, Azure, Consentmo...
-                            </div>
-                        </div>
-                    </div>
+                <h3 style="margin: 32px 0 20px; font-size: 1rem;">Lighthouse Scores (Synthetic — For Reference Only)</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">These synthetic tests don't reflect real user experience but are useful for debugging</p>
+                
+                <div class="data-table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>🇦🇺 AU Site</th>
+                                <th>🇺🇸 USA Site</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Lighthouse Score (Mobile)</strong></td>
+                                <td><span class="badge critical">30/100</span></td>
+                                <td><span class="badge weak">41/100</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lighthouse Score (Desktop)</strong></td>
+                                <td><span class="badge adequate">51/100</span></td>
+                                <td><span class="badge critical">18/100</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Synthetic LCP (Mobile)</strong></td>
+                                <td>21.01s</td>
+                                <td>16.2s</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Page Size</strong></td>
+                                <td>7.21MB</td>
+                                <td>7.83MB</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Requests</strong></td>
+                                <td>400</td>
+                                <td>387</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 
                 <div class="performance-section" style="margin-top: 32px;">
-                    <h3>Site Operations Comparison</h3>
-                    <div class="data-table-wrapper">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Metric</th>
-                                    <th>🇦🇺 AU Site</th>
-                                    <th>🇺🇸 USA Site</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Domain</strong></td>
-                                    <td>selfieleslie.com.au</td>
-                                    <td>selfieleslie.com</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Page Size (Mobile)</strong></td>
-                                    <td>5.29MB</td>
-                                    <td>4.95MB</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Page Size (Desktop)</strong></td>
-                                    <td>6.52MB</td>
-                                    <td>7.49MB</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>HTTP Requests</strong></td>
-                                    <td>300</td>
-                                    <td>279 (mobile) / 334 (desktop)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>DOM Elements</strong></td>
-                                    <td>3,976</td>
-                                    <td>4,053 (mobile) / 4,332 (desktop)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>TTFB (Server Response)</strong></td>
-                                    <td>40ms</td>
-                                    <td>39ms</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Unused JavaScript</strong></td>
-                                    <td>610KB savings</td>
-                                    <td>595KB savings</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <div class="callout">
-                    <h4>💡 Key Insight: Same Core, Different Script Load</h4>
-                    <p>Both sites share similar infrastructure (TTFB ~40ms, similar DOM complexity, comparable page weights). The massive performance difference is almost entirely due to third-party script debt on the USA site. The USA site loads <strong>15 additional scripts</strong> that collectively add <strong>12.7 seconds of blocking time</strong> that the AU site doesn't have.</p>
-                </div>
-                
-                <div class="performance-section">
-                    <h3>Recommendations for USA Site</h3>
-                    <div class="quick-wins-grid">
-                        <div class="quick-win-card critical">
-                            <span class="type-badge">Critical • Immediate</span>
-                            <h4>1. Audit All 27 Scripts</h4>
-                            <p>Review each third-party script for business necessity. The USA site has 15 more scripts than AU — are they all essential? Remove unused scripts immediately.</p>
-                            <div class="impact">📈 Potential: 50-70% TBT reduction</div>
+                    <h3>Recommendations</h3>
+                    <div class="section-grid">
+                        <div class="section-card">
+                            <h3><span class="icon good">✓</span> USA Site Status</h3>
+                            <ul>
+                                <li><strong>All Core Web Vitals:</strong> Passing (Fast)</li>
+                                <li><strong>No urgent action needed</strong> based on real user data</li>
+                                <li><strong>Continue monitoring:</strong> CrUX data monthly</li>
+                            </ul>
                         </div>
                         
-                        <div class="quick-win-card critical">
-                            <span class="type-badge">Critical • Script Deferral</span>
-                            <h4>2. Defer Heavy Scripts</h4>
-                            <p>Shopify (4.1s), Yotpo (3.6s), Searchspring (2.2s), and Klaviyo (1.2s) collectively block for 11+ seconds. Defer until after DOMContentLoaded or user interaction.</p>
-                            <div class="impact">📈 Potential: 11+ seconds saved</div>
-                        </div>
-                        
-                        <div class="quick-win-card">
-                            <span class="type-badge">High • Remove USA-Only Scripts</span>
-                            <h4>3. Review USA-Exclusive Scripts</h4>
-                            <p>BunnyCDN (338ms), Bing Ads (97ms), and several others only appear on USA. Evaluate if these are needed or can be consolidated.</p>
-                            <div class="impact">📈 Potential: 400+ms savings</div>
-                        </div>
-                        
-                        <div class="quick-win-card">
-                            <span class="type-badge">Medium • Align with AU</span>
-                            <h4>4. Match AU Site Configuration</h4>
-                            <p>Consider using the AU site's leaner script configuration as a template. If AU operates successfully with 12 scripts, does USA need 27?</p>
-                            <div class="impact">📈 Potential: Match AU performance</div>
+                        <div class="section-card">
+                            <h3><span class="icon warning">⚠</span> AU Site Opportunity</h3>
+                            <ul>
+                                <li><strong>LCP at 2.8s:</strong> 300ms above "Fast" threshold</li>
+                                <li><strong>Target:</strong> Reduce to under 2.5s to match USA</li>
+                                <li><strong>Focus:</strong> Hero image optimization</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -1798,7 +1573,7 @@
     
     <footer>
         <div class="container">
-            <p>Selfie Leslie Performance Health Check • Prepared by MindArc • December 2025</p>
+            <p>Selfie Leslie Performance Health Check • Real User Data (CrUX) + Lighthouse Analysis • Prepared by MindArc • December 2025</p>
         </div>
     </footer>
     
