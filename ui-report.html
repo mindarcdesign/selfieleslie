@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selfie Leslie – UI Review Report (UAT)</title>
+
+  <style>
+    :root{
+      --ink:#1a1a2e;
+      --muted:#666;
+      --bg:#f8f9fa;
+      --card:#ffffff;
+      --border:#e0e0e0;
+      --border2:#e8e8e8;
+      --shadow: 0 8px 24px rgba(0,0,0,0.06);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --accent:#2563eb;
+      --success:#059669;
+      --warn:#d97706;
+      --danger:#dc2626;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      line-height:1.55;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    header{
+      background: var(--ink);
+      color:#fff;
+      padding: 28px 28px;
+    }
+    .header-content{
+      max-width: 1180px;
+      margin: 0 auto;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+    }
+    header h1{
+      margin:0 0 6px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      font-size: 1.35rem;
+    }
+    header p{
+      margin:0;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.95rem;
+    }
+    .meta-row{
+      margin-top: 12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      white-space:nowrap;
+    }
+
+    .main-content{
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 22px 60px;
+    }
+
+    .nav-tabs{
+      position: sticky;
+      top:0;
+      z-index: 10;
+      background: rgba(248,249,250,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-tabs-inner{
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 12px 22px;
+      display:flex;
+      gap:10px;
+      overflow-x:auto;
+    }
+    .tab{
+      border: 1px solid var(--border);
+      background:#fff;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      color: var(--ink);
+      cursor:pointer;
+      transition: transform 0.06s ease, border-color 0.12s ease, background 0.12s ease;
+      white-space:nowrap;
+    }
+    .tab:hover{ transform: translateY(-1px); }
+    .tab.active{
+      border-color: rgba(37,99,235,0.35);
+      background: rgba(37,99,235,0.08);
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .tab-content{ display:none; }
+    .tab-content.active{ display:block; }
+
+    .section-header{
+      margin-bottom: 18px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .section-header h2{
+      margin:0;
+      font-size: 1.2rem;
+      letter-spacing: -0.01em;
+    }
+    .section-header p{
+      margin: 6px 0 0;
+      color: var(--muted);
+      max-width: 70ch;
+      font-size: 0.95rem;
+    }
+
+    .cards-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 18px;
+      box-shadow: var(--shadow);
+    }
+    .card h3{
+      margin:0 0 8px;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .list{
+      margin: 12px 0 0;
+      padding: 0;
+      list-style:none;
+    }
+    .list li{
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border2);
+      color: #444;
+      font-size: 0.92rem;
+    }
+    .list li:last-child{ border-bottom:none; }
+    .list strong{ color: var(--ink); }
+
+    .badge{
+      display:inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      color: #334155;
+      background:#fff;
+    }
+    .badge.mobile{ background: rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.25); }
+    .badge.desktop{ background: rgba(5,150,105,0.08); border-color: rgba(5,150,105,0.25); }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn{
+      border: 1px solid var(--border);
+      background:#fff;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      cursor:pointer;
+      transition: transform 0.06s ease, border-color 0.12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn.primary{
+      border-color: rgba(37,99,235,0.35);
+      background: rgba(37,99,235,0.08);
+      font-weight: 600;
+    }
+
+    .finding{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background:#fff;
+      overflow:hidden;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+    .finding-header{
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+    .finding-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .finding-title h4{
+      margin:0;
+      font-size: 0.98rem;
+      letter-spacing: -0.01em;
+    }
+    .finding-body{
+      padding: 14px 16px 16px;
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 14px;
+    }
+
+    .kv{
+      display:grid;
+      gap: 10px;
+    }
+    .kv-block{
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-sm);
+      padding: 12px 12px;
+      background: #fafafa;
+    }
+    .kv-block .label{
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+    .kv-block .value{
+      font-size: 0.95rem;
+      color: #111827;
+    }
+
+    .image-box{
+      border: 1px dashed rgba(37,99,235,0.35);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: rgba(37,99,235,0.04);
+      min-height: 210px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+    .image-box p{
+      margin:0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      max-width: 34ch;
+    }
+    .image-preview{
+      width:100%;
+      max-height: 340px;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background:#fff;
+      display:none;
+    }
+    .file-row{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    input[type="file"]{
+      font-size: 0.9rem;
+    }
+
+    .muted-note{
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .save-btn{
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid rgba(255,255,255,0.3);
+      font-weight: 600;
+    }
+    .save-btn:hover{
+      background: rgba(255,255,255,0.95);
+    }
+
+    @media (max-width: 1024px){
+      .cards-grid{ grid-template-columns: 1fr; }
+      .finding-body{ grid-template-columns: 1fr; }
+      .header-content{ flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <div>
+        <h1>Selfie Leslie – UI Review Report (UAT)</h1>
+        <p>Design-focused review of UI elements and visual system (not UX).</p>
+        <div class="meta-row">
+          <span class="pill"><strong>Environment:</strong> UAT (do not reference live)</span>
+          <span class="pill"><strong>Scope:</strong> Summary + Homepage (initial)</span>
+          <span class="pill"><strong>Status:</strong> Draft v0.1</span>
+        </div>
+      </div>
+      <div class="muted-note" style="text-align:right;">
+        <div><strong>Reviewer:</strong> UI Director</div>
+        <div><strong>Date:</strong> December 2025</div>
+        <button class="btn save-btn" onclick="saveReport()" style="margin-top: 12px;" disabled="">⏳ Preparing...</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-tabs">
+    <div class="nav-tabs-inner">
+      <button class="tab" onclick="showTab('summary')">Summary</button>
+      <button class="tab" onclick="showTab('homepage')">Homepage</button>
+      <button class="tab active" onclick="showTab('global')">Global Elements</button>
+      <button class="tab" onclick="showTab('plp')">PLP</button>
+      <button class="tab" onclick="showTab('pdp')">PDP</button>
+      <button class="tab" onclick="showTab('minicart')">Mini Cart</button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <!-- SUMMARY TAB -->
+    <div id="summary" class="tab-content">
+      <div class="section-header">
+        <div>
+          <h2>Design principles for this UI review</h2>
+          <p>
+            These principles are the lens for recommendations, aiming for clean, subtle, fresh, and modern fashion ecommerce.
+          </p>
+        </div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card">
+          <h3>1) Clarity and hierarchy</h3>
+          <p>Make the primary actions and key messages obvious with minimal visual noise.</p>
+          <ul class="list">
+            <li><strong>What good looks like:</strong> One clear hero message, one primary CTA style, consistent heading hierarchy.</li>
+            <li><strong>Watch outs:</strong> Competing banners, mixed button styles, low-contrast text on imagery.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>2) Consistency and systemisation</h3>
+          <p>Fewer component styles, more repeatable patterns, tighter spacing and typography rules.</p>
+          <ul class="list">
+            <li><strong>What good looks like:</strong> Reusable card layouts, standardised padding, predictable icon sizes.</li>
+            <li><strong>Watch outs:</strong> Slightly different fonts, radii, shadows, or borders across modules.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>3) Premium restraint</h3>
+          <p>Let photography and whitespace carry the brand, keep UI chrome minimal.</p>
+          <ul class="list">
+            <li><strong>What good looks like:</strong> Muted neutrals, subtle dividers, restrained promotions.</li>
+            <li><strong>Watch outs:</strong> Heavy outlines, loud badges, chunky shadows, overly saturated accents.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>4) Modern interaction cues</h3>
+          <p>Clear states for hover, focus, selected, disabled, and loading, without gimmicks.</p>
+          <ul class="list">
+            <li><strong>What good looks like:</strong> Soft transitions, clear active states, accessible focus rings.</li>
+            <li><strong>Watch outs:</strong> No selected indication, inconsistent hover treatments, unclear tappable targets.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>5) Content and typography polish</h3>
+          <p>Better legibility, calmer rhythm, and more editorial type use where it counts.</p>
+          <ul class="list">
+            <li><strong>What good looks like:</strong> Balanced line-lengths, consistent casing, deliberate type pairing.</li>
+            <li><strong>Watch outs:</strong> Thin type on images, excessive all-caps, inconsistent spacing between modules.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>How this report is structured</h3>
+          <p>Each page tab contains “findings”. Each finding has pros, cons, recommended change, and an image slot.</p>
+          <ul class="list">
+            <li><strong>Device:</strong> Desktop and mobile tags per finding.</li>
+            <li><strong>Images:</strong> Upload any screenshot and it previews inline (local only).</li>
+            <li><strong>Next:</strong> We will add Global, PLP, PDP, and Mini cart tabs.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOMEPAGE TAB -->
+    <div id="homepage" class="tab-content">
+      <div class="section-header">
+        <div>
+          <h2>Homepage (UAT)</h2>
+          <p>
+            Add findings for homepage UI elements only. Each item should be specific and include desktop or mobile.
+          </p>
+        </div>
+
+        <div class="controls">
+          <button class="btn primary" onclick="addFinding()">+ Add finding</button>
+        </div>
+      </div>
+
+      <div id="findings-container">
+        
+
+        
+
+        
+
+        <div class="finding" data-id="1">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Hero typography legibility and CTA refinement</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+          <div class="kv">
+                <div class="kv-block">
+                  <div class="label">Section</div>
+                  <div class="value" contenteditable="true">Hero banner headline, subcopy, CTA button</div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Pros</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Hero imagery feels editorial and on-brand for fashion.</li>
+<li>Primary CTA is clear and prominent.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Cons</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Text legibility varies depending on image brightness and contrast.</li>
+<li>CTA styling reads slightly generic and could be more boutique.</li>
+<li>On mobile, headline scale can crowd the composition.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Recommended change</div>
+                  <div class="value" contenteditable="true">Consider a subtle contrast treatment behind hero text (currently seems stronger on title rather than text). This seems to be a fully designed hero banner (image, text, cta), consider making texts and CTA a part of the code so CTA has the correct treatment with multiple states. As you can see in screenshot at tablet CTA can become blurry as it is a part of the image. CTA style seems to not exist anywhere else on the site</div>
+                </div>
+              </div>
+          <div class="image-box">
+                <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+                <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+                <div class="file-row">
+                  <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                  <button class="btn" onclick="clearImage(this)">Clear image</button>
+                </div>
+                <p class="muted-note">Tip: capture hero on desktop and mobile, plus any alternate hero slides.</p>
+              </div>
+        </div>
+        </div>
+
+        
+
+        <div class="finding" data-id="2">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Category tiles hierarchy and mobile carousel treatment</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+          <div class="kv">
+                <div class="kv-block">
+                  <div class="label">Section</div>
+                  <div class="value" contenteditable="true">Category tile modules (Maxi Dresses, Short Dresses, Cocktail Dresses, Gift Shop)</div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Pros</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Quick pathways into key categories.</li>
+<li>Photography communicates use-case well.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Cons</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Tiles lack excitement. CTA's have no unique styling</li>
+<li>Mobile carousel images can camouflage arrows.<br></li><li>Inconsistent spacing and padding around component</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Recommended change</div>
+                  <div class="value" contenteditable="true">Consider a stronger CTA and clearer pagination/arrow navigation on mobile. Ensure spacing/padding is consistent (currently seems to be 7px above, 14px below, 15 px left and right, 8px gaps between cards). Try using consistent padding and spacing divisible by 4 for better consistency</div>
+                </div>
+              </div>
+          <div class="image-box">
+                <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+                <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+                <div class="file-row">
+                  <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                  <button class="btn" onclick="clearImage(this)">Clear image</button>
+                </div>
+                <p class="muted-note">Tip: capture the tile module at first view, and after one horizontal swipe on mobile.</p>
+              </div>
+        </div>
+        </div>
+
+        <div class="finding" data-id="3">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Trending product grid, card density, and Quick Add pattern</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+          <div class="kv">
+                <div class="kv-block">
+                  <div class="label">Section</div>
+                  <div class="value" contenteditable="true">Trending Now module, product cards, Quick Add and size selection</div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Pros</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Product imagery is strong and consistent.</li>
+<li>Quick Add supports faster purchasing.</li><li>Tag design legible without interrupting product images</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Cons</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Quick Add plus size buttons and color adds visual density, most noticeable on mobile.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Recommended change</div>
+                  <div class="value" contenteditable="true">Consider a more subtle quick add design CTA, as well as navigation arrows or scrollbar for mobile. Also with most modules on homepage, consider more and consistent padding and breathing room</div>
+                </div>
+              </div>
+          <div class="image-box">
+                <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+                <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+                <div class="file-row">
+                  <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                  <button class="btn" onclick="clearImage(this)">Clear image</button>
+                </div>
+                <p class="muted-note">Tip: capture a product card default state and the Quick Add expanded state.</p>
+              </div>
+        </div>
+        </div>
+
+        <div class="finding" data-id="4">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Long-form brand copy block readability and hierarchy</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+          <div class="kv">
+                <div class="kv-block">
+                  <div class="label">Section</div>
+                  <div class="value" contenteditable="true">Welcome text block, Read more or Read less control</div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Pros</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Brand story and SEO content is present.</li>
+<li>Helpful for first-time visitors who want context.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Cons</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Visually heavy for a homepage and lacks ideal styling and formatting.</li>
+<li>Mobile scroll fatigue increases with dense paragraphs.</li>
+<li>Read more control can be missed if not styled clearly.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Recommended change</div>
+                  <div class="value" contenteditable="true">Convert to a editorial module (1 short paragraph plus 3 bullets) with a clear Read more link. Use a two-column layout on desktop, and a card layout on mobile. Tighten typography (line length, spacing, heading hierarchy).</div>
+                </div>
+              </div>
+          <div class="image-box">
+                <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+                <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+                <div class="file-row">
+                  <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                  <button class="btn" onclick="clearImage(this)">Clear image</button>
+                </div>
+                <p class="muted-note">Tip: capture the collapsed and expanded states of the Read more section.</p>
+              </div>
+        </div>
+        </div>
+
+        <div class="finding" data-id="5">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Reassurance strip icon system and spacing</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+          <div class="kv">
+                <div class="kv-block">
+                  <div class="label">Section</div>
+                  <div class="value" contenteditable="true">Afterpay, Returns, Reviews, Shipping, Loyalty, Student Discount</div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Pros</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Strong reassurance coverage at a glance.</li>
+<li>Icons help users scan the benefits.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Cons</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Mobile strip is dense and long.<br></li><li>Icon stlyling all feel completely different</li>
+<li>Spacing and alignment can drift between items.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Recommended change</div>
+                  <div class="value" contenteditable="true">Unify icon style (stroke weight, size, tone) and reduce contrast slightly. Standardise spacing and alignment across all items, and make mobile 2 column to reduce height</div>
+                </div>
+              </div>
+          <div class="image-box">
+                <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+                <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+                <div class="file-row">
+                  <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                  <button class="btn" onclick="clearImage(this)">Clear image</button>
+                </div>
+                <p class="muted-note">Tip: capture the reassurance strip on both desktop and mobile, including any hover states.</p>
+              </div>
+        </div>
+        </div>
+
+        
+
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER TABS -->
+    <div id="global" class="tab-content active">
+      <div class="section-header">
+        <div>
+          <h2>Global Elements</h2>
+          <p>
+            Global UI review covering navigation and footer patterns across desktop and mobile.
+          </p>
+        </div>
+
+        <div class="controls">
+          <button class="btn primary" onclick="addFindingFor('global')">+ Add finding</button>
+        </div>
+      </div>
+
+      <div id="global-findings-container" data-findings-container="global">
+  <div class="finding" data-id="1">
+    <div class="finding-header">
+      <div class="finding-title">
+        <h4 contenteditable="true">General UI - Global visual styling and hierarchy consistency</h4>
+        <span class="badge desktop">Desktop</span>
+        <span class="badge mobile">Mobile</span>
+      </div>
+      <button class="btn" onclick="removeFinding(this)">Remove</button>
+    </div>
+
+    <div class="finding-body">
+          <div class="kv">
+          <div class="kv-block">
+            <div class="label">Section</div>
+            <div class="value" contenteditable="true">Typography hierarchy, color usage, UI styling patterns, CTAs</div>
+          </div>
+
+          <div class="kv-block">
+            <div class="label">Pros</div>
+            <div class="value" contenteditable="true">
+              <ul>
+                <li>Clean and minimal visual presentation across the site.</li><li>Consistent use of components creates a cohesive experience.</li><li>Black and white palette keeps the UI feeling neutral and premium.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="kv-block">
+            <div class="label">Cons</div>
+            <div class="value" contenteditable="true">
+              <ul>
+                <li>Limited text hierarchy makes headlines, subheadings, and supporting text feel visually similar.</li><li>CTAs often rely on placement rather than styling to stand out.</li><li>Minimal use of brand color reduces visual energy and emphasis.</li><li>Lack of clear typographic scale or style differentiation suggests no defined UI style guide.</li><li>Important moments such as promotions, section headers, and reassurance messaging lack visual contrast.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="kv-block">
+            <div class="label">Recommended change</div>
+            <div class="value" contenteditable="true">Establish a lightweight UI style guide covering typography, spacing, color usage, and component states to improve clarity while maintaining consistency. Define a clear typographic hierarchy for headlines, section titles, body copy, and supporting text. Introduce restrained use of brand color (consider light use of old blue?) to highlight CTAs and key moments without sacrificing the clean aesthetic. Build in hover states, active states, etc and full component library ideally based on atomic design principles.</div>
+          </div>
+        </div>
+          <div class="image-box">
+          <img class="image-preview" alt="Uploaded screenshot preview">
+          <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+          <div class="file-row">
+            <input type="file" accept="image/*" onchange="previewImage(event, this)">
+            <button class="btn" onclick="clearImage(this)">Clear image</button>
+          </div>
+          <p class="muted-note">Tip: name your screenshot consistently (for example: HP-Hero-Mobile.png).</p>
+        </div>
+        </div>
+  </div>
+
+
+        <div class="finding" data-id="2">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Promo bar and header stack</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+          <div class="kv">
+                <div class="kv-block">
+                  <div class="label">Section</div>
+                  <div class="value" contenteditable="true">Promo bar(s), header, navigation row, search row</div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Pros</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Strong monochrome base feels clean and fashion-led.</li><li>Always on search box</li><li>Clear separation of global controls (nav, account, cart).</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Cons</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Multiple stacked rows and promo messages can feel visually busy, especially on mobile.</li><li>Competing promos dilute a premium, editorial tone.</li><li>Header height pushes hero content down, reducing impact.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Recommended change</div>
+                  <div class="value" contenteditable="true">Monitor use of navigation row post launch, users may ignore it and it just takes up extra space. If important consider giving quick links a clearer CTA style</div>
+                </div>
+              </div>
+          <div class="image-box">
+                <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+                <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+                <div class="file-row">
+                  <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                  <button class="btn" onclick="clearImage(this)">Clear image</button>
+                </div>
+                <p class="muted-note">Tip: screenshot the header at page load and after 1 scroll on mobile.</p>
+              </div>
+          </div>
+        </div>
+
+        <div class="finding" data-id="3">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Navigation density and mega menu scanning</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+          <div class="kv">
+                <div class="kv-block">
+                  <div class="label">Section</div>
+                  <div class="value" contenteditable="true">Top navigation labels, More menu, mega menu lists</div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Pros</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Clear category coverage and strong breadth for discovery.</li><li>Familiar patterns make the navigation learnable.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Cons</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Many top-level items compete for attention and reduce the curated feel.</li><li>Long link lists in mega menus are visually similar, scanning becomes work.</li><li>Repeated labels can create perceived redundancy.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Recommended change</div>
+                  <div class="value" contenteditable="true">Increase padding and negative space around menu links for easier scanability</div>
+                </div>
+              </div>
+          <div class="image-box">
+                <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+                <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+                <div class="file-row">
+                  <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                  <button class="btn" onclick="clearImage(this)">Clear image</button>
+                </div>
+                <p class="muted-note">Tip: capture desktop nav and the full mobile nav drawer open.</p>
+              </div>
+          </div>
+        </div>
+
+        
+
+        <div class="finding" data-id="4">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Search entry point and interaction clarity</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+          <div class="kv">
+                <div class="kv-block">
+                  <div class="label">Section</div>
+                  <div class="value" contenteditable="true">Search icon, search field, search overlay/autocomplete</div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Pros</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>Search is available globally and easy to find.</li>
+<li>Clear field pattern is familiar.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Cons</div>
+                  <div class="value" contenteditable="true">
+                    <ul>
+                      <li>If search appears as a full row, it can add height and compete with hero on mobile.</li>
+<li>Autocomplete and suggestion layout can feel busy if too many suggestion types show at once.</li>
+<li>Clear and close controls can be small on mobile.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="kv-block">
+                  <div class="label">Recommended change</div>
+                  <div class="value" contenteditable="true">On mobile, consider icon-first search that expands into an overlay. Ensure Desktop search pop up module allows view of full search box without need to scroll to view "See all results" CTA. Ensure close CTA is easy to see and touch&nbsp;</div>
+                </div>
+              </div>
+          <div class="image-box">
+                <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+                <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+                <div class="file-row">
+                  <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                  <button class="btn" onclick="clearImage(this)">Clear image</button>
+                </div>
+                <p class="muted-note">Tip: capture search closed, open, and with suggestions visible.</p>
+              </div>
+          </div>
+        </div>
+
+        
+
+        
+
+        
+      </div>
+    </div>
+
+<div id="plp" class="tab-content">
+      <div class="section-header">
+        <div>
+          <h2>PLP (UAT)</h2>
+          <p>Product listing page findings covering filters, grid, quick add, promotions, and sorting.</p>
+        </div>
+        <div class="controls">
+          <button class="btn primary" onclick="addFindingFor('plp')">+ Add finding</button>
+        </div>
+      </div>
+
+      <div id="plp-findings-container" data-findings-container="">
+
+        <div class="finding" data-id="1">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">PLP filtering density and discoverability</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+            <div class="kv">
+              <div class="kv-block">
+                <div class="label">Section</div>
+                <div class="value" contenteditable="true">Left rail filters, search within results, applied filtering behaviour</div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Pros</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Very comprehensive filtering allows users to narrow down highly specific needs.</li>
+                    <li>Search within results is available and useful for large assortments.</li>
+                    <li>Clear grouping of filter categories (color, size, length, price, occasion, fabric).</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Cons</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Filter list is very long and visually heavy, especially on desktop.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Recommended change</div>
+                <div class="value" contenteditable="true">Increase padding around .ss__list__option on mobile as the click radius is too small.</div>
+              </div>
+            </div>
+            <div class="image-box">
+              <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+              <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+              <div class="file-row">
+                <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                <button class="btn" onclick="clearImage(this)">Clear image</button>
+              </div>
+              <p class="muted-note">Tip: capture filter rail on desktop and filter drawer on mobile.</p>
+            </div>
+          </div>
+        </div>
+
+        
+
+        
+
+        
+
+        <div class="finding" data-id="2">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Sorting and results context</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+            <div class="kv">
+              <div class="kv-block">
+                <div class="label">Section</div>
+                <div class="value" contenteditable="true">Sort dropdown, result count visibility</div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Pros</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Sorting options cover key user needs (newest, price, rating).</li>
+                    <li>Default sorting provides a reasonable starting point.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Cons</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>UI error on mobile when Navigation is open</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Recommended change</div>
+                <div class="value" contenteditable="true">Address z-index issues on sorting on mobile</div>
+              </div>
+            </div>
+            <div class="image-box">
+              <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+              <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+              <div class="file-row">
+                <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                <button class="btn" onclick="clearImage(this)">Clear image</button>
+              </div>
+              <p class="muted-note">Tip: capture sort dropdown open state and result count placement.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="pdp" class="tab-content">
+      <div class="section-header">
+        <div>
+          <h2>PDP (UAT)</h2>
+          <p>Product detail page findings covering gallery, pricing, size selection, add to cart, content, and cross sell.</p>
+        </div>
+        <div class="controls">
+          <button class="btn primary" onclick="addFindingFor('pdp')">+ Add finding</button>
+        </div>
+      </div>
+
+      <div id="pdp-findings-container" data-findings-container="">
+
+        <div class="finding" data-id="1">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">PDP image gallery clarity and interaction</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+            <div class="kv">
+              <div class="kv-block">
+                <div class="label">Section</div>
+                <div class="value" contenteditable="true">Product image gallery, thumbnails, zoom and swipe behaviour</div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Pros</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>High quality imagery clearly shows fit, fabric, and detailing.</li>
+                    <li>Multiple angles help reduce uncertainty before purchase.</li>
+                    <li>Thumbnail navigation is predictable and familiar.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Cons</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Gallery size on tablet devices creates odd UI PDP layout with white space</li>
+                    <li>On mobile, long image stacks increase scroll before reaching product details.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Recommended change</div>
+                <div class="value" contenteditable="true">On tablet reduce gallery to 1 image rather than 2 (as per example). This breaks UI layout of PDP as some screen sizes</div>
+              </div>
+            </div>
+            <div class="image-box">
+              <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+              <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+              <div class="file-row">
+                <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                <button class="btn" onclick="clearImage(this)">Clear image</button>
+              </div>
+              <p class="muted-note">Tip: capture gallery layout on desktop and swipe behaviour on mobile.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="finding" data-id="2">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Product information hierarchy and scanability</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+            <div class="kv">
+              <div class="kv-block">
+                <div class="label">Section</div>
+                <div class="value" contenteditable="true">Product title, brand, price, promotions, stock messaging</div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Pros</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Pricing and discount messaging are clear and prominent.</li><li>Percentage off has strong UI and color</li>
+                    <li>Brand and product name are easy to identify.</li>
+                    <li>Low stock messaging adds urgency without being aggressive.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Cons</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Multiple price formats and payment options compete for attention.</li>
+                    <li>Promotional badges can fragment the visual hierarchy.</li>
+                    <li>Key reassurance details are pushed lower in the layout.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Recommended change</div>
+                <div class="value" contenteditable="true">Reduce padding between brand name and product name and consider making price larger</div>
+              </div>
+            </div>
+            <div class="image-box">
+              <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+              <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+              <div class="file-row">
+                <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                <button class="btn" onclick="clearImage(this)">Clear image</button>
+              </div>
+              <p class="muted-note">Tip: capture price area with all promotional messaging visible.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="finding" data-id="3">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Size selection confidence and support</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+            <div class="kv">
+              <div class="kv-block">
+                <div class="label">Section</div>
+                <div class="value" contenteditable="true">Size selector, size guide, fit assistance</div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Pros</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Size options are clearly presented and easy to tap or click.</li>
+                    <li>Size guide and fit assistance are available inline.</li>
+                    <li>Low stock indicator supports quicker decision making.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Cons</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li><br></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Recommended change</div>
+                <div class="value" contenteditable="true">Not sure you have full control of this but check TrueFit close CTA on mobile. Seems hard to close in tests&nbsp;</div>
+              </div>
+            </div>
+            <div class="image-box">
+              <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+              <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+              <div class="file-row">
+                <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                <button class="btn" onclick="clearImage(this)">Clear image</button>
+              </div>
+              <p class="muted-note">Tip: capture size selector with size guide link and any fit notes visible.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="finding" data-id="4">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Add to cart visibility and commitment</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+            <div class="kv">
+              <div class="kv-block">
+                <div class="label">Section</div>
+                <div class="value" contenteditable="true">Primary CTA, add to cart behaviour</div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Pros</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Add to cart CTA is visually strong and easy to locate.</li>
+                    <li>CTA language is clear and action oriented.</li>
+                    <li>Low stock messaging reinforces urgency near the action point.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Cons</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li><br></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Recommended change</div>
+                <div class="value" contenteditable="true">Anchor the primary CTA more persistently on mobile and consider subtle reinforcement messaging directly beneath it, such as free delivery or returns reassurance.&nbsp;</div>
+              </div>
+            </div>
+            <div class="image-box">
+              <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+              <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+              <div class="file-row">
+                <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                <button class="btn" onclick="clearImage(this)">Clear image</button>
+              </div>
+              <p class="muted-note">Tip: capture ATC button area and any sticky behaviour on mobile.</p>
+            </div>
+          </div>
+        </div>
+
+        
+
+        <div class="finding" data-id="5">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Cross sell and style inspiration placement</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+            <div class="kv">
+              <div class="kv-block">
+                <div class="label">Section</div>
+                <div class="value" contenteditable="true">Style it with, related products, recommendations</div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Pros</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Related items feel relevant and visually cohesive.</li>
+                    <li>Quick add supports easy basket expansion.</li>
+                    <li>Reinforces styling inspiration.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Cons</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Cross sell sections add significant page length.</li>
+                    <li>Can distract users before primary purchase is complete.</li>
+                    <li>On mobile, primary product context can be lost.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Recommended change</div>
+                <div class="value" contenteditable="true">Ensure cross sell content appears clearly after the primary purchase decision point. Use page breaks, background change or stronger header to distinctly seperate upsell modules from the rest of the PDP</div>
+              </div>
+            </div>
+            <div class="image-box">
+              <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+              <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+              <div class="file-row">
+                <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                <button class="btn" onclick="clearImage(this)">Clear image</button>
+              </div>
+              <p class="muted-note">Tip: capture cross sell carousel and its position relative to ATC.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="minicart" class="tab-content">
+      <div class="section-header">
+        <div>
+          <h2>Mini Cart (UAT)</h2>
+          <p>Mini cart findings covering visibility, product clarity, checkout CTA, promotions, and upsells.</p>
+        </div>
+        <div class="controls">
+          <button class="btn primary" onclick="addFindingFor('minicart')">+ Add finding</button>
+        </div>
+      </div>
+
+      <div id="minicart-findings-container" data-findings-container="">
+
+        
+
+        
+
+        
+
+        <div class="finding" data-id="1">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Promotional messaging within mini cart</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+            <div class="kv">
+              <div class="kv-block">
+                <div class="label">Section</div>
+                <div class="value" contenteditable="true">Incentives, discounts, rewards, upsell messaging</div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Pros</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Incentives and discounts remain visible close to conversion.</li>
+                    <li>Rewards and promotions reinforce perceived value.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Cons</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Critical information but can be easily lost to the eye. Requires user to stop and read</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Recommended change</div>
+                <div class="value" contenteditable="true">Utilise visual triggers to ensure user easily identifies promotion value. In case of mini-cart utilise truck icon or similar along with promo message</div>
+              </div>
+            </div>
+            <div class="image-box">
+              <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+              <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+              <div class="file-row">
+                <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                <button class="btn" onclick="clearImage(this)">Clear image</button>
+              </div>
+              <p class="muted-note">Tip: capture any promotional banners or reward messaging within mini cart.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="finding" data-id="2">
+          <div class="finding-header">
+            <div class="finding-title">
+              <h4 contenteditable="true">Upsell and cross sell behaviour</h4>
+              <span class="badge desktop">Desktop</span>
+              <span class="badge mobile">Mobile</span>
+            </div>
+            <button class="btn" onclick="removeFinding(this)">Remove</button>
+          </div>
+
+          <div class="finding-body">
+            <div class="kv">
+              <div class="kv-block">
+                <div class="label">Section</div>
+                <div class="value" contenteditable="true">Suggested products and add ons within mini cart</div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Pros</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Upsell items are relevant and visually consistent with the brand.</li>
+                    <li>Enables incremental basket growth without leaving context.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Cons</div>
+                <div class="value" contenteditable="true">
+                  <ul>
+                    <li>Upsells can extend the mini cart vertically and increase cognitive load.</li>
+                    <li>Users focused on checkout may perceive this as friction.</li>
+                    <li>On mobile, upsells can push primary actions below the fold.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="kv-block">
+                <div class="label">Recommended change</div>
+                <div class="value" contenteditable="true">Limit upsells to a single, highly relevant item. Ensure the checkout CTA remains visible without scrolling, especially on mobile.</div>
+              </div>
+            </div>
+            <div class="image-box">
+              <img class="image-preview" alt="Uploaded screenshot preview" style="display: none;">
+              <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+              <div class="file-row">
+                <input type="file" accept="image/*" onchange="previewImage(event, this)">
+                <button class="btn" onclick="clearImage(this)">Clear image</button>
+              </div>
+              <p class="muted-note">Tip: capture upsell section and its position relative to checkout CTA.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <template id="finding-template">
+  <div class="finding" data-id="new">
+    <div class="finding-header">
+      <div class="finding-title">
+        <h4 contenteditable="true">New finding title</h4>
+        <span class="badge desktop">Desktop</span>
+        <span class="badge mobile">Mobile</span>
+      </div>
+      <button class="btn" onclick="removeFinding(this)">Remove</button>
+    </div>
+
+    <div class="finding-body">
+          <div class="kv">
+          <div class="kv-block">
+            <div class="label">Section</div>
+            <div class="value" contenteditable="true">Add the UI section (for example: Header, Hero, Product grid)</div>
+          </div>
+
+          <div class="kv-block">
+            <div class="label">Pros</div>
+            <div class="value" contenteditable="true">
+              <ul>
+                <li>What is working well</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="kv-block">
+            <div class="label">Cons</div>
+            <div class="value" contenteditable="true">
+              <ul>
+                <li>What is creating noise or friction</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="kv-block">
+            <div class="label">Recommended change</div>
+            <div class="value" contenteditable="true">Describe the specific UI change to make</div>
+          </div>
+        </div>
+          <div class="image-box">
+          <img class="image-preview" alt="Uploaded screenshot preview">
+          <p><strong>Image slot:</strong> upload your UAT screenshot for this finding.</p>
+          <div class="file-row">
+            <input type="file" accept="image/*" onchange="previewImage(event, this)">
+            <button class="btn" onclick="clearImage(this)">Clear image</button>
+          </div>
+          <p class="muted-note">Tip: name your screenshot consistently (for example: HP-Hero-Mobile.png).</p>
+        </div>
+        </div>
+  </div>
+</template>
+
+</main>
+
+  <script>
+  function showTab(tabName, el) {
+    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+
+    const tab = document.getElementById(tabName);
+    if (tab) tab.classList.add("active");
+
+    if (el) {
+      el.classList.add("active");
+    } else {
+      const btn = document.querySelector(`.tab[onclick*="'${tabName}'"]`);
+      if (btn) btn.classList.add("active");
+    }
+  }
+
+  function getFindingsContainer(tabId) {
+    if (!tabId) return null;
+    if (tabId === "homepage") return document.querySelector("#homepage #findings-container");
+    if (tabId === "global") return document.querySelector("#global #global-findings-container");
+    // Fallback for future tabs
+    return document.querySelector(`#${tabId} [data-findings-container]`);
+  }
+
+  function renumberFindings(containerEl) {
+    if (!containerEl) return;
+    const cards = containerEl.querySelectorAll(".finding");
+    let i = 1;
+    cards.forEach(card => {
+      card.setAttribute("data-id", String(i));
+      const title = card.querySelector(".finding-title h4");
+      if (title && !title.textContent.trim()) title.textContent = `Finding ${i}`;
+      i += 1;
+    });
+  }
+
+  function renumberAll() {
+    const containers = document.querySelectorAll("[data-findings-container], #homepage #findings-container");
+    containers.forEach(c => renumberFindings(c));
+  }
+
+  function removeFinding(btnEl) {
+    const card = btnEl.closest(".finding");
+    if (card) card.remove();
+    renumberAll();
+  }
+
+  function previewImage(event, inputEl) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    const card = inputEl.closest(".finding");
+    const img = card ? card.querySelector(".image-preview") : null;
+    if (!img) return;
+
+    const url = URL.createObjectURL(file);
+    img.src = url;
+    img.style.display = "block";
+    img.onload = () => URL.revokeObjectURL(url);
+  }
+
+  function clearImage(btnEl) {
+    const card = btnEl.closest(".finding");
+    if (!card) return;
+    const img = card.querySelector(".image-preview");
+    const input = card.querySelector('input[type="file"]');
+
+    if (img) {
+      img.removeAttribute("src");
+      img.style.display = "none";
+    }
+    if (input) input.value = "";
+  }
+
+  function addFindingFor(tabId) {
+    const container = getFindingsContainer(tabId);
+    if (!container) return;
+
+    const template = document.getElementById("finding-template");
+    if (!template) return;
+
+    const clone = template.content.cloneNode(true);
+    container.prepend(clone);
+    renumberFindings(container);
+
+    const first = container.querySelector(".finding");
+    if (first) first.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // Backwards compatibility for older buttons
+  function addFinding() {
+    addFindingFor("homepage");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".image-preview").forEach(img => {
+      if (!img.getAttribute("src")) img.style.display = "none";
+    });
+
+    const activeBtn = document.querySelector(".tab.active");
+    showTab("summary", activeBtn);
+
+    renumberAll();
+  });
+
+  async function saveReport() {
+    const btn = document.querySelector('.save-btn');
+    const originalText = btn.textContent;
+    btn.textContent = '⏳ Preparing...';
+    btn.disabled = true;
+
+    try {
+      // Convert all displayed images to base64
+      const images = document.querySelectorAll('.image-preview');
+      for (const img of images) {
+        if (img.src && img.style.display !== 'none' && !img.src.startsWith('data:')) {
+          try {
+            const base64 = await imageToBase64(img.src);
+            img.src = base64;
+          } catch (e) {
+            console.warn('Could not convert image:', e);
+          }
+        }
+      }
+
+      // Clear file inputs (they can't be preserved)
+      document.querySelectorAll('input[type="file"]').forEach(input => {
+        input.value = '';
+      });
+
+      // Clone the document
+      const clone = document.documentElement.cloneNode(true);
+
+      // Remove any object URLs that might remain
+      clone.querySelectorAll('.image-preview').forEach(img => {
+        if (img.src && img.src.startsWith('blob:')) {
+          img.removeAttribute('src');
+          img.style.display = 'none';
+        }
+      });
+
+      // Get the full HTML
+      const html = '<!DOCTYPE html>\n<html lang="en">' + clone.innerHTML + '</html>';
+
+      // Create download
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      
+      // Generate filename with date
+      const now = new Date();
+      const dateStr = now.toISOString().slice(0, 10);
+      a.download = `ui-report-${dateStr}.html`;
+      a.href = url;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      btn.textContent = '✓ Saved!';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }, 2000);
+
+    } catch (e) {
+      console.error('Save failed:', e);
+      btn.textContent = '❌ Error';
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }, 2000);
+    }
+  }
+
+  function imageToBase64(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        try {
+          const dataURL = canvas.toDataURL('image/png');
+          resolve(dataURL);
+        } catch (e) {
+          reject(e);
+        }
+      };
+      img.onerror = reject;
+      img.src = src;
+    });
+  }
+</script>
+
+</body></html>
